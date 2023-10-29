@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Text] should render correctly 1`] = `
+<Text
+  style={
+    Array [
+      Object {},
+    ]
+  }
+>
+  This is some text
+</Text>
+`;

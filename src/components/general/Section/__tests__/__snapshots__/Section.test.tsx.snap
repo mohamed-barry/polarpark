@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ComingSoon] should render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "marginBottom": 12,
+        "padding": 16,
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#000000",
+          "fontFamily": "NunitoSans-Bold",
+          "fontSize": 20,
+          "lineHeight": 30,
+        },
+      ]
+    }
+  >
+    title
+  </Text>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#A8A8A8",
+          "fontFamily": "NunitoSans-Regular",
+          "fontSize": 14,
+          "lineHeight": 21,
+        },
+      ]
+    }
+  >
+    subtitle
+  </Text>
+</View>
+`;

@@ -1,0 +1,101 @@
+[
+  {
+    "event": {
+      "id": 706789586,
+      "publicDescription": "The Red Sox face off against the Mets!",
+      "shortPublicDescription": "Worcester Red Sox vs. Syracuse Mets",
+      "date": "2023-04-02T13:05:00-04:00"
+    },
+    "id": 84802424,
+    "tickets": [
+      {
+        "active": true,
+        "barcode": "10000100",
+        "id": 54192897,
+        "patronId": 68367876,
+        "seat": {
+          "section": 1,
+          "row": 15,
+          "seat": 3
+        }
+      },
+      {
+        "active": true,
+        "barcode": "11010101",
+        "id": 70957916,
+        "patronId": 68367876,
+        "seat": {
+          "section": 1,
+          "row": 15,
+          "seat": 4
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "id": 208651104,
+      "publicDescription": "The Red Sox face off against the Mets!",
+      "shortPublicDescription": "Worcester Red Sox vs. Syracuse Mets",
+      "date": "2023-04-01T16:05:00-04:00"
+    },
+    "id": 41234143,
+    "tickets": [
+      {
+        "active": false,
+        "barcode": "10000100",
+        "id": 54192897,
+        "patronId": 68367876,
+        "seat": {
+          "section": 1,
+          "row": 15,
+          "seat": 3
+        }
+      },
+      {
+        "active": false,
+        "barcode": "11010101",
+        "id": 70957916,
+        "patronId": 68367876,
+        "seat": {
+          "section": 1,
+          "row": 15,
+          "seat": 4
+        }
+      }
+    ]
+  },
+  {
+    "event": {
+      "id": 613373703,
+      "publicDescription": "The Red Sox face off against the Mets in the home opener!",
+      "shortPublicDescription": "Worcester Red Sox vs. Syracuse Mets",
+      "date": "2023-03-31T16:05:00-04:00"
+    },
+    "id": 62362263,
+    "tickets": [
+      {
+        "active": false,
+        "barcode": "10000100",
+        "id": 54192897,
+        "patronId": 68367876,
+        "seat": {
+          "section": 1,
+          "row": 15,
+          "seat": 3
+        }
+      },
+      {
+        "active": false,
+        "barcode": "11010101",
+        "id": 70957916,
+        "patronId": 68367876,
+        "seat": {
+          "section": 1,
+          "row": 15,
+          "seat": 4
+        }
+      }
+    ]
+  }
+]

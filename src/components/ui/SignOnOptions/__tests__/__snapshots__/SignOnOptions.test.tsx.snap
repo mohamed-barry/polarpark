@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[SignOnOptions] should render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "flex-end",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      },
+    ]
+  }
+>
+  <SvgMock
+    height={47}
+    width={38}
+  />
+  <SvgMock
+    height={38}
+    style={
+      Object {
+        "marginHorizontal": 32,
+      }
+    }
+    width={38}
+  />
+  <SvgMock
+    height={38}
+    width={38}
+  />
+</View>
+`;

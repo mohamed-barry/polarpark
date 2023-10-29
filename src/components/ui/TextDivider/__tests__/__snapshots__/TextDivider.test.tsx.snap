@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[TextDivider] should render correctly with a label 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "marginVertical": 16,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#A8A8A8",
+          "flexGrow": 1,
+          "height": 1,
+          "marginHorizontal": 12,
+        },
+      ]
+    }
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#A8A8A8",
+          "fontFamily": "NunitoSans-Regular",
+          "fontSize": 14,
+          "lineHeight": 21,
+        },
+      ]
+    }
+    testID="label"
+  >
+    or log in with
+  </Text>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#A8A8A8",
+          "flexGrow": 1,
+          "height": 1,
+          "marginHorizontal": 12,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`[TextDivider] should render correctly with a placeholder 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "marginVertical": 16,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#A8A8A8",
+          "flexGrow": 1,
+          "height": 1,
+          "marginHorizontal": 12,
+        },
+      ]
+    }
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#A8A8A8",
+          "fontFamily": "NunitoSans-Regular",
+          "fontSize": 14,
+          "lineHeight": 21,
+        },
+      ]
+    }
+    testID="label"
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "center",
+          "backgroundColor": "#A8A8A8",
+          "flexGrow": 1,
+          "height": 1,
+          "marginHorizontal": 12,
+        },
+      ]
+    }
+  />
+</View>
+`;

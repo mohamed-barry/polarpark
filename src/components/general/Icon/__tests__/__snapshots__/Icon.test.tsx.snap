@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Icon] should render correctly 1`] = `
+<Text
+  allowFontScaling={false}
+  selectable={false}
+  style={
+    Array [
+      Object {
+        "color": undefined,
+        "fontSize": 24,
+      },
+      Array [
+        Object {
+          "color": "#A8A8A8",
+          "flexGrow": 0,
+          "height": 24,
+          "justifyContent": "center",
+          "width": 24,
+        },
+      ],
+      Object {
+        "fontFamily": "icomoon",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+      },
+      Object {},
+    ]
+  }
+>
+  
+</Text>
+`;

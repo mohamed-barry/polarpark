@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ComingSoon] should render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "height": "100%",
+        "justifyContent": "center",
+      },
+    ]
+  }
+>
+  <SvgMock
+    height={48}
+    width={48}
+  />
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#DF3D3F",
+          "fontFamily": "NunitoSans-Bold",
+          "fontSize": 20,
+          "fontWeight": "800",
+          "lineHeight": 30,
+          "marginTop": 16,
+        },
+      ]
+    }
+  >
+    COMING SOON
+  </Text>
+</View>
+`;

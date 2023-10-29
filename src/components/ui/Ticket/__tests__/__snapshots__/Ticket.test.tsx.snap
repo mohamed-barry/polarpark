@@ -1,0 +1,467 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Ticket] should render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#14458E",
+        "borderRadius": 12,
+        "flexDirection": "column",
+        "height": 933.8,
+        "padding": 24,
+        "width": 710,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "marginBottom": 16,
+          },
+        ]
+      }
+    >
+      <SvgMock
+        height={32}
+        width={32}
+      />
+      <SvgMock
+        height={32}
+        width={32}
+      />
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#FFFFFF",
+            "fontFamily": "NunitoSans-Bold",
+            "fontSize": 20,
+            "lineHeight": 30,
+          },
+        ]
+      }
+    >
+      Red Sox vs Mets
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#D3D3D3",
+            "fontFamily": "NunitoSans-Regular",
+            "fontSize": 14,
+            "lineHeight": 21,
+          },
+        ]
+      }
+    >
+      The Worcester Red Sox face off against the Syracuse Mets in the home opening game!
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "borderBottomWidth": 0.4,
+            "borderColor": "#FFFFFF",
+            "marginVertical": 16,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          PATRON ID
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          41234234
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          TICKET ID
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          53425234
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          DATE
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          FRI MAR 31
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          TIME
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          4:05 PM
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          SECTION
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          120
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          ROW
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          12
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+            "marginBottom": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          SEAT
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          3
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#D3D3D3",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          GATE
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "NunitoSans-Regular",
+                "fontSize": 16,
+                "fontWeight": "bold",
+                "lineHeight": 24,
+              },
+            ]
+          }
+        >
+          D
+        </Text>
+      </View>
+    </View>
+  </View>
+  <Image
+    resizeMode="stretch"
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/barcode.png",
+      }
+    }
+    style={
+      Object {
+        "height": 90,
+        "marginTop": 16,
+        "width": "100%",
+      }
+    }
+  />
+</View>
+`;
