@@ -1,6 +1,6 @@
 import React from 'react';
-import {ComingSoon} from '@app/components';
+import {Rewards} from '@app/screens/Rewards/Login';
 
 export default function Market() {
-  return <ComingSoon />;
+  return <Rewards />;
 }

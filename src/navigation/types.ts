@@ -9,7 +9,7 @@ export type BottomBarParamList = {
   Home: undefined;
   Tickets: undefined;
   Ordering: undefined;
-  Market: undefined;
+  Rewards: undefined;
   Services: undefined;
 };
 

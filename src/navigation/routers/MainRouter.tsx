@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -14,14 +16,15 @@ import {
   Settings,
   ChangeUsername,
   ChangePassword,
-  Market,
   PurchaseTicket,
   Wallet,
 } from '@app/screens';
+
 import {Header, Icon} from '@app/components';
 import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import theme from '@app/config/theme';
+import RewardRouter from './RewardRouter';
 
 const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -73,12 +76,13 @@ function Main(): JSX.Element {
         }}
       />
       <RootTab.Screen
-        name="Market"
-        component={Market}
+        name="Rewards"
+        component={RewardRouter}
         options={{
           tabBarIcon: ({focused}) => (
             <Icon name="basket" focused={focused} size={24} />
           ),
+          headerShown: false,
         }}
       />
       <RootTab.Screen
