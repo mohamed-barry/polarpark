@@ -18,3 +18,4 @@ export {default as SignOnOptions} from '@app/components/ui/SignOnOptions/SignOnO
 export {default as TextDivider} from '@app/components/ui/TextDivider/TextDivider';
 export {default as Ticket} from '@app/components/ui/Ticket/Ticket';
 export {default as TicketPreview} from '@app/components/ui/TicketPreview/TicketPreview';
+export {default as ClickablePanel} from '@app/components/ui/ClickablePanel/ClickablePanel';

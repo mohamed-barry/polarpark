@@ -1,0 +1,31 @@
+{
+    "lot_info": {
+        "garage": {
+            "latitude": 42.25596,
+            "longitude": -71.80181,
+            "googlePlaceId": "5Cs4fAEzHhmUt2EKA"
+        },
+        "lamartine": {
+            "latitude": 42.25430,
+            "longitude": -71.80111
+        },
+        "washington-harding": {
+            "latitude": 42.25436,
+            "longitude": -71.79976
+        }
+    },
+    "dropdown": [
+        {
+            "label": "Garage",
+            "value": "garage"
+        },
+        {
+            "label": "Lamartine Lot",
+            "value": "lamartine"
+        },
+        {
+            "label": "Washington/Harding Lot",
+            "value": "washington-harding"
+        }
+    ]
+}
