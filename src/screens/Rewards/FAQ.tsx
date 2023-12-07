@@ -4,7 +4,7 @@ import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
 
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const FAQ: React.FC<Props> = ({navigation}) => {

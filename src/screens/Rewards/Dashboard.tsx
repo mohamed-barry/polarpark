@@ -29,7 +29,7 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
   };
 
   const userName = 'John Doe';
-  const userPoints = 350; // Replace this with the user's actual points
+  const userPoints = 350;
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -63,21 +63,21 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5', // Neutral background color
+    backgroundColor: '#F5F5F5',
   },
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 20,
-    marginHorizontal: 20, // Better spacing on the sides
+    marginHorizontal: 20,
     fontFamily: 'Nunito Sans',
-    color: '#333', // Darker text for better readability
+    color: '#333',
   },
   pointContainer: {
-    backgroundColor: '#4A90E2', // A more subtle color for the container
+    backgroundColor: '#4A90E2',
     padding: 20,
     borderRadius: 10,
-    margin: 20, // Consistent margin
+    margin: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -89,17 +89,17 @@ const styles = StyleSheet.create({
   },
   userPointsText: {
     color: '#FFF',
-    fontSize: 40, // Larger text for points to stand out
+    fontSize: 40,
     fontFamily: 'Nunito Sans',
     fontWeight: 'bold',
-    marginVertical: 10, // Spacing above and below the points
+    marginVertical: 10,
   },
   chooseRewardsButton: {
     backgroundColor: '#FFF',
-    borderRadius: 25, // Rounded edges
-    paddingVertical: 10, // Taller button for better tap area
+    borderRadius: 25,
+    paddingVertical: 10,
     paddingHorizontal: 20,
-    shadowColor: '#000', // Subtle shadow for elevation effect
+    shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: '#4A90E2', // Accent color that matches the container
+    color: '#4A90E2',
     fontSize: 18,
     fontFamily: 'Nunito Sans',
     fontWeight: '600',
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
   featuredText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginHorizontal: 20, // Align with the welcome text
+    marginHorizontal: 20,
     fontFamily: 'Nunito Sans',
     color: '#333',
     marginBottom: 10,
   },
   featureDealsContainer: {
     alignItems: 'center',
-    paddingBottom: 20, // Padding at the bottom of the scrollview
+    paddingBottom: 20,
   },
   scrollView: {
     flex: 1,
@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
   },
 
   separator: {
-    borderBottomColor: 'gray', // Color of the separator line
-    borderBottomWidth: 1, // Thickness of the separator line
-    marginBottom: 20, // Space after the line
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    marginBottom: 20,
     color: 'lightgray',
   },
 });

@@ -5,13 +5,13 @@ import {
   View,
   TextInput,
   Alert,
-  TouchableHighlight, // Added for better button feedback
+  TouchableHighlight,
 } from 'react-native';
 import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
 
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const Redeem: React.FC<Props> = ({navigation}) => {
@@ -37,13 +37,12 @@ const Redeem: React.FC<Props> = ({navigation}) => {
           <TextInput
             style={styles.inputBox}
             placeholder="Enter Code Here"
-            placeholderTextColor="#666" // Placeholder text color for better visibility
+            placeholderTextColor="#666"
           />
           <TouchableHighlight
             style={styles.button}
             onPress={handleScanQR}
-            underlayColor="#ddd" // Underlay color for touch feedback
-          >
+            underlayColor="#ddd">
             <Text style={styles.buttonText}>Scan QR Code</Text>
           </TouchableHighlight>
           <TouchableHighlight
@@ -61,7 +60,7 @@ const Redeem: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f4', // Neutral background for the whole screen
+    backgroundColor: '#f4f4f4',
   },
   redeemContainer: {
     alignItems: 'center',
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
   },
   redeemBox: {
     width: '90%',
-    backgroundColor: '#fff', // Light background for the redeem box
+    backgroundColor: '#fff',
     borderRadius: 10,
     elevation: 5,
     padding: 20,
@@ -79,20 +78,20 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333', // Dark color for text for better readability
+    color: '#333',
     marginBottom: 30,
   },
   inputBox: {
     width: '100%',
-    borderColor: '#ccc', // Subtle border color
+    borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
     padding: 15,
     marginBottom: 20,
-    fontSize: 16, // Increased font size for better readability
+    fontSize: 16,
   },
   button: {
-    backgroundColor: '#e7e7e7', // Subtle color for button
+    backgroundColor: '#e7e7e7',
     padding: 15,
     borderRadius: 5,
     width: '100%',
@@ -100,12 +99,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonText: {
-    color: '#333', // Text color that contrasts well with button background
-    fontSize: 18, // Making the text a bit larger for better tap targets
-    fontWeight: 'bold', // Bold text for better visibility
+    color: '#333',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   redeemButton: {
-    backgroundColor: '#4CAF50', // A green color to indicate a primary action
+    backgroundColor: '#4CAF50',
   },
 });
 

@@ -1,6 +1,15 @@
-import React from 'react';
-import {Modal, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons'; // Import your icon library
+import React, {useState} from 'react';
+import {
+  Modal,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
 
 interface CodeModalProps {
   modalVisible: boolean;
@@ -11,6 +20,26 @@ const CodeModal: React.FC<CodeModalProps> = ({
   modalVisible,
   setModalVisible,
 }) => {
+  const [scannedCode, setScannedCode] = useState('');
+
+  const handleSuccess = e => {
+    setScannedCode(e.data);
+    setModalVisible(false);
+    // You can add additional logic here for what happens after the scan is successful
+    Alert.alert('QR Code Scanned', e.data, [
+      {
+        text: 'Confirm',
+        onPress: () => console.log('Confirm Pressed'),
+        style: 'confirm',
+      },
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+    ]);
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -24,12 +53,28 @@ const CodeModal: React.FC<CodeModalProps> = ({
             onPress={() => setModalVisible(false)}>
             <Icon name="close" size={24} color="#000" />
           </TouchableOpacity>
-          <Text style={styles.modalTitle}>Scan QR Code</Text>
-          {/* Content of the modal */}
-          {/* ... */}
-          <TouchableOpacity style={styles.startEarningButton}>
-            <Text style={styles.buttonText}> Gain Points </Text>
-          </TouchableOpacity>
+          {scannedCode ? (
+            <Text style={styles.modalText}>Scanned Code: {scannedCode}</Text>
+          ) : (
+            <QRCodeScanner
+              onRead={handleSuccess}
+              flashMode={RNCamera.Constants.FlashMode.auto}
+              topContent={
+                <Text style={styles.centerText}>
+                  Go to{' '}
+                  <Text style={styles.textBold}>
+                    wikipedia.org/wiki/QR_code
+                  </Text>{' '}
+                  on your computer and scan the QR code.
+                </Text>
+              }
+              bottomContent={
+                <TouchableOpacity style={styles.buttonTouchable}>
+                  <Text style={styles.buttonText}>OK. Got it!</Text>
+                </TouchableOpacity>
+              }
+            />
+          )}
         </View>
       </View>
     </Modal>
@@ -45,8 +90,8 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    width: '90%', // Use the percentage of screen width that suits your design
-    height: '20%', // Use the percentage of screen height that suits your design
+    width: '90%',
+    height: '20%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 20,
@@ -60,6 +105,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  modalText: {
+    fontSize: 18,
+    margin: 20,
+    textAlign: 'center',
+  },
   closeButton: {
     position: 'absolute',
     top: 10,
@@ -72,7 +122,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   startEarningButton: {
-    backgroundColor: '#ADD8E6', // Light Blue color
+    backgroundColor: '#ADD8E6',
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
@@ -83,7 +133,19 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
-  // Add any other styles you might need
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777',
+  },
+  textBold: {
+    fontWeight: '500',
+    color: '#000',
+  },
+  buttonTouchable: {
+    padding: 16,
+  },
 });
 
 export default CodeModal;

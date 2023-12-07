@@ -34,12 +34,15 @@ const RewardRouter: React.FC = () => {
       <Stack.Screen name="CongratSignUp" component={CongratSignUp} />
       <Stack.Screen name="FAQ" component={FAQ} />
       <Stack.Screen name="Redeem" component={Redeem} />
-      <Stack.Screen name="Leaderboard" component={LeaderBoard} />
+      <Stack.Screen name="LeaderBoard" component={LeaderBoard} />
       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
       <Stack.Screen name="CrowdCameo" component={CrowdCameo} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="CodeVerification" component={CodeVerification} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      <Stack.Screen name="AccountSettings" component={Settings} />
+      <Stack.Screen name="PasswordSettings" component={Settings} />
+      <Stack.Screen name="ProfileSettings" component={Settings} />
       <Stack.Screen name="Setting" component={Settings} />
     </Stack.Navigator>
   );

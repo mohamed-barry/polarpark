@@ -25,7 +25,7 @@ const Login: React.FC<Props> = ({navigation}) => {
     navigation.navigate('Dashboard');
   };
   const handleForgotPassword = () => {
-    navigation.navigate('ForgotPassword'); // Assuming 'ForgotPassword' is the name of your route
+    navigation.navigate('ForgotPassword');
   };
 
   return (
@@ -52,17 +52,17 @@ const Login: React.FC<Props> = ({navigation}) => {
           />
         </View>
       </View>
-      {/* Moved the "Forgot password?" section here */}
+
       <View style={styles.forgotPasswordContainer}>
         <TouchableOpacity onPress={handleForgotPassword}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
         </TouchableOpacity>
       </View>
-      {/* Moved the "Login" button here */}
+
       <TouchableOpacity style={styles.button} onPress={handleLoginClick}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      {/* Moved the "Not a member?" section here */}
+
       <TouchableOpacity onPress={handleSignUp}>
         <Text style={styles.signupText}>
           Not a member? <Text style={styles.signupLink}>Sign up now</Text>
@@ -148,9 +148,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito Sans',
   },
   forgotPasswordContainer: {
-    alignSelf: 'flex-end', // Aligns to the right
-    marginTop: 10, // Adjust spacing as needed
-    marginBottom: 10, // Adds space between "Forgot password?" and "Login"
+    alignSelf: 'flex-end',
+    marginTop: 10,
+    marginBottom: 10,
     fontFamily: 'Nunito Sans',
   },
   forgotPassword: {

@@ -34,13 +34,11 @@ const Rewards: React.FC<Props> = ({navigation}) => {
   };
 
   const redeemPrize = () => {
-    // Implement your redeem logic here
     setModalVisible(false);
     navigation.navigate('CongratReward'); // Navigate to 'CongratReward' page
   };
 
   const handleReturnHome = () => {
-    // Navigate to the home page or any other desired destination
     navigation.navigate('Dashboard');
   };
   const handleIconClick = () => {
@@ -58,10 +56,7 @@ const Rewards: React.FC<Props> = ({navigation}) => {
           <TouchableOpacity style={styles.button} onPress={handleReturnHome}>
             <View style={styles.buttonContent}>
               <Text style={styles.buttonText}>Home</Text>
-              <Image
-                source={HomeIcon} // Replace with your icon
-                style={styles.icon}
-              />
+              <Image source={HomeIcon} style={styles.icon} />
             </View>
           </TouchableOpacity>
         </View>
@@ -88,7 +83,6 @@ const Rewards: React.FC<Props> = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  // ... (existing styles remain unchanged)
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
@@ -118,10 +112,10 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center items horizontally
   },
   prizeItem: {
-    width: '80%', // Adjust width as needed for spacing
-    marginBottom: 20, // Adjust spacing between prizes
+    width: '80%',
+    marginBottom: 20,
   },
-  // ... (other styles remain unchanged)
+
   button: {
     padding: 10,
     borderRadius: 5,
@@ -144,7 +138,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
-    // Additional styling for the icon if needed
   },
 });
 
