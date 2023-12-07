@@ -8,7 +8,7 @@ import {CompositeScreenProps} from '@react-navigation/native';
 export type BottomBarParamList = {
   Home: undefined;
   Tickets: undefined;
-  Ordering: undefined;
+  Concessions: undefined;
   Rewards: undefined;
   Services: undefined;
 };
@@ -19,6 +19,10 @@ export type RootStackParamList = {
   Settings: undefined;
   ChangeUsername: undefined;
   ChangePassword: undefined;
+  Parking: undefined;
+  Seating: undefined;
+  DevPage: undefined;
+  InteractiveMap: undefined;
 };
 
 export type AuthStackParamList = {

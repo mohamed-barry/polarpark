@@ -18,6 +18,10 @@ import {
   ChangePassword,
   PurchaseTicket,
   Wallet,
+  Parking,
+  Seating,
+  InteractiveMap,
+  DevPage,
 } from '@app/screens';
 
 import {Header, Icon} from '@app/components';
@@ -67,7 +71,7 @@ function Main(): JSX.Element {
         }}
       />
       <RootTab.Screen
-        name="Ordering"
+        name="Concessions"
         component={Ordering}
         options={{
           tabBarIcon: ({focused}) => (
@@ -158,6 +162,34 @@ export default function MainRouter(): JSX.Element {
         component={ChangePassword}
         options={{
           headerTitle: 'Change Password',
+        }}
+      />
+      <RootStack.Screen
+        name="Parking"
+        component={Parking}
+        options={{
+          headerTitle: 'Parking',
+        }}
+      />
+      <RootStack.Screen
+        name="Seating"
+        component={Seating}
+        options={{
+          headerTitle: 'Seating',
+        }}
+      />
+      <RootStack.Screen
+        name="DevPage"
+        component={DevPage}
+        options={{
+          headerTitle: 'dev',
+        }}
+      />
+      <RootStack.Screen
+        name="InteractiveMap"
+        component={InteractiveMap}
+        options={{
+          headerTitle: 'Ballpark Map',
         }}
       />
     </RootStack.Navigator>

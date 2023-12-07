@@ -1,0 +1,44 @@
+{
+    "stores": [
+        {
+            "name": "Coney Island",
+            "description": "Get hot dogs and other ballpark classics at Coney Island!",
+            "location": "",
+            "featured": [
+                {
+                    "name": "Build your own Hot Dog",
+                    "description": "Choose your favorite toppings on a hot dog!",
+                    "tags": [],
+                    "allergians": ["wheat"],
+                    "price": 6.75,
+                    "image": "https://www.wienerschnitzel.com/wp-content/uploads/2014/10/hotdog_mustard-main.jpg"
+                },
+                {
+                    "name": "item2",
+                    "description": "item2",
+                    "tags": ["vegan", "gluten-free", "kosher"],
+                    "allergians": ["peanuts", "eggs", "milk", "tree-nuts", "shellfish", "wheat", "soy", "fish"],
+                    "price": 100.00
+                }
+            ],
+            "other" : [
+            ]
+
+        },
+        {
+            "name": "Infield Fry",
+            "description": "Get your favorite fried foods while you enjoy the game!",
+            "location": "",
+            "featured": [
+                {
+                    "name": "Tenders and Fries",
+                    "description": "Get a classic order of chicken tenders and fries!",
+                    "tags": ["kosher"],
+                    "allergians": ["wheat", "eggs"],
+                    "price": 12.75
+                }
+            ],
+            "other": []
+        }
+    ]
+}

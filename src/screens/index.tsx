@@ -11,3 +11,7 @@ export {default as Services} from '@app/screens/Services/Services';
 export {default as Settings} from '@app/screens/Settings/Settings';
 export {default as ViewTicket} from '@app/screens/ViewTicket/ViewTicket';
 export {default as Wallet} from '@app/screens/Wallet/Wallet';
+export {default as Parking} from '@app/screens/Parking/Parking';
+export {default as Seating} from '@app/screens/Seating/Seating';
+export {default as InteractiveMap} from '@app/screens/InteractiveMap/InteractiveMap';
+export {default as DevPage} from '@app/screens/DevPage/DevPage';
