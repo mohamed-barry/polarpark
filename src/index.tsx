@@ -12,9 +12,9 @@ export default function App() {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <SafeAreaProvider>
-          <NavigationContainer>
-            <AppRouter />
-          </NavigationContainer>
+            <NavigationContainer>
+              <AppRouter />
+            </NavigationContainer>
         </SafeAreaProvider>
       </ThemeProvider>
     </Provider>

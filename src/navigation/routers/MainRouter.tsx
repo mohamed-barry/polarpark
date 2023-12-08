@@ -104,7 +104,7 @@ function Main(): JSX.Element {
 
 export default function MainRouter(): JSX.Element {
   return (
-    <RootStack.Navigator initialRouteName="Main">
+    <RootStack.Navigator initialRouteName="InteractiveMap">
       <RootStack.Screen
         name="Main"
         component={Main}

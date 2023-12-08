@@ -1,5 +1,5 @@
 import { ColorValue } from 'react-native';
-import { Rect, Svg, Text, SvgProps, G, GProps } from 'react-native-svg';
+import { Rect, Svg, Text, SvgProps, G, GProps, Circle, Path, Polygon } from 'react-native-svg';
 import MapPoint from './Point';
 
 type LegendProps = SvgProps & {
@@ -10,6 +10,7 @@ type LegendProps = SvgProps & {
 export default function MapLegend(props: LegendProps): JSX.Element {
 
     const floorDown = () => {
+        console.log("floor down");
         if (props.floor > 1) {
             props.setFloor(props.floor - 1);
         } else {
@@ -18,11 +19,16 @@ export default function MapLegend(props: LegendProps): JSX.Element {
     }
 
     const floorUp = () => {
+        console.log("floor up");
         if (props.floor < 3) {
             props.setFloor(props.floor + 1);
         } else {
             props.setFloor(3);
         }
+    }
+
+    const floorDisp = () => {
+        return "F" + props.floor
     }
 
     return (
@@ -38,6 +44,13 @@ export default function MapLegend(props: LegendProps): JSX.Element {
             <LegendElement X={150} Y={115} color={"#F7931E"} text='Stairs & Elevators' />
             <LegendElement X={150} Y={150} color={"#0000FF"} text="Batter's Box" />
             <Text fill={"black"} x={40} y={27} fontSize={16}>POI</Text>
+
+            <Circle cx={350} cy={35} r={20} stroke={"black"} strokeWidth={3} fill={"white"} onPress={floorUp}/>
+            <Polygon points="340,42 360,42 350,27" fill={"black"} onPress={floorUp}/>
+            <Text fill={"black"} x={337} y={105} fontSize={24} fontWeight={"bold"}>{floorDisp()}</Text>
+            <Circle cx={350} cy={155} r={20} stroke={"black"} strokeWidth={3} fill={"white"} onPress={floorDown}/>
+            <Polygon points="340,148 360,148 350,163" fill={"black"} onPress={floorDown}/>
+
             <MapPoint pointX={12} pointY={-140} width={450} height={450} />
             
         </Svg>
