@@ -25,12 +25,11 @@ const CodeModal: React.FC<CodeModalProps> = ({
   const handleSuccess = e => {
     setScannedCode(e.data);
     setModalVisible(false);
-    // You can add additional logic here for what happens after the scan is successful
     Alert.alert('QR Code Scanned', e.data, [
       {
         text: 'Confirm',
         onPress: () => console.log('Confirm Pressed'),
-        style: 'confirm',
+        style: 'default',
       },
       {
         text: 'Cancel',
