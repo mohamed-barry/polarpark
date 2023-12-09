@@ -4,6 +4,8 @@ import {
   Image,
   ImageSourcePropType,
   RefreshControl,
+  StyleSheet,
+  ImageBackground,
 } from 'react-native';
 import {Box, Section, Text} from '@app/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,6 +16,8 @@ import {
   CONCESSIONS_CSV_CACHE_ID,
 } from '../constants';
 import {readRemoteFile} from 'react-native-csv';
+import ConcessionBox from '@app/components/ui/ConcessionBox/ConcessionBox';
+import SearchBox from '@app/components/ui/SearchBox/SearchBox';
 
 const FOOD = require('@app/assets/data/default_food.json');
 let KEY = 0;
@@ -138,15 +142,7 @@ async function getFood(): Promise<Array<ConsessionStand>> {
 }
 
 function displayConcessionStand(stand: ConsessionStand): JSX.Element {
-  let i = 0;
-
-  return (
-    <Section subtitle={stand.description} title={stand.name} key={KEY++}>
-      {stand.featured.map(item => (
-        <FoodContainer item={item} key={i++} />
-      ))}
-    </Section>
-  );
+  return <ConcessionBox concessionStand={stand} key={KEY++} />;
 }
 
 export default function Ordering(): JSX.Element {
@@ -173,14 +169,62 @@ export default function Ordering(): JSX.Element {
     FIRST = false;
   }
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState<Array<ConsessionStand>>(
+    [],
+  );
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    if (term.trim() === '') {
+      setSearchResults([]); // Reset if the search term is empty
+    } else {
+      const matchedStands = food.filter(stand =>
+        stand.featured.some(item =>
+          item.name.toLowerCase().includes(term.toLowerCase()),
+        ),
+      );
+      setSearchResults(matchedStands);
+    }
+  };
+
+  const styles = StyleSheet.create({
+    // ... (any other styles you have for this component)
+    noResults: {
+      color: 'red',
+      textAlign: 'center',
+      marginTop: 20,
+    },
+    backgroundImage: {
+      flex: 1, // Make sure it covers the whole screen
+      resizeMode: 'cover', // or 'stretch'
+    },
+  });
+
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
-      {food.map(displayConcessionStand)}
-    </ScrollView>
+    <ImageBackground
+      source={require('@app/assets/images/background-concessions.jpeg')} // Replace with your actual background image path
+      style={styles.backgroundImage}
+      imageStyle={{opacity: 0.8}}
+      resizeMode="cover">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        style={{backgroundColor: 'transparent'}} // Ensure ScrollView background is transparent
+      >
+        <SearchBox onSearch={handleSearch} />
+        {searchTerm && searchResults.length === 0 ? (
+          <Text style={styles.noResults}>
+            No concessions currently sell this item
+          </Text>
+        ) : (
+          searchResults.map(displayConcessionStand)
+        )}
+        {food.map(displayConcessionStand)}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
