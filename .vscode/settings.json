@@ -8,5 +8,6 @@
     "**/Thumbs.db": true,
     "**node_modules": true
   },
-  "explorerExclude.backup": {}
+  "explorerExclude.backup": {},
+  "compile-hero.disable-compile-files-on-did-save-code": false
 }

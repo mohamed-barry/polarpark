@@ -22,6 +22,7 @@ import {
   Seating,
   InteractiveMap,
   DevPage,
+  WebTicket,
 } from '@app/screens';
 
 import {Header, Icon} from '@app/components';
@@ -63,7 +64,7 @@ function Main(): JSX.Element {
       />
       <RootTab.Screen
         name="Tickets"
-        component={Tickets}
+        component={WebTicket}
         options={{
           tabBarIcon: ({focused}) => (
             <Icon name="ticket" focused={focused} size={24} />
@@ -73,11 +74,12 @@ function Main(): JSX.Element {
       <RootTab.Screen
         name="Concessions"
         component={Ordering}
-        options={{
+        options={
+          {
           tabBarIcon: ({focused}) => (
             <Icon name="food" focused={focused} size={24} />
-          ),
-        }}
+          ),}
+        }
       />
       <RootTab.Screen
         name="Rewards"
@@ -104,7 +106,7 @@ function Main(): JSX.Element {
 
 export default function MainRouter(): JSX.Element {
   return (
-    <RootStack.Navigator initialRouteName="InteractiveMap">
+    <RootStack.Navigator initialRouteName="Main">
       <RootStack.Screen
         name="Main"
         component={Main}

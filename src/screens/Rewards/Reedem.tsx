@@ -1,32 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   Alert,
-  TouchableHighlight, // Added for better button feedback
+  TouchableHighlight,
+  ColorValue, // Added for better button feedback
 } from 'react-native';
 import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
+import { redeemCode } from '@app/api/features/pointsAction';
 
 interface Props {
   navigation: any; // Replace 'any' with your NavigationProp type
 }
 
+type OutputBoxProps = {
+  color: ColorValue,
+  message: string,
+  display: boolean
+}
+
 const Redeem: React.FC<Props> = ({navigation}) => {
+  const defaultOB: OutputBoxProps = {
+    color: "lightcoral",
+    message: "",
+    display: false
+  }
+
+  const [outputBox, setOutputBox] = useState(defaultOB);
+  const [code, setCode] = useState("");
+
   const handleScanQR = () => {
     Alert.alert('Redeem Code', 'Opening Camera for QR Scanning');
   };
 
   // Function to handle Redeem - this is just a placeholder
   const handleRedeem = () => {
-    Alert.alert('Redeem', 'Code Redeemed');
+    redeemCode(code)
+      .then((resp) => {
+        if (resp.success) {
+          setOutputBox({
+            color: "lightgreen",
+            message: resp.message,
+            display: true
+          })
+        } else {
+          setOutputBox({
+            color: "lightcoral",
+            message: resp.message,
+            display: true
+          });
+        }
+      })
+      .catch((e) => {
+        const msg = e instanceof Error ? e.message : "Unknown"
+        setOutputBox({
+          color: "lightcoral",
+          message: "Failed to redeem code due to " + msg + ". Try again later.",
+          display: true
+        });
+      })
   };
 
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
   };
+
+
 
   return (
     <View style={styles.container}>
@@ -38,6 +80,8 @@ const Redeem: React.FC<Props> = ({navigation}) => {
             style={styles.inputBox}
             placeholder="Enter Code Here"
             placeholderTextColor="#666" // Placeholder text color for better visibility
+            value={code}
+            onChangeText={setCode}
           />
           <TouchableHighlight
             style={styles.button}
@@ -53,6 +97,10 @@ const Redeem: React.FC<Props> = ({navigation}) => {
             <Text style={styles.buttonText}>Redeem</Text>
           </TouchableHighlight>
         </View>
+        {outputBox.display &&
+        <View style={[styles.redeemBox, {backgroundColor: outputBox.color}]}>
+          <Text>{outputBox.message}</Text>
+        </View>}
       </View>
     </View>
   );

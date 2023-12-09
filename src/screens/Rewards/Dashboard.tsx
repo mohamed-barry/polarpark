@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   View,
@@ -12,10 +12,18 @@ import {NavigationProp} from '@react-navigation/native';
 import Prize from '@app/components/reward/Prize';
 import QRImage from '@app/assets/icons/rewards/blue-qr.png';
 import CodeModal from '@app/components/reward/CodeModal';
+import { getAvaliblePoints } from '@app/api/features/pointsAction';
+import { logoutUser } from '@app/api/features/rewardsLogin';
+import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
+import AccountIcon from '@app/assets/icons/rewards/user-icon.png';
+import PrizeImage from '@app/assets/images/jersey.png';
+import { PrizeInfo, getPrizeList } from '@app/api/features/prizeActions';
 
 interface Props {
   navigation: NavigationProp<any>;
 }
+
+let key = 0;
 
 const Dashboard: React.FC<Props> = ({navigation}) => {
   const [isCodeModalVisible, setIsCodeModalVisible] = useState(false);
@@ -28,9 +36,65 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
     setIsCodeModalVisible(true);
   };
 
-  const userName = 'John Doe';
-  const userPoints = 350; // Replace this with the user's actual points
+  const defaultProfileInfo: ProfileInfo = {
+    name: 'John Doe',
+    avatar: AccountIcon,
+    userID: "0"
+  }
 
+  const defaultPrizes: Array<PrizeInfo> = []
+
+  const [profileInfo, setProfileInfo] = useState(defaultProfileInfo);
+  const [userPoints, setUserPoints] = useState(0); 
+  const [prizes, setPrizes] = useState(defaultPrizes);
+
+  useEffect(() => {
+    getProfileInfo({useCache: true})
+      .then((info) => {
+        // console.log(info)
+        if (profileInfo.name !== info.name) {
+          setProfileInfo(info);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        logoutUser();
+        navigation.navigate('Login');
+      })
+
+    getAvaliblePoints({useCache: true})
+      .then((points) => {
+        // console.log(points)
+        if (userPoints !== points)
+          setUserPoints(points);
+      })
+      .catch((e) => {
+        console.error(e);
+        logoutUser();
+        navigation.navigate('Login');
+      })
+
+    getPrizeList({useCache: true})
+      .then((tPrizes) => {
+        if (prizes.length === 0) {
+          tPrizes.sort((a, b) => {
+            return b.id - a.id;
+          })
+          setPrizes(tPrizes);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+  });
+
+  const prizeMapper = (p: PrizeInfo, i:number) => {
+    if (i <= 5) {
+      return (<Prize key={p.id} image={{uri: p.images?.medium}} name={p.title} price={p.pointsCost} />)
+    }
+    return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map 
+  }
+  
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
@@ -38,8 +102,9 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <CodeModal
           modalVisible={isCodeModalVisible}
           setModalVisible={setIsCodeModalVisible}
+          userID={profileInfo.userID} //todo make screen bright
         />
-        <Text style={styles.welcomeText}>Welcome, {userName}</Text>
+        <Text style={styles.welcomeText}>Welcome, {profileInfo.name}</Text>
         <View style={styles.pointContainer}>
           <Text style={styles.pointContainerTitle}>Rewards Points</Text>
           <Text style={styles.userPointsText}>{userPoints}</Text>
@@ -52,8 +117,8 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <View style={styles.separator} />
         <Text style={styles.featuredText}>Featured Offers & Rewards</Text>
         <View style={styles.featureDealsContainer}>
-          <Prize />
-          <Prize />
+          {prizes.map(prizeMapper)}
+          {/* <Prize image={PrizeImage} name="Signed Jersey" price={100}/> */}
         </View>
       </View>
     </ScrollView>

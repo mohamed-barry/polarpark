@@ -1,15 +1,19 @@
 import React from 'react';
 import {Modal, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/Ionicons'; // Import your icon library
+import SMILEY from '@app/assets/images/smiley-1.png'
 
 interface CodeModalProps {
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
+  userID: string;
 }
 
 const CodeModal: React.FC<CodeModalProps> = ({
   modalVisible,
   setModalVisible,
+  userID
 }) => {
   return (
     <Modal
@@ -18,18 +22,25 @@ const CodeModal: React.FC<CodeModalProps> = ({
       visible={modalVisible}
       onRequestClose={() => setModalVisible(!modalVisible)}>
       <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+        <View style={[styles.modalView]}>
+          <View style={styles.centeredView}>
+            <QRCode 
+              value={userID}
+              logo={SMILEY}
+              size={200}
+            />
+          </View>
           <TouchableOpacity
             style={styles.closeButton}
             onPress={() => setModalVisible(false)}>
             <Icon name="close" size={24} color="#000" />
           </TouchableOpacity>
-          <Text style={styles.modalTitle}>Scan QR Code</Text>
+          {/* <Text style={styles.modalTitle}>Scan QR Code</Text> */}
           {/* Content of the modal */}
           {/* ... */}
-          <TouchableOpacity style={styles.startEarningButton}>
+          {/* <TouchableOpacity style={styles.startEarningButton}>
             <Text style={styles.buttonText}> Gain Points </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </Modal>
@@ -44,12 +55,12 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
+    margin: 10,
     width: '90%', // Use the percentage of screen width that suits your design
-    height: '20%', // Use the percentage of screen height that suits your design
+    height: '50%', // Use the percentage of screen height that suits your design
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 20,
+    padding: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 5
   },
   closeButton: {
     position: 'absolute',

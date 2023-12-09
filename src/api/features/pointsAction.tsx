@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fanmakerGetRequest } from "./fanmakerAPIRequest";
+import { fanmakerGetRequest, fanmakerPostRequest } from "./fanmakerAPIRequest";
 import { REWARDS_LOGIN_TOKEN_ID, REWARDS_POINTS_CACHE_ID } from "../constants";
 import { isLoggedIn } from "./rewardsLogin";
 import { checkStale, newStaleTime } from "../cache/checkStale";
@@ -21,7 +21,7 @@ export async function getAvaliblePoints({useCache = true}: CachedAPICallProps): 
         }
 
         const token = await AsyncStorage.getItem(REWARDS_LOGIN_TOKEN_ID);
-        if (token === null || !(await isLoggedIn())) {
+        if (token === null) {
             throw new Error("User not logged In");
         }
 
@@ -52,4 +52,44 @@ export async function getAvaliblePoints({useCache = true}: CachedAPICallProps): 
         if (e instanceof Error) throw new Error("Unable to get User's Points caused by: " + e.message + e.stack)
         throw new Error("Unable to get User's Points");
     }
+}
+
+type RedemtionResp = {
+    success: boolean,
+    message: string
+}
+
+export async function redeemCode(code: string): Promise<RedemtionResp> {
+    const uri = "https://api.fanmaker.com/api/v2/promo_codes?code=" + code
+
+    try {
+        const token = await AsyncStorage.getItem(REWARDS_LOGIN_TOKEN_ID);
+        if (token === null) {
+            throw new Error("User not logged In");
+        }
+
+        const resp = await fanmakerPostRequest(uri, token, "");
+
+        if (resp.code === 400) {
+            return {
+                success: false,
+                message: resp.message ? resp.message : ""
+            }
+        } else if (resp.code === 200) {
+            getAvaliblePoints({useCache: false}); //manually update points cache
+            return {
+                success: true,
+                message: resp.data?.message ? resp.data.message : ""
+            }
+        } else {
+            throw new Error("Weird error when connecting to FanMaker" + resp.code + resp.message);
+        }
+    } catch (e) {
+        if (e instanceof Error) {
+            throw new Error("Unable to connect to FanMaker caused by: " + e.message + e.stack)
+        } else {
+            throw new Error("Unable to connect to FanMaker")
+        }
+    } 
+
 }

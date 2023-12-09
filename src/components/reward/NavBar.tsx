@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -19,6 +19,8 @@ import ExitIcon from '@app/assets/icons/rewards/arrow-icon.png';
 import CrowdIcon from '@app/assets/icons/rewards/crowd-icon.png';
 import HomeIcon from '@app/assets/images/home-icon.png';
 import SettingIcon from '@app/assets/icons/rewards/settings-icon.png';
+import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
+import { logoutUser } from '@app/api/features/rewardsLogin';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -27,9 +29,27 @@ interface Props {
 }
 
 const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
-  const userData = {
+  const defaultData: ProfileInfo = {
     name: 'John Doe',
+    avatar: AccountIcon
   };
+
+  const [userData, setUserData] = useState(defaultData);
+
+  useEffect(() => {
+    getProfileInfo({useCache: true})
+    .then((info) => {
+      // console.log(info)
+      if (userData.name !== info.name) {
+        setUserData(info);
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+      logoutUser();
+      navigation.navigate('Login');
+    })
+  })
 
   const sections = [
     {name: 'Home', icon: HomeIcon, route: 'Dashboard'},
@@ -45,7 +65,8 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
     closeModal(); // Close modal after navigating
   };
 
-  const handleButtonClick = () => {
+  const handleSignoutButtonClick = () => {
+    logoutUser();
     navigation.navigate('Login');
   };
 
@@ -76,13 +97,13 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
       <View style={styles.navContainer}>
         <View style={styles.userInfo}>
           <Text style={styles.userName}>{userData.name}</Text>
-          <Image source={AccountIcon} style={styles.userImage} />
+          <Image source={userData.avatar} style={styles.userImage} />
         </View>
         <View style={styles.sectionContainer}>{renderSections()}</View>
         <View style={styles.bottomContainer}>
           <TouchableOpacity
             style={styles.signOutButton}
-            onPress={handleButtonClick}>
+            onPress={handleSignoutButtonClick}>
             <Text style={styles.signOutText}>Sign Out</Text>
             <Image source={ExitIcon} style={styles.placeholderIcon} />
           </TouchableOpacity>
