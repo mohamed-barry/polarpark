@@ -104,11 +104,6 @@ const styles = StyleSheet.create({
     margin: 20,
     textAlign: 'center',
   },
-  modalText: {
-    fontSize: 18,
-    margin: 20,
-    textAlign: 'center',
-  },
   closeButton: {
     position: 'absolute',
     top: 10,
