@@ -11,6 +11,16 @@ interface Props {
   navigation: any;
 }
 
+interface UserItem {
+  id: number;
+  name: string;
+  points: number;
+}
+
+const users: UserItem[] = [
+  // ... populate this array with your users data
+];
+
 export const LeaderBoard: React.FC<Props> = ({navigation}) => {
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
@@ -61,6 +71,12 @@ export const LeaderBoard: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
+      <Text style={styles.header}> Leaderboard </Text>
+      <FlatList
+        data={users}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+      />
       <Text style={styles.header}> Leaderboard </Text>
       <FlatList
         data={users}

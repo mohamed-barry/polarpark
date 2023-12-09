@@ -17,7 +17,7 @@ const ForgotPassword: React.FC<Props> = ({navigation}) => {
   // Add state and functions as needed for handling input and submission
 
   const handleContinueClick = () => {
-    navigation.navigate('CodeVerification'); // Assuming 'ForgotPassword' is the name of your route
+    navigation.navigate('CodeVerification');
   };
 
   return (
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     borderRadius: 30,
-    backgroundColor: 'rgba(169, 7, 10, 1)', // Green color for the button
+    backgroundColor: 'rgba(169, 7, 10, 1)',
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  // New styles for the bottom container and buttons
+
   bottomContainer: {
     paddingTop: 20,
     alignItems: 'center',

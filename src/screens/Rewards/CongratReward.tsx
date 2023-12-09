@@ -4,32 +4,25 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import ConfettiIcon from '@app/assets/images/confetti-icon.png';
 import HomeIcon from '@app/assets/images/home-icon.png';
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const CongratReward: React.FC<Props> = ({navigation}) => {
-  // This function handles navigation to the Dashboard screen
   const handleReturnHome = () => {
-    navigation.navigate('Dashboard'); // Navigate to the Dashboard screen
+    navigation.navigate('Dashboard');
   };
 
   return (
     <View style={styles.container}>
       {/* Placeholder for the image */}
-      <Image
-        source={ConfettiIcon} // Replace with your image
-        style={styles.image}
-      />
+      <Image source={ConfettiIcon} style={styles.image} />
       <Text style={styles.congratsText}>
         Congrats, you have redeemed your prize!
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleReturnHome}>
         <Text style={styles.buttonText}>Return Home</Text>
         {/* Placeholder for the icon image */}
-        <Image
-          source={HomeIcon} // Replace with your icon
-          style={styles.icon}
-        />
+        <Image source={HomeIcon} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -47,7 +40,6 @@ const styles = StyleSheet.create({
     height: 200,
     marginBottom: 20,
     resizeMode: 'contain',
-    // Additional styling for the image if needed
   },
   congratsText: {
     fontSize: 24,
@@ -71,7 +63,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
-    // Additional styling for the icon if needed
   },
 });
 

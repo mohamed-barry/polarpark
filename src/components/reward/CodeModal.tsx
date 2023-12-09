@@ -1,7 +1,16 @@
-import React from 'react';
-import {Modal, View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Modal,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import Icon from 'react-native-vector-icons/Ionicons'; // Import your icon library
+import Icon from 'react-native-vector-icons/Ionicons';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import {RNCamera} from 'react-native-camera';
 import SMILEY from '@app/assets/images/smiley-1.png'
 
 interface CodeModalProps {
@@ -15,6 +24,25 @@ const CodeModal: React.FC<CodeModalProps> = ({
   setModalVisible,
   userID
 }) => {
+  const [scannedCode, setScannedCode] = useState('');
+
+  const handleSuccess = e => {
+    setScannedCode(e.data);
+    setModalVisible(false);
+    Alert.alert('QR Code Scanned', e.data, [
+      {
+        text: 'Confirm',
+        onPress: () => console.log('Confirm Pressed'),
+        style: 'default',
+      },
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+    ]);
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -56,8 +84,8 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 10,
-    width: '90%', // Use the percentage of screen width that suits your design
-    height: '50%', // Use the percentage of screen height that suits your design
+    width: '90%',
+    height: '50%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 10,
@@ -71,6 +99,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
+  modalText: {
+    fontSize: 18,
+    margin: 20,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    margin: 20,
+    textAlign: 'center',
+  },
   closeButton: {
     position: 'absolute',
     top: 10,
@@ -83,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   startEarningButton: {
-    backgroundColor: '#ADD8E6', // Light Blue color
+    backgroundColor: '#ADD8E6',
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
@@ -94,7 +132,19 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
-  // Add any other styles you might need
+  centerText: {
+    flex: 1,
+    fontSize: 18,
+    padding: 32,
+    color: '#777',
+  },
+  textBold: {
+    fontWeight: '500',
+    color: '#000',
+  },
+  buttonTouchable: {
+    padding: 16,
+  },
 });
 
 export default CodeModal;

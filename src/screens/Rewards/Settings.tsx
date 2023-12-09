@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Make sure to install react-native-vector-icons
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from '@app/components/reward/RewardHeader';
 import ProfileImage from '@app/assets/images/woosox-rewards-nobg.png';
 import Home from '@app/assets/icons/rewards/blue-home.png';
@@ -25,7 +25,7 @@ const settingsOptions = [
 ];
 
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const Settings: React.FC<Props> = ({navigation}) => {
@@ -44,10 +44,7 @@ const Settings: React.FC<Props> = ({navigation}) => {
     <View style={styles.container}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
       <View style={styles.profileSection}>
-        <Image
-          source={ProfileImage} // Replace with your image path
-          style={styles.profileImage}
-        />
+        <Image source={ProfileImage} style={styles.profileImage} />
         <Text style={styles.profileName}>User Name</Text>
 
         {/* Replace User Name with actual user name */}
@@ -75,7 +72,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 60,
     height: 60,
-    borderRadius: 30, // This makes it circular
+    borderRadius: 30,
   },
   profileName: {
     marginLeft: 10,
@@ -94,7 +91,6 @@ const styles = StyleSheet.create({
   settingText: {
     fontSize: 16,
   },
-  // Add other styles as needed
 });
 
 export default Settings;

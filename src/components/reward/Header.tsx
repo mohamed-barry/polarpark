@@ -18,11 +18,10 @@ const styles = StyleSheet.create({
     width: 430,
   },
   headerImage: {
-    width: 400, // Adjust the width of the image
-    height: 160, // Adjust the height of the image
-    resizeMode: 'contain', // Adjust the image content mode as needed
+    width: 400,
+    height: 160,
+    resizeMode: 'contain',
   },
-  // Add more styles as needed for your header
 });
 
 export default Header;

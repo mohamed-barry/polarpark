@@ -15,7 +15,7 @@ const Prize: React.FC<PrizeProps> = (props: PrizeProps) => {
         <Image
           source={props.image} // Replace with your placeholder image
           style={styles.image}
-          resizeMode="contain" // Adjust the resizeMode as needed
+          resizeMode="contain"
         />
       </View>
       <View style={styles.divider} />
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: '80%', // Adjust the width of the image as needed
-    height: '80%', // Adjust the height of the image as needed
+    width: '80%',
+    height: '80%',
   },
   divider: {
     borderBottomWidth: 1,
