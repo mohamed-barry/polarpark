@@ -69,7 +69,7 @@ const ConcessionBox: React.FC<ConcessionBoxProps> = ({concessionStand}) => {
 
 const styles = StyleSheet.create({
   box: {
-    borderRadius: 10,
+    borderRadius: 20,
     overflow: 'hidden',
     margin: 15,
   },

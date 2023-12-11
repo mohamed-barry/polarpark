@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,12 @@ interface Props {
 
 const ForgotPassword: React.FC<Props> = ({navigation}) => {
   // Add state and functions as needed for handling input and submission
+  const [email, setEmail] = useState('');
+
+  // Function to generate a random 4-digit code
+  const generateCode = () => {
+    return Math.floor(1000 + Math.random() * 9000); // Random 4-digit number
+  };
 
   const handleContinueClick = () => {
     navigation.navigate('CodeVerification');
@@ -35,7 +41,8 @@ const ForgotPassword: React.FC<Props> = ({navigation}) => {
             style={styles.inputBox}
             placeholder="Enter your email"
             keyboardType="email-address"
-            // onChangeText={...} // Handle email input change
+            value={email}
+            onChangeText={setEmail} // Handle email input change
           />
         </View>
         <TouchableOpacity style={styles.button} onPress={handleContinueClick}>
