@@ -1,15 +1,15 @@
 
-import { useState } from 'react';
-import { View } from 'react-native';
-import { Circle, SvgProps } from 'react-native-svg';
-import SvgPanZoom, { SvgPanZoomElement } from 'react-native-svg-pan-zoom';
+import {useState} from 'react';
+import {View} from 'react-native';
+import {Circle, SvgProps} from 'react-native-svg';
+import SvgPanZoom, {SvgPanZoomElement} from 'react-native-svg-pan-zoom';
 import MapLegend from './MapLegend';
 import MapPoint from './Point';
 import MapViewer from './MapViewer';
 // import MainFloor from './MainFloor';
 
 export default function InteractiveMap(): JSX.Element {
-    let [floor, setFloor] = useState(2);
+  let [floor, setFloor] = useState(2);
 
     return (
         <View style={{height: "100%", width: "100%"}}>

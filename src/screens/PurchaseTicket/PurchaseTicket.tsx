@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {FlashList} from '@shopify/flash-list';
 import {Box, ContentWrapper, ScheduleItem, Text} from '@app/components';
 import {TicketFlowScreenProps} from '@app/navigation/types';
 import {TDC} from '@app/api/model/tdc';
 import {useEventSchedule} from '@app/hooks';
+import UpcomingTickets from '@app/components/ui/UpcomingTickets/UpcomingTickets'; // Make sure the path is correct
 
 interface ScheduleItemWrapperProps {
   event: TDC.Event;
@@ -31,6 +33,15 @@ export default function PurchaseTicketScreen(
   return (
     <ContentWrapper>
       <Box height="100%">
+        {/* Header for the upcoming tickets */}
+        <Text variant="heading2" mb="m">
+          Upcoming Tickets
+        </Text>
+
+        {/* Render UpcomingTickets at the top */}
+        <UpcomingTickets />
+
+        {/* FlashList for purchasing tickets */}
         <FlashList
           data={events}
           estimatedItemSize={100}
@@ -40,9 +51,7 @@ export default function PurchaseTicketScreen(
           renderItem={({item}) => <ScheduleItemWrapper event={item} />}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={() => (
-            <Text mt="l" variant="heading2">
-              Purchase tickets
-            </Text>
+            <Text variant="heading2">Purchase tickets</Text>
           )}
         />
       </Box>

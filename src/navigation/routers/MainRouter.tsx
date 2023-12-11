@@ -25,6 +25,10 @@ import {
   WebTicket,
 } from '@app/screens';
 
+import SecurityServices from '@app/screens/Services/SecurityServices';
+import FAQServices from '@app/screens/Services/FAQServices';
+import ParkingServices from '@app/screens/Services/ParkingServices';
+
 import {Header, Icon} from '@app/components';
 import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -192,6 +196,60 @@ export default function MainRouter(): JSX.Element {
         component={InteractiveMap}
         options={{
           headerTitle: 'Ballpark Map',
+        }}
+      />
+      <RootStack.Screen
+        name="ParkingServices"
+        component={ParkingServices}
+        options={{
+          headerTitle: 'Parking',
+          headerTintColor: theme.colors.black,
+          headerShadowVisible: false,
+          headerLeft: () => {
+            const navigation = useNavigation();
+            const goBack = () => navigation.goBack();
+            return (
+              <Pressable onPress={goBack}>
+                <Icon name="arrow-left" color="black" />
+              </Pressable>
+            );
+          },
+        }}
+      />
+      <RootStack.Screen
+        name="SecurityServices"
+        component={SecurityServices}
+        options={{
+          headerTitle: 'Security',
+          headerTintColor: theme.colors.black,
+          headerShadowVisible: false,
+          headerLeft: () => {
+            const navigation = useNavigation();
+            const goBack = () => navigation.goBack();
+            return (
+              <Pressable onPress={goBack}>
+                <Icon name="arrow-left" color="black" />
+              </Pressable>
+            );
+          },
+        }}
+      />
+      <RootStack.Screen
+        name="FAQServices"
+        component={FAQServices}
+        options={{
+          headerTitle: 'FAQ',
+          headerTintColor: theme.colors.black,
+          headerShadowVisible: false,
+          headerLeft: () => {
+            const navigation = useNavigation();
+            const goBack = () => navigation.goBack();
+            return (
+              <Pressable onPress={goBack}>
+                <Icon name="arrow-left" color="black" />
+              </Pressable>
+            );
+          },
         }}
       />
     </RootStack.Navigator>

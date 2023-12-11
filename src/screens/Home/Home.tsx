@@ -21,6 +21,8 @@ import {
   TicketStackNavigationProps,
 } from '@app/navigation/types';
 import { FMEvent, getFanmakerEvents } from '@app/api/features/getFanmakerEvents';
+import UpcomingTickets from '@app/components/ui/UpcomingTickets/UpcomingTickets';
+import MapBox from '@app/components/ui/Map/MapBox';
 
 export default function Home(): JSX.Element {
   const [activeItem, setActiveItem] = useState<Array<TDC.LineItem>>([]);
@@ -77,24 +79,10 @@ export default function Home(): JSX.Element {
     <>
       {loading ? null : (
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Section title="Your Upcoming Tickets">
-            {activeItem.length > 0 ? (
-              activeItem.map(item => (
-                <TicketPreview
-                  active={true}
-                  key={item.id}
-                  lineItem={item}
-                  onPress={navigateToTicket}
-                />
-              ))
-            ) : (
-              <Button
-                onPress={navigateToPurchaseTicket}
-                title="Purchase tickets"
-                variant="default"
-              />
-            )}
+          <Section title="Map of Polar Park">
+            <MapBox />
           </Section>
+
           <Section title="Events at Polar Park" mb="l">
             {events.length == 0? 
             <DefaultEvent />
