@@ -5,7 +5,7 @@ import ConfettiIcon from '@app/assets/images/confetti-icon.png';
 import RightArrow from '@app/assets/icons/rewards/arrow-icon.png';
 
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const CongratSignUp: React.FC<Props> = ({navigation}) => {
@@ -17,20 +17,14 @@ const CongratSignUp: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* Placeholder for the image */}
-      <Image
-        source={ConfettiIcon} // Replace with your image
-        style={styles.image}
-      />
+      <Image source={ConfettiIcon} style={styles.image} />
       <Text style={styles.congratsText}>
         Congrats, you have signed up for WooSox Rewards!
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleStartEarning}>
         <Text style={styles.buttonText}>Start Earning</Text>
         {/* Placeholder for the icon image */}
-        <Image
-          source={RightArrow} // Replace with your icon
-          style={styles.icon}
-        />
+        <Image source={RightArrow} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -48,7 +42,6 @@ const styles = StyleSheet.create({
     height: 200,
     marginBottom: 20,
     resizeMode: 'contain',
-    // Additional styling for the image if needed
   },
   congratsText: {
     fontSize: 24,
@@ -72,7 +65,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
-    // Additional styling for the icon if needed
   },
 });
 

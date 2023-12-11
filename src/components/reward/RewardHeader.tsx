@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'rgb(16, 41, 89)',
     alignItems: 'center',
-    justifyContent: 'center', // Center horizontally
+    justifyContent: 'center',
     paddingTop: 60,
     paddingBottom: 20,
     width: 430,
@@ -69,14 +69,14 @@ const styles = StyleSheet.create({
     paddingRight: 45,
   },
   logoContainer: {
-    alignItems: 'center', // Center logo image
+    alignItems: 'center',
     flex: 1,
-    position: 'relative', // To position the right icon container
+    position: 'relative',
   },
   headerImage: {
-    width: 350, // Adjust the width of the image
-    height: 150, // Adjust the height of the image
-    resizeMode: 'contain', // Adjust the image content mode as needed
+    width: 350,
+    height: 150,
+    resizeMode: 'contain',
   },
   iconImage: {
     width: 40,
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    borderRadius: 20, // Half the width and height for a circle
+    borderRadius: 20,
     width: 40,
     height: 40,
-    elevation: 4, // Add elevation for a slight shadow effect
+    elevation: 4,
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 2,
@@ -109,9 +109,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rightImage: {
-    width: 20, // Adjust the width of the right image icon
-    height: 20, // Adjust the height of the right image icon
-    resizeMode: 'contain', // Adjust the image content mode as needed
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
   },
   // Add more styles as needed for your header
 });

@@ -10,9 +10,11 @@ import {
 interface IconTextFieldProps {
   placeholder: string;
   icon: ImageSourcePropType;
+  value?: string;
+  onChange?: (arg0: string) => void;
 }
 
-const IconTextField: React.FC<IconTextFieldProps> = ({placeholder, icon}) => {
+const IconTextField: React.FC<IconTextFieldProps> = ({placeholder, icon, value, onChange}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -25,6 +27,8 @@ const IconTextField: React.FC<IconTextFieldProps> = ({placeholder, icon}) => {
         placeholder={placeholder}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        value={value}
+        onChangeText={onChange}
       />
     </View>
   );

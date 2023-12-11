@@ -6,12 +6,12 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Home from '@app/assets/images/home-icon.png';
 
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const CrowdCameo: React.FC<Props> = ({navigation}) => {
   const handleHome = () => {
-    navigation.navigate('Dashboard'); // Navigate to the Dashboard screen
+    navigation.navigate('Dashboard');
   };
 
   const handleIconClick = () => {
@@ -24,10 +24,7 @@ const CrowdCameo: React.FC<Props> = ({navigation}) => {
       <Text style={styles.textStyle}> Coming Soon! </Text>
       <TouchableOpacity style={styles.button} onPress={handleHome}>
         <Text style={styles.buttonText}> Return Home</Text>
-        <Image
-          source={Home} // Replace with your image
-          style={styles.icon}
-        />
+        <Image source={Home} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -63,7 +60,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
-    // Additional styling for the icon if needed
   },
 });
 

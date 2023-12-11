@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   View,
@@ -12,10 +12,18 @@ import {NavigationProp} from '@react-navigation/native';
 import Prize from '@app/components/reward/Prize';
 import QRImage from '@app/assets/icons/rewards/blue-qr.png';
 import CodeModal from '@app/components/reward/CodeModal';
+import { getAvaliblePoints } from '@app/api/features/pointsAction';
+import { logoutUser } from '@app/api/features/rewardsLogin';
+import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
+import AccountIcon from '@app/assets/icons/rewards/user-icon.png';
+import PrizeImage from '@app/assets/images/jersey.png';
+import { PrizeInfo, getPrizeList } from '@app/api/features/prizeActions';
 
 interface Props {
   navigation: NavigationProp<any>;
 }
+
+let key = 0;
 
 const Dashboard: React.FC<Props> = ({navigation}) => {
   const [isCodeModalVisible, setIsCodeModalVisible] = useState(false);
@@ -28,9 +36,65 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
     setIsCodeModalVisible(true);
   };
 
-  const userName = 'John Doe';
-  const userPoints = 350; // Replace this with the user's actual points
+  const defaultProfileInfo: ProfileInfo = {
+    name: 'John Doe',
+    avatar: AccountIcon,
+    userID: "0"
+  }
 
+  const defaultPrizes: Array<PrizeInfo> = []
+
+  const [profileInfo, setProfileInfo] = useState(defaultProfileInfo);
+  const [userPoints, setUserPoints] = useState(0); 
+  const [prizes, setPrizes] = useState(defaultPrizes);
+
+  useEffect(() => {
+    getProfileInfo({useCache: true})
+      .then((info) => {
+        // console.log(info)
+        if (profileInfo.name !== info.name) {
+          setProfileInfo(info);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        logoutUser();
+        navigation.navigate('Login');
+      })
+
+    getAvaliblePoints({useCache: true})
+      .then((points) => {
+        // console.log(points)
+        if (userPoints !== points)
+          setUserPoints(points);
+      })
+      .catch((e) => {
+        console.error(e);
+        logoutUser();
+        navigation.navigate('Login');
+      })
+
+    getPrizeList({useCache: true})
+      .then((tPrizes) => {
+        if (prizes.length === 0) {
+          tPrizes.sort((a, b) => {
+            return b.id - a.id;
+          })
+          setPrizes(tPrizes);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+  });
+
+  const prizeMapper = (p: PrizeInfo, i:number) => {
+    if (i <= 5) {
+      return (<Prize key={p.id} image={{uri: p.images?.medium}} name={p.title} price={p.pointsCost} />)
+    }
+    return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map 
+  }
+  
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
@@ -38,8 +102,9 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <CodeModal
           modalVisible={isCodeModalVisible}
           setModalVisible={setIsCodeModalVisible}
+          userID={profileInfo.userID} //todo make screen bright
         />
-        <Text style={styles.welcomeText}>Welcome, {userName}</Text>
+        <Text style={styles.welcomeText}>Welcome, {profileInfo.name}</Text>
         <View style={styles.pointContainer}>
           <Text style={styles.pointContainerTitle}>Rewards Points</Text>
           <Text style={styles.userPointsText}>{userPoints}</Text>
@@ -52,8 +117,8 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <View style={styles.separator} />
         <Text style={styles.featuredText}>Featured Offers & Rewards</Text>
         <View style={styles.featureDealsContainer}>
-          <Prize />
-          <Prize />
+          {prizes.map(prizeMapper)}
+          {/* <Prize image={PrizeImage} name="Signed Jersey" price={100}/> */}
         </View>
       </View>
     </ScrollView>
@@ -63,21 +128,21 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5', // Neutral background color
+    backgroundColor: '#F5F5F5',
   },
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 20,
-    marginHorizontal: 20, // Better spacing on the sides
+    marginHorizontal: 20,
     fontFamily: 'Nunito Sans',
-    color: '#333', // Darker text for better readability
+    color: '#333',
   },
   pointContainer: {
-    backgroundColor: '#4A90E2', // A more subtle color for the container
+    backgroundColor: '#4A90E2',
     padding: 20,
     borderRadius: 10,
-    margin: 20, // Consistent margin
+    margin: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -89,17 +154,17 @@ const styles = StyleSheet.create({
   },
   userPointsText: {
     color: '#FFF',
-    fontSize: 40, // Larger text for points to stand out
+    fontSize: 40,
     fontFamily: 'Nunito Sans',
     fontWeight: 'bold',
-    marginVertical: 10, // Spacing above and below the points
+    marginVertical: 10,
   },
   chooseRewardsButton: {
     backgroundColor: '#FFF',
-    borderRadius: 25, // Rounded edges
-    paddingVertical: 10, // Taller button for better tap area
+    borderRadius: 25,
+    paddingVertical: 10,
     paddingHorizontal: 20,
-    shadowColor: '#000', // Subtle shadow for elevation effect
+    shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -107,7 +172,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: '#4A90E2', // Accent color that matches the container
+    color: '#4A90E2',
     fontSize: 18,
     fontFamily: 'Nunito Sans',
     fontWeight: '600',
@@ -115,14 +180,14 @@ const styles = StyleSheet.create({
   featuredText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginHorizontal: 20, // Align with the welcome text
+    marginHorizontal: 20,
     fontFamily: 'Nunito Sans',
     color: '#333',
     marginBottom: 10,
   },
   featureDealsContainer: {
     alignItems: 'center',
-    paddingBottom: 20, // Padding at the bottom of the scrollview
+    paddingBottom: 20,
   },
   scrollView: {
     flex: 1,
@@ -130,9 +195,9 @@ const styles = StyleSheet.create({
   },
 
   separator: {
-    borderBottomColor: 'gray', // Color of the separator line
-    borderBottomWidth: 1, // Thickness of the separator line
-    marginBottom: 20, // Space after the line
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    marginBottom: 20,
     color: 'lightgray',
   },
 });

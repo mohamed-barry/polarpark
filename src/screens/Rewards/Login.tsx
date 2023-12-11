@@ -1,5 +1,5 @@
 import {NavigationProp} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -12,20 +12,40 @@ import {
 import Header from '@app/components/reward/Header';
 import MailIcon from '@app/assets/icons/rewards/mail-icon.png';
 import LockIcon from '@app/assets/icons/rewards/password-icon.png';
+import { loginUser, isLoggedIn } from '@app/api/features/rewardsLogin';
+import { Alert } from 'react-native';
 
 interface Props {
   navigation: NavigationProp<any>;
 }
 
 const Login: React.FC<Props> = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  isLoggedIn().then(
+    (loggedIn) => {
+      if (loggedIn) {
+        navigation.navigate('Dashboard');
+      }
+    }
+  )
+
   const handleSignUp = () => {
     navigation.navigate('Signup');
   };
   const handleLoginClick = () => {
-    navigation.navigate('Dashboard');
+    loginUser(email, password)
+      .then((lp) => {
+        if (lp.success) {
+          navigation.navigate('Dashboard');
+        } else {
+          Alert.alert("Login failed", lp.errorMessage);
+        }
+      })
   };
   const handleForgotPassword = () => {
-    navigation.navigate('ForgotPassword'); // Assuming 'ForgotPassword' is the name of your route
+    navigation.navigate('ForgotPassword');
   };
 
   return (
@@ -37,7 +57,7 @@ const Login: React.FC<Props> = ({navigation}) => {
           <View style={styles.inputIcon}>
             <Image source={MailIcon} style={styles.inputIcon} />
           </View>
-          <TextInput style={styles.input} placeholder="Email" />
+          <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
         </View>
       </View>
       <View style={styles.inputContainer}>
@@ -49,20 +69,22 @@ const Login: React.FC<Props> = ({navigation}) => {
             style={styles.input}
             placeholder="Password"
             secureTextEntry={true}
+            value={password}
+            onChangeText={setPassword}
           />
         </View>
       </View>
-      {/* Moved the "Forgot password?" section here */}
+
       <View style={styles.forgotPasswordContainer}>
         <TouchableOpacity onPress={handleForgotPassword}>
           <Text style={styles.forgotPassword}>Forgot password?</Text>
         </TouchableOpacity>
       </View>
-      {/* Moved the "Login" button here */}
+
       <TouchableOpacity style={styles.button} onPress={handleLoginClick}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      {/* Moved the "Not a member?" section here */}
+
       <TouchableOpacity onPress={handleSignUp}>
         <Text style={styles.signupText}>
           Not a member? <Text style={styles.signupLink}>Sign up now</Text>
@@ -148,9 +170,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito Sans',
   },
   forgotPasswordContainer: {
-    alignSelf: 'flex-end', // Aligns to the right
-    marginTop: 10, // Adjust spacing as needed
-    marginBottom: 10, // Adds space between "Forgot password?" and "Login"
+    alignSelf: 'flex-end',
+    marginTop: 10,
+    marginBottom: 10,
     fontFamily: 'Nunito Sans',
   },
   forgotPassword: {

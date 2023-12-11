@@ -5,15 +5,15 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Home from '@app/assets/icons/rewards/blue-home.png';
 
 interface Props {
-  navigation: any; // Replace 'any' with your NavigationProp type
+  navigation: any;
 }
 
 const PrivacyPolicy: React.FC<Props> = ({navigation}) => {
   const handleAcceptClick = () => {
-    navigation.navigate('Dashboard'); // Navigate to the Dashboard screen
+    navigation.navigate('Dashboard');
   };
   const handleDeclineClick = () => {
-    navigation.navigate('Login'); // Navigate to the Dashboard screen
+    navigation.navigate('Login');
   };
   const handleIconClick = () => {
     navigation.navigate('Dashboard');

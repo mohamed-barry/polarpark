@@ -5,7 +5,8 @@ import { fanmakerGetRequest } from "./fanmakerAPIRequest";
 import { checkStale, newStaleTime } from "../cache/checkStale";
 
 
-type LeaderboardEntry = {
+export type LeaderboardEntry = {
+    id: number;
     name: string;
     points: number;
 }
@@ -28,7 +29,8 @@ export async function getLeaderboard({useCache = true}: CachedAPICallProps): Pro
             for (let i = 0; i < 10; i++) { //gets the top 10 users
                 const currEntry = {
                     name: resp.data.users[i].full_name,
-                    points: resp.data.users[i].display_points
+                    points: resp.data.users[i].display_points,
+                    id: i+1
                 }
                 userList.push(currEntry);
             }

@@ -10,7 +10,6 @@ import {
 import Header from '@app/components/reward/Header';
 import {NavigationProp} from '@react-navigation/native';
 
-// You might need to replace this with the actual icon you're using
 const eyeIcon = require('@app/assets/icons/rewards/eye-icon.png');
 
 interface Props {

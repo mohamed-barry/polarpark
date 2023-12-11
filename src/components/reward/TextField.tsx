@@ -3,9 +3,11 @@ import {View, TextInput, StyleSheet} from 'react-native';
 
 interface TextFieldProps {
   placeholder: string;
+  value?: string;
+  onChange?: (arg0: string) => void
 }
 
-const TextField: React.FC<TextFieldProps> = ({placeholder}) => {
+const TextField: React.FC<TextFieldProps> = ({placeholder, value, onChange}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -15,6 +17,8 @@ const TextField: React.FC<TextFieldProps> = ({placeholder}) => {
         placeholder={placeholder}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        value={value}
+        onChangeText={onChange}
       />
     </View>
   );

@@ -15,3 +15,4 @@ export {default as Parking} from '@app/screens/Services/ParkingServices';
 export {default as Seating} from '@app/screens/Seating/Seating';
 export {default as InteractiveMap} from '@app/screens/InteractiveMap/InteractiveMap';
 export {default as DevPage} from '@app/screens/DevPage/DevPage';
+export {default as WebTicket} from '@app/screens/WebTickets/Webtickets';

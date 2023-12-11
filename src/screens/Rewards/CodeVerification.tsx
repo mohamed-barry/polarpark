@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#fff', // Assuming a white background
+    backgroundColor: '#fff',
     paddingTop: 0,
     marginTop: 0,
   },
@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 10,
-    backgroundColor: '#f0f0f0', // Light grey background for the input
+    backgroundColor: '#f0f0f0',
     fontSize: 24,
     textAlign: 'center',
     marginHorizontal: 10,
-    // Shadows can be adjusted to match the screenshot
+
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -10,9 +10,11 @@ import {RootState} from '@app/context/store';
  */
 
 export default function AppRouter(): JSX.Element {
-  const authenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated,
-  );
+  return <MainRouter />;
+  
+  // const authenticated = useSelector(
+  //   (state: RootState) => state.auth.isAuthenticated,
+  // );
 
-  return authenticated ? <MainRouter /> : <AuthRouter />;
+  // return authenticated ? <MainRouter /> : <AuthRouter />;
 }

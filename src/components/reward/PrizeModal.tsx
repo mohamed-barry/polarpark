@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
-    width: '80%', // Adjust the width of the modal content
+    width: '80%',
     borderWidth: 1,
     borderColor: 'rgb(16, 41, 89)',
   },
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 5,
-    width: '45%', // Adjust the width of the buttons for spacing
+    width: '45%',
     alignItems: 'center',
     justifyContent: 'center',
   },

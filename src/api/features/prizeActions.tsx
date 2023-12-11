@@ -4,7 +4,7 @@ import { REWARDS_LOGIN_TOKEN_ID, REWARDS_STORE_CACHE_ID } from "../constants";
 import { checkStale, newStaleTime } from "../cache/checkStale";
 import { CachedAPICallProps } from "../model/types";
 
-type PrizeInfo = {
+export type PrizeInfo = {
     id: number;
     images?: ImageLinks;
     inStock: boolean;

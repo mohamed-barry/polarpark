@@ -1,23 +1,46 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Header from '@app/components/reward/Header';
-import {NavigationProp} from '@react-navigation/native';
 import IconTextField from '@app/components/reward/IconTextField';
 import MailIcon from '@app/assets/icons/rewards/mail-icon.png';
 import LockIcon from '@app/assets/icons/rewards/password-icon.png';
 import WhiteLockIcon from '@app/assets/icons/rewards/lock-icon.png';
 
 interface Props {
-  navigation: NavigationProp<any>;
+  handleLoginClick: () => void,
+  handleSignUpClick: (user: string, password:string) => void
 }
 
-const Confirmation: React.FC<Props> = ({navigation}) => {
-  const handleLoginClick = () => {
-    navigation.navigate('Login');
-  };
-  const handleSignUpClick = () => {
-    navigation.navigate('CongratSignUp');
-  };
+type FormError = {
+  showError: boolean,
+  errorMsg: string
+}
+
+const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+
+function Confirmation ({handleLoginClick, handleSignUpClick}: Props): JSX.Element {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [errorMsg, setErrorMsg] = useState<FormError>({showError: false, errorMsg: ""});
+
+  const signUpClick = () => {
+    if (password != confirm) {
+      console.log(password + " " + confirm);
+      setErrorMsg({
+        showError: true,
+        errorMsg: "Passwords do not match!"
+      })
+    } else if (!emailReg.test(email)) {
+      setErrorMsg({
+        showError: true,
+        errorMsg: "Invalid Email!"
+      })
+    } else {
+      handleSignUpClick(email, password);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -30,13 +53,19 @@ const Confirmation: React.FC<Props> = ({navigation}) => {
       </TouchableOpacity>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email:</Text>
-        <IconTextField placeholder="Email" icon={MailIcon} />
+        <IconTextField placeholder="Email" icon={MailIcon} value={email} onChange={setEmail} />
         <Text style={styles.label}>Password:</Text>
-        <IconTextField placeholder="Password" icon={LockIcon} />
+        <IconTextField placeholder="Password" icon={LockIcon} value={password} onChange={setPassword} />
         <Text style={styles.label}>Confirm Password:</Text>
-        <IconTextField placeholder="Confirm Password" icon={LockIcon} />
+        <IconTextField placeholder="Confirm Password" icon={LockIcon} value={confirm} onChange={setConfirm}/>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleSignUpClick}>
+
+      {errorMsg.showError && 
+        <View style={[styles.redeemBox]}>
+          <Text>{errorMsg.errorMsg}</Text>
+        </View>} 
+
+      <TouchableOpacity style={styles.button} onPress={signUpClick}>
         <Image source={WhiteLockIcon} style={styles.buttonIcon} />
         <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
@@ -123,6 +152,15 @@ const styles = StyleSheet.create({
   buttonIcon: {
     height: 25,
     width: 25,
+  },
+  redeemBox: {
+    width: '100%',
+    backgroundColor: 'lightcoral',
+    borderRadius: 10,
+    elevation: 5,
+    padding: 20,
+    alignItems: 'center',
+    marginTop: 20,
   },
 });
 

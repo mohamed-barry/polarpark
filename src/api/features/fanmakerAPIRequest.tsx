@@ -12,12 +12,15 @@ export async function fanmakerGetRequest(uri: RequestInfo, token: string): Promi
         'X-Fanmaker-Token': token
     };
 
+    // console.log(uri);
+    // console.log(token);
+
     try {
         const resp = await fetch(uri, {
             headers: header
         })
         const text = await resp.text();
-        console.log(text);
+        // console.log(text);
         const data = JSON.parse(text);
 
         if (data.status >= 400) {
@@ -26,7 +29,7 @@ export async function fanmakerGetRequest(uri: RequestInfo, token: string): Promi
             return {code: data.status, data: data.data};
         }
     } catch (e) {
-        console.log(e);
+        console.error(e);
         if (e instanceof Error) {
             console.log(e.stack);
             return {code: -1, message: e.message};
@@ -50,7 +53,7 @@ export async function fanmakerPostRequest(uri: RequestInfo, token: string, body:
         })
 
         const text = await resp.text();
-        console.log(text);
+        // console.log(text);
         const data = JSON.parse(text);
 
         if (data.status >= 400) {

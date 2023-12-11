@@ -4,8 +4,7 @@ import {
   Button,
   Event,
   Footer,
-  Link,
-  Placeholder,
+  DefaultEvent,
   Section,
   TicketPreview,
 } from '@app/components';
@@ -21,6 +20,7 @@ import {
   RootStackNavigationProps,
   TicketStackNavigationProps,
 } from '@app/navigation/types';
+import { FMEvent, getFanmakerEvents } from '@app/api/features/getFanmakerEvents';
 import UpcomingTickets from '@app/components/ui/UpcomingTickets/UpcomingTickets';
 import MapBox from '@app/components/ui/Map/MapBox';
 
@@ -28,7 +28,11 @@ export default function Home(): JSX.Element {
   const [activeItem, setActiveItem] = useState<Array<TDC.LineItem>>([]);
   const [loading, setLoading] = useState(true);
 
-  const events = useEventSchedule();
+  const defaultEvents: Array<FMEvent> = [];
+
+  const [events, setEvents] = useState(defaultEvents);
+
+
   const dispatch = useDispatch();
 
   const ticketNav = useNavigation<RootStackNavigationProps<'Main'>>();
@@ -60,6 +64,15 @@ export default function Home(): JSX.Element {
       }
     }
     fetchPatronInfo();
+
+    getFanmakerEvents({useCache: true})
+      .then((ev) => {
+        // console.log("got events");
+        setEvents(ev);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
   }, []);
 
   return (
@@ -71,8 +84,10 @@ export default function Home(): JSX.Element {
           </Section>
 
           <Section title="Events at Polar Park" mb="l">
-            {events.map((event, idx) => {
-              if (idx > 3) return;
+            {events.length == 0? 
+            <DefaultEvent />
+            :
+            events.map((event, idx) => {
               return (
                 <React.Fragment key={event.id}>
                   {idx > 0 ? (
@@ -86,7 +101,7 @@ export default function Home(): JSX.Element {
                 </React.Fragment>
               );
             })}
-            <Link
+            {/* <Link
               mt="l"
               onPress={() => {}}
               color="authenticationLink"
@@ -94,13 +109,13 @@ export default function Home(): JSX.Element {
               textAlign="center"
               variant="body">
               View more
-            </Link>
+            </Link> dedicated events page could be linked to here*/}
           </Section>
-          <Section title="Polar Park News">
+          {/* <Section title="Polar Park News">
             <Placeholder height={112} mb="m" width="100%" />
             <Placeholder height={112} mb="m" width="100%" />
             <Placeholder height={112} mb="m" width="100%" />
-          </Section>
+          </Section> maybe a social media feed in the future?*/}
           <Footer text="Having troubles with the Polar Park app?" />
         </ScrollView>
       )}
