@@ -68,6 +68,7 @@ export default function Home(): JSX.Element {
     getFanmakerEvents({useCache: true})
       .then((ev) => {
         // console.log("got events");
+        // console.log(ev);
         setEvents(ev);
       })
       .catch((e) => {

@@ -6,13 +6,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ImageURISource,
 } from 'react-native';
 import PrizeModal from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
 
 // Add props for name, image, and points
 interface Prize {
   name: string;
-  image: NodeRequire;
+  image: ImageURISource;
   points: number;
   userPoints: number; // The number of points the user has
 }

@@ -31,7 +31,8 @@ interface Props {
 const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
   const defaultData: ProfileInfo = {
     name: 'John Doe',
-    avatar: AccountIcon
+    avatar: AccountIcon,
+    userID: ""
   };
 
   const [userData, setUserData] = useState(defaultData);
@@ -53,7 +54,7 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
 
   const sections = [
     {name: 'Dashboard', icon: HomeIcon, route: 'Dashboard'},
-    {name: 'Leaderboard', icon: LeaderboardIcon, route: 'Leaderboard'},
+    {name: 'Leaderboard', icon: LeaderboardIcon, route: 'LeaderBoard'},
     {name: 'FAQ', icon: FAQIcon, route: 'FAQ'},
     {name: 'Redeem Code', icon: RedeemCodeIcon, route: 'Redeem'},
     {name: 'Crowd Cameo', icon: CrowdIcon, route: 'CrowdCameo'},

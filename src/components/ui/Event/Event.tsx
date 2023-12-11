@@ -8,7 +8,9 @@ interface EventProps {
 }
 
 export function Event({event}: EventProps): JSX.Element {
-  const [day, date] = [event.date.getDay(), event.date.getDate()];
+  // console.log(new Date(event.date));
+
+  const [day, date] = [new Date(event.date).getDay(), new Date(event.date).getDate()];
 
   const dayNames = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 

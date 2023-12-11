@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
-import Prize from '@app/components/reward/PrizeList';
+import Prize from '@app/components/reward/Prize';
 
 interface PrizeData {
   name: string;

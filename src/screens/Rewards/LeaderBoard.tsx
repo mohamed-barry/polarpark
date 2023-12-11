@@ -77,12 +77,6 @@ export const LeaderBoard: React.FC<Props> = ({navigation}) => {
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
       />
-      <Text style={styles.header}> Leaderboard </Text>
-      <FlatList
-        data={users}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      />
     </View>
   );
 };

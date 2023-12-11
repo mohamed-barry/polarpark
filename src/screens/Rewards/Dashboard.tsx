@@ -88,12 +88,12 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
       })
   });
 
-  const prizeMapper = (p: PrizeInfo, i:number) => {
-    if (i <= 5) {
-      return (<Prize key={p.id} image={{uri: p.images?.medium}} name={p.title} price={p.pointsCost} />)
-    }
-    return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map 
-  }
+  // const prizeMapper = (p: PrizeInfo, i:number) => {
+  //   if (i <= 5) {
+  //     return (<Prize key={p.id} image={{uri: p.images?.medium}} name={p.title} price={p.pointsCost} />)
+  //   }
+  //   return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map 
+  // }
   
   return (
     <ScrollView style={styles.scrollView}>
