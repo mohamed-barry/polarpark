@@ -23,6 +23,9 @@ export type RootStackParamList = {
   Seating: undefined;
   DevPage: undefined;
   InteractiveMap: undefined;
+  ParkingServices: undefined;
+  SecurityServices: undefined;
+  FAQServices: undefined;
 };
 
 export type AuthStackParamList = {
