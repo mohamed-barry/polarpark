@@ -12,6 +12,9 @@ export async function fanmakerGetRequest(uri: RequestInfo, token: string): Promi
         'X-Fanmaker-Token': token
     };
 
+    // console.log(uri);
+    // console.log(token);
+
     try {
         const resp = await fetch(uri, {
             headers: header

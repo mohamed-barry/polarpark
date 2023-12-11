@@ -8,3 +8,4 @@ export const REWARDS_POINTS_CACHE_ID = '@polarpark_rewards_points';
 export const REWARDS_STORE_CACHE_ID = '@polarpark_rewards_store';
 export const REWARDS_LEADERBOARD_CACHE_ID = '@polarpark_rewards_leaderboard';
 export const REWARDS_PROFILE_CACHE_ID = '@polarpark_rewards_profile';
+export const REWARDS_EVENTS_CACHE_ID = '@polarpark_rewards_events';

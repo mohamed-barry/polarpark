@@ -3,9 +3,10 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 interface DropdownProps {
   contents: string[];
+  onChange?: (arg0: string) => void
 }
 
-const Dropdown: React.FC<DropdownProps> = ({contents}) => {
+const Dropdown: React.FC<DropdownProps> = ({contents, onChange}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
@@ -14,6 +15,9 @@ const Dropdown: React.FC<DropdownProps> = ({contents}) => {
   const handleItemClick = (item: string) => {
     setSelectedItem(item);
     setIsOpen(false);
+    if (onChange) {
+      onChange(item);
+    }
   };
 
   return (

@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
-import QRCodeScanner from 'react-native-qrcode-scanner';
-import {RNCamera} from 'react-native-camera';
 import SMILEY from '@app/assets/images/smiley-1.png'
 
 interface CodeModalProps {
@@ -26,7 +24,7 @@ const CodeModal: React.FC<CodeModalProps> = ({
 }) => {
   const [scannedCode, setScannedCode] = useState('');
 
-  const handleSuccess = e => {
+  const handleSuccess = (e: any) => {
     setScannedCode(e.data);
     setModalVisible(false);
     Alert.alert('QR Code Scanned', e.data, [

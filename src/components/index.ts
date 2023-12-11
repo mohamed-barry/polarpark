@@ -10,7 +10,7 @@ export {default as Section} from '@app/components/general/Section/Section';
 export {default as Text} from '@app/components/general/Text/Text';
 
 export {default as ComingSoon} from '@app/components/ui/ComingSoon/ComingSoon';
-export {default as Event} from '@app/components/ui/Event/Event';
+export {Event, DefaultEvent} from '@app/components/ui/Event/Event';
 export {default as Footer} from '@app/components/ui/Footer/Footer';
 export {default as Header} from '@app/components/ui/Header/Header';
 export {default as ScheduleItem} from '@app/components/ui/ScheduleItem/ScheduleItem';

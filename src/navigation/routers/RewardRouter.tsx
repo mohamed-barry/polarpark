@@ -3,7 +3,6 @@ import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '@app/screens/Rewards/Login';
 import Signup from '@app/screens/Rewards/Signup';
-import Confirmation from '@app/screens/Rewards/Confirmation';
 import Dashboard from '@app/screens/Rewards/Dashboard';
 import RewardList from '@app/screens/Rewards/RewardList';
 import CongratReward from '@app/screens/Rewards/CongratReward';
@@ -27,7 +26,6 @@ const RewardRouter: React.FC = () => {
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="Confirmation" component={Confirmation} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="RewardList" component={RewardList} />
       <Stack.Screen name="CongratReward" component={CongratReward} />
