@@ -17,6 +17,9 @@ import ForgotPassword from '@app/screens/Rewards/ForgotPassword';
 import CodeVerification from '@app/screens/Rewards/CodeVerification';
 import ResetPassword from '@app/screens/Rewards/ResetPassword';
 import Settings from '@app/screens/Rewards/Settings';
+import ChangePassword from '@app/screens/Rewards/Settings/ChangePassword';
+import UploadProfilePhoto from '@app/screens/Rewards/Settings/UploadProfilePhoto';
+import UpdateAccountInfo from '@app/screens/Rewards/Settings/UpdateAccountInfo';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +44,9 @@ const RewardRouter: React.FC = () => {
       <Stack.Screen name="CodeVerification" component={CodeVerification} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
       <Stack.Screen name="Setting" component={Settings} />
+      <Stack.Screen name="UpdateAccountInfo" component={UpdateAccountInfo} />
+      <Stack.Screen name="UploadProfilePhoto" component={UploadProfilePhoto} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
     </Stack.Navigator>
   );
 };

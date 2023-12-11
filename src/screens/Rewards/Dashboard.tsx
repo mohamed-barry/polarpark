@@ -9,9 +9,9 @@ import {
 
 import Header from '@app/components/reward/RewardHeader';
 import {NavigationProp} from '@react-navigation/native';
-import Prize from '@app/components/reward/Prize';
 import QRImage from '@app/assets/icons/rewards/blue-qr.png';
 import CodeModal from '@app/components/reward/CodeModal';
+import PrizeList from '@app/components/reward/PrizeList';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -52,8 +52,7 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <View style={styles.separator} />
         <Text style={styles.featuredText}>Featured Offers & Rewards</Text>
         <View style={styles.featureDealsContainer}>
-          <Prize />
-          <Prize />
+          <PrizeList />
         </View>
       </View>
     </ScrollView>

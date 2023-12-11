@@ -1,31 +1,47 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Header from '@app/components/reward/RewardHeader';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import Prize from '@app/components/reward/PrizeList';
 
-import {ScrollView} from 'react-native-gesture-handler';
-import Home from '@app/assets/icons/rewards/blue-home.png';
-import {NavigationProp} from '@react-navigation/native';
-import PrizeList from '@app/components/reward/PrizeList';
-
-interface Props {
-  navigation: NavigationProp<any>;
+interface PrizeData {
+  name: string;
+  image: string; // The API is expected to return image URLs
+  points: number;
 }
 
-const Rewards: React.FC<Props> = ({navigation}) => {
-  const handleIconClick = () => {
-    navigation.navigate('Dashboard');
-  };
+const PrizeList: React.FC = () => {
+  const [prizes, setPrizes] = useState<PrizeData[]>([]);
+  const [userPoints, setUserPoints] = useState<number>(0); // Assume a state that tracks the user's points
+
+  // Fetch prizes from the API
+  useEffect(() => {
+    const fetchPrizes = async () => {
+      try {
+        const response = await fetch('https://example.com/api/prizes');
+        const data = await response.json();
+        setPrizes(data); // Set the prizes in state
+        // setUserPoints(data.userPoints); // If the user's points come from the same API call
+      } catch (error) {
+        console.error('Failed to fetch prizes:', error);
+      }
+    };
+
+    fetchPrizes();
+  }, []);
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Header rightImage={Home} onRightImageClick={handleIconClick} />
-        <View style={styles.titleContainer}>
-          <View style={styles.rewardsContainer}>
-            <Text style={styles.rewardsText}>Rewards</Text>
-          </View>
+        <View style={styles.prizesContainer}>
+          {prizes.map((prize, index) => (
+            <Prize
+              key={index}
+              name={prize.name}
+              image={{uri: prize.image}} // Assuming the image is a URL
+              points={prize.points}
+              userPoints={userPoints} // You would fetch this from your API or state management
+            />
+          ))}
         </View>
-        <PrizeList />
       </View>
     </ScrollView>
   );
@@ -124,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Rewards;
+export default PrizeList;

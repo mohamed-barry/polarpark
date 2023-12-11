@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-
-import ConfettiIcon from '@app/assets/images/confetti-icon.png';
-import RightArrow from '@app/assets/icons/rewards/arrow-icon.png';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faStar, faArrowRight} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   navigation: any; // Replace 'any' with your NavigationProp type
@@ -11,26 +10,23 @@ interface Props {
 const CongratSignUp: React.FC<Props> = ({navigation}) => {
   // This function handles navigation to the Dashboard screen
   const handleStartEarning = () => {
-    navigation.navigate('PrivacyPolicy'); // Navigate to the Dashboard screen
+    navigation.navigate('PrivacyPolicy'); // Correct this to navigate to the Dashboard or Rewards screen
   };
 
   return (
     <View style={styles.container}>
-      {/* Placeholder for the image */}
-      <Image
-        source={ConfettiIcon} // Replace with your image
-        style={styles.image}
+      <FontAwesomeIcon
+        icon={faStar}
+        size={100}
+        color="#FFD700"
+        style={styles.icon}
       />
       <Text style={styles.congratsText}>
         Congrats, you have signed up for WooSox Rewards!
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleStartEarning}>
         <Text style={styles.buttonText}>Start Earning</Text>
-        {/* Placeholder for the icon image */}
-        <Image
-          source={RightArrow} // Replace with your icon
-          style={styles.icon}
-        />
+        <FontAwesomeIcon icon={faArrowRight} size={20} color="#FFF" />
       </TouchableOpacity>
     </View>
   );
@@ -42,37 +38,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#FFF', // Use a neutral background color
   },
-  image: {
-    width: 200,
-    height: 200,
+  icon: {
     marginBottom: 20,
-    resizeMode: 'contain',
-    // Additional styling for the image if needed
+    // Additional styling if needed
   },
   congratsText: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontWeight: '600',
     marginBottom: 20,
     textAlign: 'center',
+    color: '#333', // Use a professional text color
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'skyblue',
+    backgroundColor: '#007BFF', // Use a more professional button color
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
+    shadowOpacity: 0.1, // Optional: add a subtle shadow
+    shadowRadius: 5,
+    elevation: 3,
   },
   buttonText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
+    color: '#FFF', // Ensure text is readable on the button background
     marginRight: 10,
-  },
-  icon: {
-    width: 20,
-    height: 20,
-    // Additional styling for the icon if needed
   },
 });
 
