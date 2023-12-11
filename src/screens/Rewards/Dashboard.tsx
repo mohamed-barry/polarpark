@@ -9,7 +9,6 @@ import {
 
 import Header from '@app/components/reward/RewardHeader';
 import {NavigationProp} from '@react-navigation/native';
-import Prize from '@app/components/reward/Prize';
 import QRImage from '@app/assets/icons/rewards/blue-qr.png';
 import CodeModal from '@app/components/reward/CodeModal';
 import { getAvaliblePoints } from '@app/api/features/pointsAction';
@@ -18,6 +17,7 @@ import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
 import AccountIcon from '@app/assets/icons/rewards/user-icon.png';
 import PrizeImage from '@app/assets/images/jersey.png';
 import { PrizeInfo, getPrizeList } from '@app/api/features/prizeActions';
+import PrizeList from '@app/components/reward/PrizeList';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -117,8 +117,7 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <View style={styles.separator} />
         <Text style={styles.featuredText}>Featured Offers & Rewards</Text>
         <View style={styles.featureDealsContainer}>
-          {prizes.map(prizeMapper)}
-          {/* <Prize image={PrizeImage} name="Signed Jersey" price={100}/> */}
+          <PrizeList />
         </View>
       </View>
     </ScrollView>

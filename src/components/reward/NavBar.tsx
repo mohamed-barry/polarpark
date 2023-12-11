@@ -52,7 +52,7 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
   })
 
   const sections = [
-    {name: 'Home', icon: HomeIcon, route: 'Dashboard'},
+    {name: 'Dashboard', icon: HomeIcon, route: 'Dashboard'},
     {name: 'Leaderboard', icon: LeaderboardIcon, route: 'Leaderboard'},
     {name: 'FAQ', icon: FAQIcon, route: 'FAQ'},
     {name: 'Redeem Code', icon: RedeemCodeIcon, route: 'Redeem'},

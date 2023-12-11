@@ -248,6 +248,7 @@ function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.E
         <View style={styles.stateCityContainer}>
           <View style={styles.stateInput}>
             <Text style={styles.label}>State</Text>
+
             <Dropdown contents={stateAbbreviations} onChange={setState} />
           </View>
           <View style={styles.cityInput}>
@@ -293,6 +294,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'Nunito Sans',
   },
+
   loginText: {
     marginBottom: 20,
     fontFamily: 'Nunito Sans',
