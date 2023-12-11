@@ -5,7 +5,7 @@ import Login from '@app/screens/Rewards/Login';
 import Signup from '@app/screens/Rewards/Signup';
 import Confirmation from '@app/screens/Rewards/Confirmation';
 import Dashboard from '@app/screens/Rewards/Dashboard';
-import RewardList from '@app/screens/Rewards/RewardList';
+import RewardList from '@app/screens/Rewards/Rewards';
 import CongratReward from '@app/screens/Rewards/CongratReward';
 import CongratSignUp from '@app/screens/Rewards/CongratSignUp';
 import FAQ from '@app/screens/Rewards/FAQ';
