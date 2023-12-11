@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 
 interface DropdownProps {
   contents: string[];
@@ -25,7 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({contents}) => {
         <Text style={styles.arrow}>↓</Text>
       </TouchableOpacity>
       {isOpen && (
-        <View style={styles.dropdownContent}>
+        <ScrollView style={styles.dropdownContent}>
           {contents.map((item, index) => (
             <TouchableOpacity
               key={index}
@@ -34,7 +35,7 @@ const Dropdown: React.FC<DropdownProps> = ({contents}) => {
               <Text>{item}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
       )}
     </View>
   );
