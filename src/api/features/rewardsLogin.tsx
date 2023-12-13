@@ -1,4 +1,4 @@
-import {REWARDS_LOGIN_TOKEN_ID, DEFAULT_REWARDS_LOGIN_TOKEN} from '@app/api/constants';
+import {REWARDS_LOGIN_TOKEN_ID, DEFAULT_REWARDS_LOGIN_TOKEN, REWARDS_POINTS_CACHE_ID, REWARDS_PROFILE_CACHE_ID} from '@app/api/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fanmakerGetRequest, fanmakerPostRequest } from './fanmakerAPIRequest';
 
@@ -53,5 +53,7 @@ export async function loginUser (username: string, password: string): Promise<Lo
 
 export async function logoutUser() {
     await AsyncStorage.removeItem(REWARDS_LOGIN_TOKEN_ID);
+    await AsyncStorage.removeItem(REWARDS_POINTS_CACHE_ID);
+    await AsyncStorage.removeItem(REWARDS_PROFILE_CACHE_ID);
     //todo something else?
 }

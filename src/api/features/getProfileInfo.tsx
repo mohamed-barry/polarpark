@@ -32,7 +32,7 @@ export async function getProfileInfo({useCache = true}: CachedAPICallProps): Pro
         const resp = await fanmakerGetRequest("https://api.fanmaker.com/api/v2/profile", token);
         if (resp.code >= 200 && resp.code < 400) {
             const data = resp.data;
-            console.log(data);
+            // console.log(data);
 
             const retObj: ProfileInfo = {
                 name: data.full_name,

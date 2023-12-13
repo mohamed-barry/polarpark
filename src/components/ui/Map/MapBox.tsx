@@ -4,13 +4,11 @@ import {TouchableOpacity, StyleSheet, ImageBackground} from 'react-native';
 
 import MapImage from '@app/assets/images/map-background.jpeg';
 
-const MapBox = () => {
-  // const navigation = useNavigation();
+type Props = {
+  openMap: () => void
+}
 
-  const openMap = () => {
-    // Trigger the circle animation and navigate when it's done
-    // navigation.navigate('InteractiveMapScreen');
-  };
+const MapBox = ({openMap}: Props) => {
 
   return (
     <TouchableOpacity onPress={openMap} style={styles.box}>

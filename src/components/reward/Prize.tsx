@@ -8,29 +8,41 @@ import {
   Alert,
   ImageURISource,
 } from 'react-native';
-import PrizeModal from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
+import { PrizeModal, InvalidPrize } from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
+import { getAvaliblePoints } from '@app/api/features/pointsAction';
+import { redeemPrize } from '@app/api/features/prizeActions';
 
 // Add props for name, image, and points
 interface Prize {
   name: string;
   image: ImageURISource;
   points: number;
-  userPoints: number; // The number of points the user has
+  id: number;
 }
 
-const Prize: React.FC<Prize> = ({name, image, points, userPoints}) => {
+type FailProps = {
+  visible: boolean,
+  message: string
+}
+
+const Prize: React.FC<Prize> = ({name, image, points, id}) => {
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
+  const [fail, setFail] = useState<FailProps>({visible: false, message: ""});
 
   // Function to open the modal
   const openModal = () => {
-    if (userPoints >= points) {
-      setModalVisible(true); // User has enough points
-    } else {
-      Alert.alert(
-        'Not enough points',
-        "You don't have enough points to redeem this prize.",
-      ); // User doesn't have enough points
-    }
+    getAvaliblePoints({useCache: false})
+      .then((userPoints => {
+        if (userPoints >= points || true) {
+          setModalVisible(true); // User has enough points
+        } else {
+          Alert.alert(
+            'Not enough points',
+            "You don't have enough points to redeem this prize.",
+          ); // User doesn't have enough points
+        }
+      }))
+  
   };
 
   // Function to close the modal
@@ -43,6 +55,20 @@ const Prize: React.FC<Prize> = ({name, image, points, userPoints}) => {
     // Implement the redeem logic here
     // Ensure to check that the user has enough points to redeem the prize
     setModalVisible(false);
+    redeemPrize(id)
+      .then(resp => {
+        setFail({
+          visible: true,
+          message: resp.message
+        });
+      })
+      .catch(e => {
+        const message = e instanceof Error ? e.message : "Unknown Error";
+        setFail({
+          visible: true,
+          message: message
+        })
+      })
   };
 
   return (
@@ -64,6 +90,11 @@ const Prize: React.FC<Prize> = ({name, image, points, userPoints}) => {
         visible={modalVisible}
         onClose={closeModal}
         onRedeem={handleRedeem}
+      />
+      <InvalidPrize
+        visible={fail.visible}
+        message={fail.message}
+        onClose={() => setFail({visible: false, message: ""})}
       />
     </>
   );
@@ -101,6 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     paddingTop: 15, // Reduced padding top to compensate for image adjustment
+    maxWidth: "80%" //make sure the text doesn't get too wide
   },
   rewardText: {
     fontSize: 20, // Slightly larger font size for better readability
