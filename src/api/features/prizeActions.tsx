@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fanmakerGetRequest } from "./fanmakerAPIRequest";
+import { fanmakerGetRequest, fanmakerPostRequest } from "./fanmakerAPIRequest";
 import { REWARDS_LOGIN_TOKEN_ID, REWARDS_STORE_CACHE_ID } from "../constants";
 import { checkStale, newStaleTime } from "../cache/checkStale";
 import { CachedAPICallProps } from "../model/types";
@@ -70,6 +70,59 @@ export async function getPrizeList({useCache = true}: CachedAPICallProps): Promi
     } catch (e) {
         if (e instanceof Error) throw new Error("Unable to get Prizes due to " + e.name + " " + e.message + "\n" + e.stack);
         throw new Error("Unable to get prizes");
+    }
+}
+
+type PrizeResp = {
+    success: boolean,
+    message: string
+}
+
+export async function redeemPrize(prizeID: number): Promise<PrizeResp> {
+    try {
+        const uri = "https://api.fanmaker.com/api/v2/store/items/" + prizeID + "/order";
+        const params = JSON.stringify({
+            "item_id": prizeID,
+            "delivery_method": "pickup"
+        });
+
+        const token = await AsyncStorage.getItem(REWARDS_LOGIN_TOKEN_ID);
+
+        if (token == null) {
+            throw new Error("User not signed in!");
+        }
+
+        const fet = await fetch(uri, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-Fanmaker-Token': token
+            },
+            method: 'POST',
+            body: params
+        })
+        
+        const resp = await fet.json();
+
+        if (resp.status !== undefined && resp.status >= 400) {
+            return {
+                success: false,
+                message: resp.message
+            }
+        } else if (resp.users_order !== undefined) {
+            return {
+                success: true,
+                message: resp.users_order.delivery_message
+            }
+        } else {
+            console.log(resp);
+            throw new Error("Unknown response: " + resp);
+        }
+
+    } catch (e) {
+        console.error(e);
+        if (e instanceof Error) throw new Error("Unable to redeem prize " + e.message);
+        throw new Error("Unable to redeem prize");
     }
 }
 

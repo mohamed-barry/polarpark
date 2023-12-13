@@ -1,69 +1,59 @@
 import React, {useEffect, useState} from 'react';
 import {
   Box,
-  Button,
   Event,
   Footer,
   DefaultEvent,
   Section,
-  TicketPreview,
 } from '@app/components';
 import {ScrollView} from 'react-native';
-import {useEventSchedule} from '@app/hooks';
-import {getPatronTickets} from '@app/api';
-import {TDC} from '@app/api/model/tdc';
-import {useDispatch} from 'react-redux';
-import {partition} from '@app/helpers';
-import {setActive, setInactive} from '@app/context/features';
 import {useNavigation} from '@react-navigation/native';
 import {
   RootStackNavigationProps,
-  TicketStackNavigationProps,
 } from '@app/navigation/types';
 import { FMEvent, getFanmakerEvents } from '@app/api/features/getFanmakerEvents';
-import UpcomingTickets from '@app/components/ui/UpcomingTickets/UpcomingTickets';
 import MapBox from '@app/components/ui/Map/MapBox';
 
 export default function Home(): JSX.Element {
-  const [activeItem, setActiveItem] = useState<Array<TDC.LineItem>>([]);
+  // const [activeItem, setActiveItem] = useState<Array<TDC.LineItem>>([]);
   const [loading, setLoading] = useState(true);
 
   const defaultEvents: Array<FMEvent> = [];
 
   const [events, setEvents] = useState(defaultEvents);
 
+  // const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+  const rootNav = useNavigation<RootStackNavigationProps<'Main'>>();
+  // const ticketNav = useNavigation<RootStackNavigationProps<'Main'>>();
+  // const purchaseNav = useNavigation<TicketStackNavigationProps<'Wallet'>>();
 
-  const ticketNav = useNavigation<RootStackNavigationProps<'Main'>>();
-  const purchaseNav = useNavigation<TicketStackNavigationProps<'Wallet'>>();
-
-  const navigateToTicket = () => ticketNav.navigate('ViewTicket');
-  const navigateToPurchaseTicket = () => purchaseNav.navigate('PurchaseTicket');
+  // const navigateToTicket = () => ticketNav.navigate('ViewTicket');
+  // const navigateToPurchaseTicket = () => purchaseNav.navigate('PurchaseTicket');
 
   useEffect(() => {
-    async function fetchPatronInfo() {
-      try {
-        const userId = 613373703;
-        const response = await getPatronTickets(userId);
+    // async function fetchPatronInfo() {
+    //   try {
+    //     const userId = 613373703;
+    //     const response = await getPatronTickets(userId);
 
-        const [active, inactive] = partition(
-          response,
-          (lineItem: TDC.LineItem) =>
-            lineItem.tickets.length > 0 ? lineItem.tickets[0]!.active : false,
-        );
+    //     const [active, inactive] = partition(
+    //       response,
+    //       (lineItem: TDC.LineItem) =>
+    //         lineItem.tickets.length > 0 ? lineItem.tickets[0]!.active : false,
+    //     );
 
-        dispatch(setActive(active));
-        dispatch(setInactive(inactive));
+    //     dispatch(setActive(active));
+    //     dispatch(setInactive(inactive));
 
-        setActiveItem(active);
-      } catch (err) {
-        console.log('Handle this better!!!!');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchPatronInfo();
+    //     setActiveItem(active);
+    //   } catch (err) {
+    //     console.log('Handle this better!!!!');
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
+    // fetchPatronInfo();
 
     getFanmakerEvents({useCache: true})
       .then((ev) => {
@@ -74,6 +64,9 @@ export default function Home(): JSX.Element {
       .catch((e) => {
         console.error(e);
       })
+      .finally(() => {
+        setLoading(false);
+      })
   }, []);
 
   return (
@@ -81,7 +74,7 @@ export default function Home(): JSX.Element {
       {loading ? null : (
         <ScrollView showsVerticalScrollIndicator={false}>
           <Section title="Map of Polar Park">
-            <MapBox />
+            <MapBox openMap={() => rootNav.navigate('InteractiveMap')}/>
           </Section>
 
           <Section title="Events at Polar Park" mb="l">

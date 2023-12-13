@@ -5,9 +5,11 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Header from '@app/components/reward/Header';
 import {NavigationProp} from '@react-navigation/native';
+import { rewardsForgotPassword } from '@app/api/features/rewardsForgotPassword';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -17,13 +19,18 @@ const ForgotPassword: React.FC<Props> = ({navigation}) => {
   // Add state and functions as needed for handling input and submission
   const [email, setEmail] = useState('');
 
-  // Function to generate a random 4-digit code
-  const generateCode = () => {
-    return Math.floor(1000 + Math.random() * 9000); // Random 4-digit number
-  };
-
   const handleContinueClick = () => {
-    navigation.navigate('CodeVerification');
+    rewardsForgotPassword(email)
+      .then((ret) => {
+        if (ret) {
+          Alert.alert("Check your email", "Check your email for further instructions!", [{text: 'OK', onPress: () => navigation.navigate('Login')}]);
+        } else {
+          console.error("how did this happen");
+        }
+      })
+      .catch((e) => {
+        Alert.alert("Unable to recover password", "Unable to recover password due to " + e.message);
+      })
   };
 
   return (
@@ -32,8 +39,7 @@ const ForgotPassword: React.FC<Props> = ({navigation}) => {
       <View style={styles.infoContainer}>
         <Text style={styles.headerText}>Forgot Password</Text>
         <Text style={styles.subText}>
-          Enter your email for the verification process, we will send a 4-digit
-          code to your email.
+          Enter your email for your WooSox Rewards Account!
         </Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>

@@ -25,7 +25,7 @@ const Rewards: React.FC<Props> = ({navigation}) => {
             <Text style={styles.rewardsText}>Rewards</Text>
           </View>
         </View>
-        <PrizeList />
+        <PrizeList prizeCount={-1} />
       </View>
     </ScrollView>
   );

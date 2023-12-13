@@ -1,8 +1,19 @@
 // updateaccountinfo.tsx
+import Header from '@app/components/reward/RewardHeader';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
+import Home from '@app/assets/icons/rewards/blue-home.png';
+import TextField from '@app/components/reward/TextField';
 
-const UpdateAccountInfo = () => {
+interface Props {
+  navigation: any;
+}
+
+const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
+  const handleIconClick = () => {
+    navigation.navigate('Dashboard');
+  };
+  
   const [userInfo, setUserInfo] = useState({
     firstName: '',
     lastName: '',
@@ -49,17 +60,18 @@ const UpdateAccountInfo = () => {
   const handleContinueClick = () => {
     // Handle continue click
   };
+  
 
   // Define your styles somewhere here...
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <Header />
+      <Header rightImage={Home} onRightImageClick={handleIconClick}/>
       {/* ... rest of your component ... */}
       <TextField
         placeholder="Enter your first name"
         value={userInfo.firstName}
-        onChangeText={text => setUserInfo({...userInfo, firstName: text})}
+        onChange={text => setUserInfo({...userInfo, firstName: text})}
       />
       {/* Repeat for each field */}
       {/* ... */}

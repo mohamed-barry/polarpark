@@ -120,7 +120,7 @@ type DisplayFloorProp = {
     floor_num: number
 };
 
-function DisplayFloor(props: DisplayFloorProp): JSX.Element {
+export function DisplayFloor(props: DisplayFloorProp): JSX.Element {
     if (props.floor_num == 1) {
         return (<></>)
     } else if (props.floor_num == 2) {

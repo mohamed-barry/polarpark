@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 
 import Header from '@app/components/reward/RewardHeader';
@@ -15,15 +16,12 @@ import { getAvaliblePoints } from '@app/api/features/pointsAction';
 import { logoutUser } from '@app/api/features/rewardsLogin';
 import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
 import AccountIcon from '@app/assets/icons/rewards/user-icon.png';
-import PrizeImage from '@app/assets/images/jersey.png';
 import { PrizeInfo, getPrizeList } from '@app/api/features/prizeActions';
 import PrizeList from '@app/components/reward/PrizeList';
 
 interface Props {
   navigation: NavigationProp<any>;
 }
-
-let key = 0;
 
 const Dashboard: React.FC<Props> = ({navigation}) => {
   const [isCodeModalVisible, setIsCodeModalVisible] = useState(false);
@@ -47,6 +45,7 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
   const [profileInfo, setProfileInfo] = useState(defaultProfileInfo);
   const [userPoints, setUserPoints] = useState(0); 
   const [prizes, setPrizes] = useState(defaultPrizes);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     getProfileInfo({useCache: true})
@@ -86,7 +85,7 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
       .catch((e) => {
         console.error(e);
       })
-  });
+  }, []);
 
   // const prizeMapper = (p: PrizeInfo, i:number) => {
   //   if (i <= 5) {
@@ -94,9 +93,17 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
   //   }
   //   return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map 
   // }
+  const onRefresh = () => {
+    setRefreshing(true);
+    getAvaliblePoints({useCache: false})
+      .then((p) => {
+        setUserPoints(p);
+        setRefreshing(false);
+      })
+  }
   
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={styles.scrollView} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
         <Header rightImage={QRImage} onRightImageClick={handleIconClick} />
         <CodeModal
@@ -117,7 +124,7 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
         <View style={styles.separator} />
         <Text style={styles.featuredText}>Featured Offers & Rewards</Text>
         <View style={styles.featureDealsContainer}>
-          <PrizeList />
+          <PrizeList prizeCount={5}/>
         </View>
       </View>
     </ScrollView>

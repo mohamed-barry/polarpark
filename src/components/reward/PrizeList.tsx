@@ -1,31 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Prize from '@app/components/reward/Prize';
+import { getPrizeList } from '@app/api/features/prizeActions';
 
 interface PrizeData {
   name: string;
   image: string; // The API is expected to return image URLs
   points: number;
+  id: number;
 }
 
-const PrizeList: React.FC = () => {
+type PrizeListProps = {
+  prizeCount: number;
+}
+
+const PrizeList: React.FC<PrizeListProps> = ({prizeCount}) => {
   const [prizes, setPrizes] = useState<PrizeData[]>([]);
-  const [userPoints, setUserPoints] = useState<number>(0); // Assume a state that tracks the user's points
 
   // Fetch prizes from the API
   useEffect(() => {
-    const fetchPrizes = async () => {
-      try {
-        const response = await fetch('https://example.com/api/prizes');
-        const data = await response.json();
-        setPrizes(data); // Set the prizes in state
-        // setUserPoints(data.userPoints); // If the user's points come from the same API call
-      } catch (error) {
-        console.error('Failed to fetch prizes:', error);
-      }
-    };
-
-    fetchPrizes();
+    getPrizeList({useCache: true})
+      .then((prizes) => {
+        //if prize count is less than 0 or greater than the total number of prizes then just so all prizes
+        const count = (prizeCount < 0 || prizeCount > prizes.length) ? prizes.length : prizeCount;
+        let prizeData: PrizeData[] = [];
+        for (let i = 0; i < count; i++) {
+          const prizeImage = prizes[i].images?.display;
+          prizeData.push({
+            name: prizes[i].title,
+            image: prizeImage ? prizeImage : "",
+            points: prizes[i].pointsCost,
+            id: prizes[i].id
+          });
+        }
+        setPrizes(prizeData);
+      })
   }, []);
 
   return (
@@ -38,7 +47,7 @@ const PrizeList: React.FC = () => {
               name={prize.name}
               image={{uri: prize.image}} // Assuming the image is a URL
               points={prize.points}
-              userPoints={userPoints} // You would fetch this from your API or state management
+              id={prize.id}
             />
           ))}
         </View>

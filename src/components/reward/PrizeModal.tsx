@@ -7,11 +7,7 @@ interface PrizeModalProps {
   onRedeem: () => void;
 }
 
-const PrizeModal: React.FC<PrizeModalProps> = ({
-  visible,
-  onClose,
-  onRedeem,
-}) => {
+export function PrizeModal({visible, onClose, onRedeem}: PrizeModalProps): JSX.Element {
   return (
     <Modal
       animationType="slide"
@@ -40,6 +36,35 @@ const PrizeModal: React.FC<PrizeModalProps> = ({
     </Modal>
   );
 };
+
+type InvalidPrizeProps = {
+  message: string;
+  visible: boolean;
+  onClose: () => void;
+}
+
+export function InvalidPrize({message, visible, onClose}: InvalidPrizeProps): JSX.Element {
+  return (<Modal
+    animationType="slide"
+    transparent={true}
+    visible={visible}
+    onRequestClose={onClose}>
+    <View style={styles.modalContainer}>
+      <View style={styles.modalContent}>
+        <Text style={styles.modalText}>
+          Prize Redeem Failed: {message}
+        </Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, {backgroundColor: 'red'}]}
+            onPress={onClose}>
+            <Text style={styles.buttonText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  </Modal>)
+}
 
 const styles = StyleSheet.create({
   modalContainer: {
@@ -80,5 +105,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default PrizeModal;
