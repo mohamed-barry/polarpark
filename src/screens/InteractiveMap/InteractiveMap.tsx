@@ -30,7 +30,9 @@ export default function InteractiveMap(): JSX.Element {
                     {/**@ts-ignore */}
                     <SvgPanZoomElement
                         onClick={(evt)=>{console.log(evt)}}>
-                        <Circle r={5} ></Circle>
+                       {/* <MapPoint pointX={10} pointY={10}></MapPoint> */} 
+
+                        {/* i figured out this too late, but go nuts */}
                     </SvgPanZoomElement>
 
                     {/* <MapPoint pointX={100} pointY={900} onPress={()=>console.log("hi")}/> */}

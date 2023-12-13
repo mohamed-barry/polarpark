@@ -34,6 +34,7 @@ import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import theme from '@app/config/theme';
 import RewardRouter from './RewardRouter';
+import WeatherPolicy from '@app/screens/Services/WeatherPolicy';
 
 const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -73,6 +74,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="ticket" focused={focused} size={24} />
           ),
+          headerShown: false
         }}
       />
       <RootTab.Screen
@@ -82,7 +84,9 @@ function Main(): JSX.Element {
           {
           tabBarIcon: ({focused}) => (
             <Icon name="food" focused={focused} size={24} />
-          ),}
+          ),
+          headerShown: false
+          }
         }
       />
       <RootTab.Screen
@@ -102,6 +106,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="service" focused={focused} size={24} />
           ),
+          headerShown: false
         }}
       />
     </RootTab.Navigator>
@@ -239,6 +244,24 @@ export default function MainRouter(): JSX.Element {
         component={FAQServices}
         options={{
           headerTitle: 'FAQ',
+          headerTintColor: theme.colors.black,
+          headerShadowVisible: false,
+          headerLeft: () => {
+            const navigation = useNavigation();
+            const goBack = () => navigation.goBack();
+            return (
+              <Pressable onPress={goBack}>
+                <Icon name="arrow-left" color="black" />
+              </Pressable>
+            );
+          },
+        }}
+      />
+      <RootStack.Screen
+        name="WeatherPolicy"
+        component={WeatherPolicy}
+        options={{
+          headerTitle: 'Weather Policy',
           headerTintColor: theme.colors.black,
           headerShadowVisible: false,
           headerLeft: () => {

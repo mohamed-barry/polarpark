@@ -1,8 +1,8 @@
 import * as React from "react"
-import Svg, { SvgProps, Path } from "react-native-svg"
+import Svg, { SvgProps, Path, G } from "react-native-svg"
 
 const MapPoint = (props) => (
-  <Svg xmlns="http://www.w3.org/2000/svg" {...props}>
+  <G>
     <Path 
       d="M21.72 21.72C6.1 37.34 6.1 62.67 21.72 78.29c15.62 15.62 40.95 15.62 56.57 0 15.62-15.62 15.62-40.95 0-56.57-15.63-15.63-40.95-15.63-56.57 0z" 
       translateX={props.pointX}
@@ -27,6 +27,6 @@ const MapPoint = (props) => (
         fill: "black",
       }}
     />
-  </Svg>
+  </G>
 )
 export default MapPoint

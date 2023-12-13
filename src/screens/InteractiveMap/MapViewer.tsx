@@ -1,4 +1,6 @@
-import {default as MainFloor} from '@app/assets/maps/PolarPark Beta.svg';
+import {default as BottomFloor} from '@app/assets/maps/PolarParkF1.svg';
+import {default as MainFloor} from '@app/assets/maps/PolarParkF2.svg';
+import {default as TopFloor} from '@app/assets/maps/PolarParkF3.svg';
 import { useRef, useState } from 'react';
 import { NativeSyntheticEvent } from 'react-native';
 import { Animated, DimensionValue, Image, PanResponder, Pressable, GestureResponderEvent } from 'react-native';
@@ -122,10 +124,10 @@ type DisplayFloorProp = {
 
 export function DisplayFloor(props: DisplayFloorProp): JSX.Element {
     if (props.floor_num == 1) {
-        return (<></>)
+        return (<BottomFloor></BottomFloor>)
     } else if (props.floor_num == 2) {
         return (<MainFloor></MainFloor>)
     } else {
-        return (<></>)
+        return (<TopFloor></TopFloor>)
     }
 }
