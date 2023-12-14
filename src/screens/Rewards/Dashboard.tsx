@@ -11,12 +11,12 @@ import Header from '@app/components/reward/RewardHeader';
 import {NavigationProp} from '@react-navigation/native';
 import QRImage from '@app/assets/icons/rewards/blue-qr.png';
 import CodeModal from '@app/components/reward/CodeModal';
-import { getAvaliblePoints } from '@app/api/features/pointsAction';
-import { logoutUser } from '@app/api/features/rewardsLogin';
-import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
+import {getAvaliblePoints} from '@app/api/features/pointsAction';
+import {logoutUser} from '@app/api/features/rewardsLogin';
+import {ProfileInfo, getProfileInfo} from '@app/api/features/getProfileInfo';
 import AccountIcon from '@app/assets/icons/rewards/user-icon.png';
 import PrizeImage from '@app/assets/images/jersey.png';
-import { PrizeInfo, getPrizeList } from '@app/api/features/prizeActions';
+import {PrizeInfo, getPrizeList} from '@app/api/features/prizeActions';
 import PrizeList from '@app/components/reward/PrizeList';
 
 interface Props {
@@ -39,62 +39,61 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
   const defaultProfileInfo: ProfileInfo = {
     name: 'John Doe',
     avatar: AccountIcon,
-    userID: "0"
-  }
+    userID: '0',
+  };
 
-  const defaultPrizes: Array<PrizeInfo> = []
+  const defaultPrizes: Array<PrizeInfo> = [];
 
   const [profileInfo, setProfileInfo] = useState(defaultProfileInfo);
-  const [userPoints, setUserPoints] = useState(0); 
+  const [userPoints, setUserPoints] = useState(0);
   const [prizes, setPrizes] = useState(defaultPrizes);
 
   useEffect(() => {
     getProfileInfo({useCache: true})
-      .then((info) => {
+      .then(info => {
         // console.log(info)
         if (profileInfo.name !== info.name) {
           setProfileInfo(info);
         }
       })
-      .catch((e) => {
+      .catch(e => {
         console.error(e);
         logoutUser();
         navigation.navigate('Login');
-      })
+      });
 
     getAvaliblePoints({useCache: true})
-      .then((points) => {
+      .then(points => {
         // console.log(points)
-        if (userPoints !== points)
-          setUserPoints(points);
+        if (userPoints !== points) setUserPoints(points);
       })
-      .catch((e) => {
+      .catch(e => {
         console.error(e);
         logoutUser();
         navigation.navigate('Login');
-      })
+      });
 
     getPrizeList({useCache: true})
-      .then((tPrizes) => {
+      .then(tPrizes => {
         if (prizes.length === 0) {
           tPrizes.sort((a, b) => {
             return b.id - a.id;
-          })
+          });
           setPrizes(tPrizes);
         }
       })
-      .catch((e) => {
+      .catch(e => {
         console.error(e);
-      })
+      });
   });
 
   // const prizeMapper = (p: PrizeInfo, i:number) => {
   //   if (i <= 5) {
   //     return (<Prize key={p.id} image={{uri: p.images?.medium}} name={p.title} price={p.pointsCost} />)
   //   }
-  //   return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map 
+  //   return (<React.Fragment key={p.id} />) //this is equivalant to using a <></> but with a key b/c u need that to map
   // }
-  
+
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>

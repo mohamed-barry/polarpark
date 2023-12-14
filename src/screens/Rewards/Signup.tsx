@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {NavigationProp} from '@react-navigation/native';
 import TextField from '@app/components/reward/TextField';
 import Dropdown from '@app/components/reward/DropDown';
 import Confirmation from './Confirmation';
-import { SignUpParams, signUp } from '@app/api/features/rewardsSignup';
+import {SignUpParams, signUp} from '@app/api/features/rewardsSignup';
 
 const phoneRegEx = new RegExp('[- +()0-9]+');
 
@@ -21,17 +21,16 @@ interface Props {
 }
 
 const Signup: React.FC<Props> = ({navigation}) => {
-
   const defaultUserParams: SignUpParams = {
-    first_name: "",
-    last_name: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zipcode: "",
-    phoneNumber: ""
-  }
+    first_name: '',
+    last_name: '',
+    address1: '',
+    address2: '',
+    city: '',
+    state: '',
+    zipcode: '',
+    phoneNumber: '',
+  };
 
   const [stage, setStage] = useState(1);
   const [userParams, setUserParams] = useState(defaultUserParams);
@@ -39,49 +38,57 @@ const Signup: React.FC<Props> = ({navigation}) => {
   const handleContinueClick = (sup: SignUpParams) => {
     setUserParams(sup);
     setStage(2);
-  }
+  };
 
   const handleLoginClick = () => {
     navigation.navigate('Login');
-  }
+  };
 
   const handleSignUpClick = (email: string, password: string) => {
     signUp(email, password, userParams)
-      .then ((success) => {
+      .then(success => {
         if (success) {
           navigation.navigate('CongratSignUp');
         } else {
-          Alert.alert("Unable to make account");
+          Alert.alert('Unable to make account');
         }
       })
-      .catch((e) => {
-        Alert.alert("Unable to make account", e.message);
-      })
-
-    
-  }
+      .catch(e => {
+        Alert.alert('Unable to make account', e.message);
+      });
+  };
 
   return (
-  <>
-    {stage == 1 ? 
-      <UserInfo handleContinueClick={handleContinueClick} handleLoginClick={handleLoginClick}/> : 
-      <Confirmation handleLoginClick={handleLoginClick} handleSignUpClick={handleSignUpClick}/>}
-  </>
+    <>
+      {stage == 1 ? (
+        <UserInfo
+          handleContinueClick={handleContinueClick}
+          handleLoginClick={handleLoginClick}
+        />
+      ) : (
+        <Confirmation
+          handleLoginClick={handleLoginClick}
+          handleSignUpClick={handleSignUpClick}
+        />
+      )}
+    </>
   );
-}
+};
 
 type UserInfoProps = {
-  handleContinueClick: (up: SignUpParams) => void,
-  handleLoginClick: () => void,
-}
+  handleContinueClick: (up: SignUpParams) => void;
+  handleLoginClick: () => void;
+};
 
 type FormError = {
-  showError: boolean,
-  errorMsg: string
-}
+  showError: boolean;
+  errorMsg: string;
+};
 
-function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.Element {
-
+function UserInfo({
+  handleContinueClick,
+  handleLoginClick,
+}: UserInfoProps): JSX.Element {
   const stateAbbreviations = [
     'Alabama', // Alabama
     'Alaska', // Alaska
@@ -142,13 +149,13 @@ function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.E
     'Northern Mariana Islands',
     'Palau',
     'Puerto Rico',
-    'US Virgin Islands'
+    'US Virgin Islands',
   ];
 
   const genders = ['Male', 'Female', 'Other'];
 
   const races = [
-    'African',
+    'African American',
     'Asian',
     'Caucasian',
     'Hispanic',
@@ -172,43 +179,44 @@ function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.E
     'Cohabiting',
   ];
 
-  const [fname, setFName] = useState("");
-  const [lname, setLName] = useState("");
-  const [address1, setAddress1] = useState("");
-  const [address2, setAddress2] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [fname, setFName] = useState('');
+  const [lname, setLName] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState<string | undefined>(undefined);
   const [race, setRace] = useState<string | undefined>(undefined);
   const [marital, setMarital] = useState<string | undefined>(undefined);
-  const [errorMsg, setErrorMsg] = useState<FormError>({showError: false, errorMsg: ""});
+  const [errorMsg, setErrorMsg] = useState<FormError>({
+    showError: false,
+    errorMsg: '',
+  });
 
   const continueClick = () => {
-    if (fname == "") {
+    if (fname == '') {
       setErrorMsg({
         showError: true,
-        errorMsg: "You must provide a first name"
+        errorMsg: 'You must provide a first name',
       });
-    } else if (lname == "") {
+    } else if (lname == '') {
       setErrorMsg({
         showError: true,
-        errorMsg: "You must provide a last name"
-      })
-    } else if (address1 == "" || city == "" || state == "" || zipcode == "") {
+        errorMsg: 'You must provide a last name',
+      });
+    } else if (address1 == '' || city == '' || state == '' || zipcode == '') {
       setErrorMsg({
         showError: true,
-        errorMsg: "Check you address"
-      })
-    } else if (phoneNumber != "" && !(/[- +()0-9]+/.test(phoneNumber))) {
+        errorMsg: 'Check you address',
+      });
+    } else if (phoneNumber != '' && !/[- +()0-9]+/.test(phoneNumber)) {
       setErrorMsg({
         showError: true,
-        errorMsg: "Check your phone number"
-      })
-    }
-    
-    else {
+        errorMsg: 'Check your phone number',
+      });
+    } else {
       const userParams: SignUpParams = {
         first_name: fname,
         last_name: lname,
@@ -220,11 +228,11 @@ function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.E
         phoneNumber,
         gender,
         race,
-        marital
+        marital,
       };
       handleContinueClick(userParams);
     }
-  }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -239,12 +247,20 @@ function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.E
       </View>
       <View style={styles.contentContainer}>
         <Text style={styles.label}>First Name</Text>
-        <TextField placeholder="First name" value={fname} onChange={setFName}/>
+        <TextField placeholder="First name" value={fname} onChange={setFName} />
         <Text style={styles.label}>Last Name</Text>
         <TextField placeholder="Last name" value={lname} onChange={setLName} />
         <Text style={styles.label}>Address</Text>
-        <TextField placeholder="Address Line 1" value={address1} onChange={setAddress1}/>
-        <TextField placeholder="Address Line 2" value={address2} onChange={setAddress2}/>
+        <TextField
+          placeholder="Address Line 1"
+          value={address1}
+          onChange={setAddress1}
+        />
+        <TextField
+          placeholder="Address Line 2"
+          value={address2}
+          onChange={setAddress2}
+        />
         <View style={styles.stateCityContainer}>
           <View style={styles.stateInput}>
             <Text style={styles.label}>State</Text>
@@ -253,35 +269,43 @@ function UserInfo({handleContinueClick, handleLoginClick}: UserInfoProps): JSX.E
           </View>
           <View style={styles.cityInput}>
             <Text style={styles.label}>City</Text>
-            <TextField placeholder="City" value={city} onChange={setCity}/>
+            <TextField placeholder="City" value={city} onChange={setCity} />
           </View>
         </View>
         <Text style={styles.label}>Zip Code</Text>
-        <TextField placeholder="Enter your zipcode" value={zipcode} onChange={setZipcode}/>
+        <TextField
+          placeholder="Enter your zipcode"
+          value={zipcode}
+          onChange={setZipcode}
+        />
         <Text style={styles.label}>Phone Number (Optional)</Text>
-        <TextField placeholder="Enter your phone number" value={phoneNumber} onChange={setPhoneNumber}/>
+        <TextField
+          placeholder="Enter your phone number"
+          value={phoneNumber}
+          onChange={setPhoneNumber}
+        />
         <Text style={styles.label}>Gender (Optional)</Text>
-        <Dropdown contents={genders} onChange={setGender}/>
+        <Dropdown contents={genders} onChange={setGender} />
         <Text style={styles.label}>Race (Optional)</Text>
-        <Dropdown contents={races} onChange={setRace}/>
+        <Dropdown contents={races} onChange={setRace} />
         <Text style={styles.label}>Marital Status (Optional)</Text>
-        <Dropdown contents={maritalStatus} onChange={setMarital}/>
-        
-        {errorMsg.showError && 
-        <View style={[styles.redeemBox]}>
-          <Text>{errorMsg.errorMsg}</Text>
-        </View>} 
+        <Dropdown contents={maritalStatus} onChange={setMarital} />
+
+        {errorMsg.showError && (
+          <View style={[styles.redeemBox]}>
+            <Text>{errorMsg.errorMsg}</Text>
+          </View>
+        )}
 
         {/* <Text style={styles.label}>Phone Number</Text>
         <TextField placeholder="Enter your phone number" /> */}
         <TouchableOpacity style={styles.button} onPress={continueClick}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
-        
       </View>
     </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

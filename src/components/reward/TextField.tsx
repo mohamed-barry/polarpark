@@ -4,10 +4,14 @@ import {View, TextInput, StyleSheet} from 'react-native';
 interface TextFieldProps {
   placeholder: string;
   value?: string;
-  onChange?: (arg0: string) => void
+  onChange?: (arg0: string) => void;
 }
 
-const TextField: React.FC<TextFieldProps> = ({placeholder, value, onChange}) => {
+const TextField: React.FC<TextFieldProps> = ({
+  placeholder,
+  value,
+  onChange,
+}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 2,
     backgroundColor: '#f0f0f0',
-    marginBottom: 10,
+    marginBottom: 15,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
