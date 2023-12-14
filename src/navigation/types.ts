@@ -26,6 +26,7 @@ export type RootStackParamList = {
   ParkingServices: undefined;
   SecurityServices: undefined;
   FAQServices: undefined;
+  WeatherServices: undefined;
 };
 
 export type AuthStackParamList = {

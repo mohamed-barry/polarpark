@@ -20,6 +20,7 @@ export default function Services(): JSX.Element {
   const navigateToSecurity = () => securityNav.navigate('SecurityServices');
   const navigateToFaq = () => faqNav.navigate('FAQServices');
   const navigateToParking = () => parkingNav.navigate('ParkingServices');
+  const navigateToWeather = () => parkingNav.navigate('WeatherServices');
 
   const backgroundImage = require('@app/assets/images/smiley-1.png');
 
@@ -41,6 +42,11 @@ export default function Services(): JSX.Element {
             style={styles.boxContainer}
             onPress={navigateToParking}>
             <Text style={styles.boxText}>Parking Map</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.boxContainer}
+            onPress={navigateToWeather}>
+            <Text style={styles.boxText}>Weather Policy</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

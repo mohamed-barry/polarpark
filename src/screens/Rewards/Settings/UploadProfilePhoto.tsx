@@ -3,8 +3,19 @@ import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const UploadProfilePhoto = () => {
+import Header from '@app/components/reward/RewardHeader';
+import Home from '@app/assets/icons/rewards/blue-home.png';
+
+interface Props {
+  navigation: any;
+}
+
+const UploadProfilePhoto: React.FC<Props> = ({navigation}) => {
   const [imageUri, setImageUri] = useState<string | null>(null);
+
+  const handleIconClick = () => {
+    navigation.navigate('Dashboard');
+  };
 
   const handlePickImage = () => {
     const options = {
@@ -49,20 +60,23 @@ const UploadProfilePhoto = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.imageContainer}>
-        {imageUri ? (
-          <Image source={{uri: imageUri}} style={styles.image} />
-        ) : (
-          <Text style={styles.imagePlaceholder}>Your Profile Photo</Text>
-        )}
+    <View style={{flex: 1}}>
+      <Header rightImage={Home} onRightImageClick={handleIconClick} />
+      <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          {imageUri ? (
+            <Image source={{uri: imageUri}} style={styles.image} />
+          ) : (
+            <Text style={styles.imagePlaceholder}>Your Profile Photo</Text>
+          )}
+        </View>
+        <TouchableOpacity style={styles.button} onPress={handlePickImage}>
+          <Text style={styles.buttonText}>Pick an Image from Gallery</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
+          <Text style={styles.buttonText}>Take a Photo</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handlePickImage}>
-        <Text style={styles.buttonText}>Pick an Image from Gallery</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
-        <Text style={styles.buttonText}>Take a Photo</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -73,7 +87,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#fff',
   },
   imageContainer: {
     width: 200,

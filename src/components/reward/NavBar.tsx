@@ -19,8 +19,8 @@ import ExitIcon from '@app/assets/icons/rewards/arrow-icon.png';
 import CrowdIcon from '@app/assets/icons/rewards/crowd-icon.png';
 import HomeIcon from '@app/assets/images/home-icon.png';
 import SettingIcon from '@app/assets/icons/rewards/settings-icon.png';
-import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
-import { logoutUser } from '@app/api/features/rewardsLogin';
+import {ProfileInfo, getProfileInfo} from '@app/api/features/getProfileInfo';
+import {logoutUser} from '@app/api/features/rewardsLogin';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -32,25 +32,25 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
   const defaultData: ProfileInfo = {
     name: 'John Doe',
     avatar: AccountIcon,
-    userID: ""
+    userID: '',
   };
 
   const [userData, setUserData] = useState(defaultData);
 
   useEffect(() => {
     getProfileInfo({useCache: true})
-    .then((info) => {
-      // console.log(info)
-      if (userData.name !== info.name) {
-        setUserData(info);
-      }
-    })
-    .catch((e) => {
-      console.error(e);
-      logoutUser();
-      navigation.navigate('Login');
-    })
-  })
+      .then(info => {
+        // console.log(info)
+        if (userData.name !== info.name) {
+          setUserData(info);
+        }
+      })
+      .catch(e => {
+        console.error(e);
+        logoutUser();
+        navigation.navigate('Login');
+      });
+  });
 
   const sections = [
     {name: 'Dashboard', icon: HomeIcon, route: 'Dashboard'},
