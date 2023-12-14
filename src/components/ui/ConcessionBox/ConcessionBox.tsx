@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22, // Increased font size
     color: 'white',
-    marginBottom: 10,
+    marginBottom: 15,
   },
   foodItemContainer: {
     flexDirection: 'row',
@@ -106,13 +106,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: 'white',
+    marginBottom: 10,
   },
   foodItemDescription: {
     color: 'white',
+    marginRight: 5,
   },
   foodItemImage: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     borderRadius: 10,
   },
 });

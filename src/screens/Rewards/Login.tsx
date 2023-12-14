@@ -12,8 +12,8 @@ import {
 import Header from '@app/components/reward/Header';
 import MailIcon from '@app/assets/icons/rewards/mail-icon.png';
 import LockIcon from '@app/assets/icons/rewards/password-icon.png';
-import { loginUser, isLoggedIn } from '@app/api/features/rewardsLogin';
-import { Alert } from 'react-native';
+import {loginUser, isLoggedIn} from '@app/api/features/rewardsLogin';
+import {Alert} from 'react-native';
 
 interface Props {
   navigation: NavigationProp<any>;
@@ -23,26 +23,23 @@ const Login: React.FC<Props> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  isLoggedIn().then(
-    (loggedIn) => {
-      if (loggedIn) {
-        navigation.navigate('Dashboard');
-      }
+  isLoggedIn().then(loggedIn => {
+    if (loggedIn) {
+      navigation.navigate('Dashboard');
     }
-  )
+  });
 
   const handleSignUp = () => {
     navigation.navigate('Signup');
   };
   const handleLoginClick = () => {
-    loginUser(email, password)
-      .then((lp) => {
-        if (lp.success) {
-          navigation.navigate('Dashboard');
-        } else {
-          Alert.alert("Login failed", lp.errorMessage);
-        }
-      })
+    loginUser(email, password).then(lp => {
+      if (lp.success) {
+        navigation.navigate('Dashboard');
+      } else {
+        Alert.alert('Login failed', lp.errorMessage);
+      }
+    });
   };
   const handleForgotPassword = () => {
     navigation.navigate('ForgotPassword');
@@ -57,7 +54,12 @@ const Login: React.FC<Props> = ({navigation}) => {
           <View style={styles.inputIcon}>
             <Image source={MailIcon} style={styles.inputIcon} />
           </View>
-          <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+          />
         </View>
       </View>
       <View style={styles.inputContainer}>

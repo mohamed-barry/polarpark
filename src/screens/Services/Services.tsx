@@ -22,7 +22,7 @@ export default function Services(): JSX.Element {
   const navigateToSecurity = () => securityNav.navigate('SecurityServices');
   const navigateToFaq = () => faqNav.navigate('FAQServices');
   const navigateToParking = () => parkingNav.navigate('ParkingServices');
-  const navigateToWeather = () => weatherNav.navigate('WeatherPolicy');
+  const navigateToWeather = () => parkingNav.navigate('WeatherServices');
 
   const backgroundImage = require('@app/assets/images/smiley-1.png');
 

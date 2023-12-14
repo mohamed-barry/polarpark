@@ -28,6 +28,7 @@ import {
 import SecurityServices from '@app/screens/Services/SecurityServices';
 import FAQServices from '@app/screens/Services/FAQServices';
 import ParkingServices from '@app/screens/Services/ParkingServices';
+import WeatherServices from '@app/screens/Services/WeatherServices';
 
 import {Header, Icon} from '@app/components';
 import {Pressable} from 'react-native';
@@ -80,8 +81,7 @@ function Main(): JSX.Element {
       <RootTab.Screen
         name="Concessions"
         component={Ordering}
-        options={
-          {
+        options={{
           tabBarIcon: ({focused}) => (
             <Icon name="food" focused={focused} size={24} />
           ),
@@ -258,8 +258,8 @@ export default function MainRouter(): JSX.Element {
         }}
       />
       <RootStack.Screen
-        name="WeatherPolicy"
-        component={WeatherPolicy}
+        name="WeatherServices"
+        component={WeatherServices}
         options={{
           headerTitle: 'Weather Policy',
           headerTintColor: theme.colors.black,

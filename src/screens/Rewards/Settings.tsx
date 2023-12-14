@@ -1,5 +1,4 @@
-// Settings.tsx
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -9,7 +8,7 @@ import {
   FlatList,
   ListRenderItem
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Arrow from '@app/assets/icons/rewards/right-arrow.png';
 import Header from '@app/components/reward/RewardHeader';
 import ProfileImage from '@app/assets/images/woosox-rewards-nobg.png';
 import Home from '@app/assets/icons/rewards/blue-home.png';
@@ -30,49 +29,52 @@ type RenderProps = {
 }
 
 const Settings: React.FC<Props> = ({navigation}) => {
-
-  const onSignOut = () => {
-    logoutUser();
-    navigation.navigate('Login');
-  }
-
   const settingsOptions = [
-    {key: 'updateInfo', text: 'Update Account Information', iconName: 'user-circle-o', onClick: () => {navigation.navigate('UpdateAccountInfo')}},
-    {key: 'uploadPhoto', text: 'Upload Profile Photo', iconName: 'camera', onClick: () => {navigation.navigate('UploadProfilePhoto')}},
-    {key: 'changePassword', text: 'Change Password', iconName: 'lock', onClick: () => {navigation.navigate('ChangePassword')}},
-    {key: 'signOut', text: 'Sign Out', iconName: 'sign-out', onClick: onSignOut},
+    {
+      key: 'updateInfo',
+      text: 'Update Account Information',
+      iconName: 'user-circle-o',
+      route: 'UpdateAccountInfo',
+    },
+    {
+      key: 'uploadPhoto',
+      text: 'Upload Profile Photo',
+      iconName: 'camera',
+      route: 'UploadProfilePhoto',
+    },
+    {
+      key: 'changePassword',
+      text: 'Change Password',
+      iconName: 'lock',
+      route: 'ChangePassword',
+    },
+    {key: 'signOut', text: 'Sign Out', iconName: 'sign-out', route: 'Login'},
   ];
-
-  const renderSettingItem = ({item}: RenderProps) => (
-    <TouchableOpacity style={styles.settingItem} onPress={item.onClick}>
-      <Text style={styles.settingText}>{item.text}</Text>
-      <Icon name={item.iconName} size={24} color="#6e6e6e" />
-    </TouchableOpacity>
-  );
-
-  const [profileInfo, setProfileInfo] = useState<ProfileInfo>({
-    userID: "0",
-    name: "John Doe",
-    avatar: ProfileImage
-  })
 
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
   };
 
-  useEffect(() => {
-    getProfileInfo({useCache: true})
-      .then(setProfileInfo)
-  }, []);
+  const handleSectionClick = (route: string) => {
+    navigation.navigate(route);
+  };
+
+  const renderSettingItem = ({item}) => (
+    <TouchableOpacity
+      style={styles.settingItem}
+      onPress={() => handleSectionClick(item.route)} // Added onPress event handler
+    >
+      <Text style={styles.settingText}>{item.text}</Text>
+      <Image source={Arrow} style={{height: 40, width: 40}} />
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
       <View style={styles.profileSection}>
-        <Image source={profileInfo.avatar} style={styles.profileImage} />
-        <Text style={styles.profileName}>{profileInfo.name}</Text>
-
-        {/* Replace User Name with actual user name */}
+        <Image source={ProfileImage} style={styles.profileImage} />
+        <Text style={styles.profileName}>User Name</Text>
       </View>
       <FlatList
         data={settingsOptions}

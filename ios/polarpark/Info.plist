@@ -59,6 +59,7 @@
 				<string>TLSv1.1</string>
 			</dict>
 		</dict>
+
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
