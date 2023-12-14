@@ -4,6 +4,7 @@ import {
   REWARDS_LOGIN_TOKEN_ID,
 } from '../constants';
 import {fanmakerPostRequest} from './fanmakerAPIRequest';
+import { UserInfo } from './getProfileInfo';
 
 export type SignUpParams = {
   first_name: string;
@@ -90,4 +91,66 @@ export async function signUp(
   }
 
   return true;
+}
+
+export async function updateRewardsAccount(ui: UserInfo): Promise<boolean> {
+  let respBody: any = {
+    feature: 'missing',
+    referral_token: '',
+    first_name: ui.firstName,
+    last_name: ui.lastName,
+    'address[country]': 'US',
+    'address[throughfare]': ui.address1,
+    'address[premise]': ui.address2,
+    'address[localityname]': ui.city,
+    'address[administrativearea]': ui.state,
+    'address[postalcode]': ui.zipCode,
+    'address[phone]': ui.phoneNumber,
+    address: {
+      country: 'US',
+      thoroughfare: ui.address1,
+      premise: ui.address2,
+      localityname: ui.city,
+      administrativearea: ui.state,
+      postalcode: ui.zipCode,
+      phone: ui.phoneNumber,
+    },
+    country: 'US',
+    thoroughfare: ui.address1,
+    premise: ui.address2,
+    localityname: ui.city,
+    administrativearea: ui.state,
+    postalcode: ui.zipCode,
+    phone: ui.phoneNumber,
+    gender: ui.gender,
+    marital_status: ui.maritalStatus,
+    race: ui.race
+  };
+
+  try {
+    const token = await AsyncStorage.getItem(REWARDS_LOGIN_TOKEN_ID);
+
+    if (token == null) {
+      throw new Error("User not signed in");
+    }
+
+    const resp = await fanmakerPostRequest(
+      'https://api.fanmaker.com/api/v2/registration',
+      token,
+      JSON.stringify(respBody),
+    );
+
+    if (resp.code >= 200 && resp.code < 400) {
+      return true;
+    } else {
+      throw new Error(resp.message);
+    }
+  } catch (e) {
+    console.error(e);
+    if (e instanceof Error)
+      throw new Error(
+        'Unable to update account due to ' + e.message + ' ' + e.stack,
+      );
+    throw new Error('Unable to update account');
+  }
 }

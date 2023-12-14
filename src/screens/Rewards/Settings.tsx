@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  ListRenderItem
+  ListRenderItem,
+  Alert
 } from 'react-native';
 import Arrow from '@app/assets/icons/rewards/right-arrow.png';
 import Header from '@app/components/reward/RewardHeader';
@@ -14,6 +15,7 @@ import ProfileImage from '@app/assets/images/woosox-rewards-nobg.png';
 import Home from '@app/assets/icons/rewards/blue-home.png';
 import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
 import { logoutUser } from '@app/api/features/rewardsLogin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
   navigation: any;
@@ -24,7 +26,7 @@ type RenderProps = {
     key: string;
     text: string;
     iconName: string;
-    onClick: () => void;
+    route: string;
   }
 }
 
@@ -51,15 +53,36 @@ const Settings: React.FC<Props> = ({navigation}) => {
     {key: 'signOut', text: 'Sign Out', iconName: 'sign-out', route: 'Login'},
   ];
 
+  const [profile, setProfile] = useState<ProfileInfo>({
+    name: 'John Doe',
+    avatar: ProfileImage,
+    userID: "0"
+  });
+
+  useEffect(() => {
+    getProfileInfo({useCache: true})
+      .then((pi) => {
+        setProfile(pi);
+      })
+  }, [])
+
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
   };
 
   const handleSectionClick = (route: string) => {
-    navigation.navigate(route);
+    if (route == 'Login') {
+      logoutUser();
+    }
+
+    if (route == 'UploadProfilePhoto') {
+      Alert.alert("Coming soon!", "The ability to change your profile picture is coming soon!");
+    } else {
+      navigation.navigate(route);
+    }
   };
 
-  const renderSettingItem = ({item}) => (
+  const renderSettingItem = ({item}: RenderProps) => (
     <TouchableOpacity
       style={styles.settingItem}
       onPress={() => handleSectionClick(item.route)} // Added onPress event handler
@@ -73,8 +96,8 @@ const Settings: React.FC<Props> = ({navigation}) => {
     <View style={styles.container}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
       <View style={styles.profileSection}>
-        <Image source={ProfileImage} style={styles.profileImage} />
-        <Text style={styles.profileName}>User Name</Text>
+        <Image source={profile.avatar} style={styles.profileImage} />
+        <Text style={styles.profileName}>{profile.name}</Text>
       </View>
       <FlatList
         data={settingsOptions}
