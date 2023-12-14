@@ -75,7 +75,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="ticket" focused={focused} size={24} />
           ),
-          headerShown: false
+          headerShown: false,
         }}
       />
       <RootTab.Screen
@@ -85,16 +85,15 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="food" focused={focused} size={24} />
           ),
-          headerShown: false
-          }
-        }
+          headerShown: false,
+        }}
       />
       <RootTab.Screen
         name="Rewards"
         component={RewardRouter}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="basket" focused={focused} size={24} />
+            <Icon name="price-ribbon" focused={focused} size={24} />
           ),
           headerShown: false,
         }}
@@ -106,7 +105,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="service" focused={focused} size={24} />
           ),
-          headerShown: false
+          headerShown: false,
         }}
       />
     </RootTab.Navigator>
