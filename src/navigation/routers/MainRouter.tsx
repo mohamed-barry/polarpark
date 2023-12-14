@@ -31,11 +31,18 @@ import ParkingServices from '@app/screens/Services/ParkingServices';
 import WeatherServices from '@app/screens/Services/WeatherServices';
 
 import {Header, Icon} from '@app/components';
+import SvgIcon from '@app/components/ui/SvgIcon/SvgIcon';
 import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import theme from '@app/config/theme';
 import RewardRouter from './RewardRouter';
-import WeatherPolicy from '@app/screens/Services/WeatherPolicy';
+
+import BaseballIcon from '@app/assets/icons/baseball-icon.svg'
+import TicketIcon from '@app/assets/icons/ticket-icon.svg'
+import FoodIcon from '@app/assets/icons/food-icon.svg'
+import BasketIcon from '@app/assets/icons/shopping-icon.svg'
+import ServerIcon from '@app/assets/icons/server-icon.svg'
+import LeftArrow from '@app/assets/icons/left-arrow-icon.svg'
 
 const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -64,7 +71,7 @@ function Main(): JSX.Element {
         component={Home}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="baseball" focused={focused} size={24} />
+            <SvgIcon SVG={BaseballIcon} focused={focused} size={24} />
           ),
         }}
       />
@@ -73,7 +80,7 @@ function Main(): JSX.Element {
         component={WebTicket}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="ticket" focused={focused} size={24} />
+            <SvgIcon SVG={TicketIcon} focused={focused} size={24} />
           ),
           headerShown: false
         }}
@@ -83,8 +90,8 @@ function Main(): JSX.Element {
         component={Ordering}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="food" focused={focused} size={24} />
-          )
+            <SvgIcon SVG={FoodIcon} focused={focused} size={24} />
+          ),
         }}
       />
       <RootTab.Screen
@@ -92,7 +99,7 @@ function Main(): JSX.Element {
         component={RewardRouter}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="basket" focused={focused} size={24} />
+            <SvgIcon SVG={BasketIcon} focused={focused} size={24} />
           ),
           headerShown: false,
         }}
@@ -102,8 +109,8 @@ function Main(): JSX.Element {
         component={Services}
         options={{
           tabBarIcon: ({focused}) => (
-            <Icon name="service" focused={focused} size={24} />
-          )
+            <SvgIcon SVG={ServerIcon} focused={focused} size={24} />
+          ),
         }}
       />
     </RootTab.Navigator>
@@ -133,9 +140,7 @@ export default function MainRouter(): JSX.Element {
             const goBack = () => navigation.goBack();
 
             return (
-              <Pressable onPress={goBack}>
-                <Icon name="arrow-left" color="viewTicketHeaderTint" />
-              </Pressable>
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
             );
           },
         }}
@@ -177,6 +182,15 @@ export default function MainRouter(): JSX.Element {
         component={Parking}
         options={{
           headerTitle: 'Parking',
+          headerTintColor: theme.colors.black,
+          headerShadowVisible: false,
+          headerLeft: () => {
+            const navigation = useNavigation();
+            const goBack = () => navigation.goBack();
+            return (
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+            );
+          },
         }}
       />
       <RootStack.Screen
@@ -198,6 +212,15 @@ export default function MainRouter(): JSX.Element {
         component={InteractiveMap}
         options={{
           headerTitle: 'Ballpark Map',
+          headerTintColor: theme.colors.black,
+          headerShadowVisible: false,
+          headerLeft: () => {
+            const navigation = useNavigation();
+            const goBack = () => navigation.goBack();
+            return (
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+            );
+          },
         }}
       />
       <RootStack.Screen
@@ -211,9 +234,7 @@ export default function MainRouter(): JSX.Element {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <Pressable onPress={goBack}>
-                <Icon name="arrow-left" color="black" />
-              </Pressable>
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
             );
           },
         }}
@@ -229,9 +250,7 @@ export default function MainRouter(): JSX.Element {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <Pressable onPress={goBack}>
-                <Icon name="arrow-left" color="black" />
-              </Pressable>
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
             );
           },
         }}
@@ -247,9 +266,7 @@ export default function MainRouter(): JSX.Element {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <Pressable onPress={goBack}>
-                <Icon name="arrow-left" color="black" />
-              </Pressable>
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
             );
           },
         }}
@@ -265,9 +282,7 @@ export default function MainRouter(): JSX.Element {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <Pressable onPress={goBack}>
-                <Icon name="arrow-left" color="black" />
-              </Pressable>
+              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
             );
           },
         }}

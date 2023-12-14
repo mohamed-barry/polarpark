@@ -3,7 +3,7 @@ import {Image, View, Pressable, Alert} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Text from '@app/components/general/Text/Text';
 import {Box} from '@app/components';
-import {Popup} from 'react-native-map-link';
+import {Popup, showLocation} from 'react-native-map-link';
 import ImageView from 'react-native-image-viewing';
 
 const parkingMapImage = require('@app/assets/images/woosox-parking.jpg');
@@ -17,6 +17,7 @@ export default function Parking(): JSX.Element {
   const [popupOpts, setPopupOpts] = useState({
     latitude: 0,
     longitude: 0,
+    googlePlaceId: ''
   });
   const [imageVis, setImageVis] = useState(false);
 
@@ -26,6 +27,12 @@ export default function Parking(): JSX.Element {
     } else {
       setPopupOpts(lots.lot_info[value]);
       setPopupVisible(true);
+      // showLocation(
+      //   {
+      //     ...lots.lot_info[value],
+      //     alwaysIncludeGoogle: true,
+      //   }
+      // )
     }
   };
 
@@ -88,7 +95,7 @@ export default function Parking(): JSX.Element {
         modalProps={{
           animationIn: 'slideInUp',
         }}
-        options={popupOpts}
+        options={{...popupOpts, alwaysIncludeGoogle: true}}
       />
       <ImageView
         images={[parkingMapImage]}

@@ -30,7 +30,7 @@ export default function HeaderContainer({route}: HeaderProps): JSX.Element {
         <Box flexDirection="row" justifyContent="space-between">
           <Text variant="heading1">{route.name}</Text>
           <Box alignItems="center" flexDirection="row">
-            {options}
+            {/* {options} */}
           </Box>
         </Box>
       </SafeAreaView>
