@@ -35,6 +35,7 @@ import {Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import theme from '@app/config/theme';
 import RewardRouter from './RewardRouter';
+import WeatherPolicy from '@app/screens/Services/WeatherPolicy';
 
 const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -74,6 +75,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="ticket" focused={focused} size={24} />
           ),
+          headerShown: false
         }}
       />
       <RootTab.Screen
@@ -83,7 +85,9 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="food" focused={focused} size={24} />
           ),
-        }}
+          headerShown: false
+          }
+        }
       />
       <RootTab.Screen
         name="Rewards"
@@ -102,6 +106,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <Icon name="service" focused={focused} size={24} />
           ),
+          headerShown: false
         }}
       />
     </RootTab.Navigator>

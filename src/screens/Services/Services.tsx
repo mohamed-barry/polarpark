@@ -16,6 +16,8 @@ export default function Services(): JSX.Element {
   const faqNav = useNavigation<RootStackNavigationProps<'FAQServices'>>();
   const parkingNav =
     useNavigation<RootStackNavigationProps<'ParkingServices'>>();
+    const weatherNav =
+    useNavigation<RootStackNavigationProps<'WeatherServices'>>();
 
   const navigateToSecurity = () => securityNav.navigate('SecurityServices');
   const navigateToFaq = () => faqNav.navigate('FAQServices');

@@ -13,12 +13,8 @@ interface HeaderProps {
 
 export default function HeaderContainer({route}: HeaderProps): JSX.Element {
   const options =
-    route.name === 'Tickets' ? (
-      <TicketsOptions />
-    ) : route.name === 'Home' ? (
+    route.name === 'Home' ? (
       <HomeOptions />
-    ) : route.name === 'Ordering' ? (
-      <OrderingOptions />
     ) : null;
 
   // todo [dev note]: please change how we did this

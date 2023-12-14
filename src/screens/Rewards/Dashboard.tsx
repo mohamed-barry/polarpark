@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   RefreshControl,
+  Alert,
 } from 'react-native';
 
 import Header from '@app/components/reward/RewardHeader';
@@ -33,6 +34,18 @@ const Dashboard: React.FC<Props> = ({navigation}) => {
   const handleIconClick = () => {
     setIsCodeModalVisible(true);
   };
+
+  const onRefresh = () => {
+    getAvaliblePoints({useCache: false})
+      .then(points => {
+        // console.log(points)
+        if (userPoints !== points) setUserPoints(points);
+      })
+      .catch(e => {
+        console.error(e);
+        Alert.alert("Unable to update points", e.message);
+      });
+  }
 
   const defaultProfileInfo: ProfileInfo = {
     name: 'John Doe',

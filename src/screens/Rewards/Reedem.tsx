@@ -83,12 +83,12 @@ const Redeem: React.FC<Props> = ({navigation}) => {
             value={code}
             onChangeText={setCode}
           />
-          <TouchableHighlight
+          {/* <TouchableHighlight
             style={styles.button}
             onPress={handleScanQR}
             underlayColor="#ddd">
             <Text style={styles.buttonText}>Scan QR Code</Text>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
           <TouchableHighlight
             style={[styles.button, styles.redeemButton]}
             onPress={handleRedeem}
