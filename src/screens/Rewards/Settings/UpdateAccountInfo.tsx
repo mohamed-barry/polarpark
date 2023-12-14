@@ -1,5 +1,4 @@
 // updateaccountinfo.tsx
-import Header from '@app/components/reward/RewardHeader';
 import TextField from '@app/components/reward/TextField';
 import React, {useEffect, useState} from 'react';
 import {
@@ -12,12 +11,6 @@ import {
 
 import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
-
-interface Props {
-  navigation: any;
-}
-import Home from '@app/assets/icons/rewards/blue-home.png';
-import TextField from '@app/components/reward/TextField';
 
 interface Props {
   navigation: any;
@@ -70,8 +63,6 @@ const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
     // Handle confirm click
   };
 
-  // Define your styles somewhere here...
-
   return (
     <ScrollView>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
@@ -119,16 +110,6 @@ const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
           <Text style={styles.confirmText}>Confirm</Text>
         </TouchableOpacity>
       </View>
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <Header rightImage={Home} onRightImageClick={handleIconClick}/>
-      {/* ... rest of your component ... */}
-      <TextField
-        placeholder="Enter your first name"
-        value={userInfo.firstName}
-        onChange={text => setUserInfo({...userInfo, firstName: text})}
-      />
-      {/* Repeat for each field */}
-      {/* ... */}
     </ScrollView>
   );
 };
