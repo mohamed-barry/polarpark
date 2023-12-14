@@ -3,29 +3,58 @@
         "garage": {
             "latitude": 42.25596,
             "longitude": -71.80181,
-            "googlePlaceId": "5Cs4fAEzHhmUt2EKA"
+            "googlePlaceId": "ChIJPSVWZioH5IkRe02jwO5NVeU"
         },
-        "lamartine": {
-            "latitude": 42.25430,
-            "longitude": -71.80111
+        "union" : {
+            "latitude": 42.2603336,
+            "longitude": -71.7946069,
+            "googlePlaceId": "ChIJGSwz324G5IkRqBSiSIMawow"
         },
-        "washington-harding": {
-            "latitude": 42.25436,
-            "longitude": -71.79976
+        "common" : {
+            "latitude": 42.2621291,
+            "longitude": -71.7978644,
+            "googlePlaceId": "ChIJXeE_qWgG5IkRmfB2qGpGrsU"
+        },
+        "federal" : {
+            "latitude": 42.2608704,
+            "longitude": -71.80398,
+            "googlePlaceId": "ChIJPUZ0j2MG5IkRBt65kfcrQzg"
+        },
+        "pearl" : {
+            "latitude": 42.2645905,
+            "longitude": -71.8026887,
+            "googlePlaceId": "ChIJHYGqw2YG5IkRM94hUFcaQuI"
+        },
+        "mcgrath" : {
+            "latitude": 42.2596005,
+            "longitude": -71.8012198,
+            "googlePlaceId": "ChIJ95e0_mQG5IkRpuy8U-4qPrE"
         }
     },
     "dropdown": [
         {
-            "label": "Garage",
+            "label": "Green Island Boulevard Garage",
             "value": "garage"
         },
         {
-            "label": "Lamartine Lot",
-            "value": "lamartine"
+            "label": "Union Station Garage",
+            "value": "union"
         },
         {
-            "label": "Washington/Harding Lot",
-            "value": "washington-harding"
+            "label": "Worcester Common Underground Lot",
+            "value": "common"
+        },
+        {
+            "label": "Federal Plaza Garage",
+            "value": "federal"
+        },
+        {
+            "label": "Pearl & Elm Garage",
+            "value": "pearl"
+        },
+        {
+            "label": "McGrath (Library) Garage",
+            "value": "mcgrath"
         }
     ]
 }
