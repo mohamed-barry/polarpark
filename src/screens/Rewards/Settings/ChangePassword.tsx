@@ -5,22 +5,46 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
+import { rewardsChangePassword } from '@app/api/features/rewardsChangePassword';
 
 interface Props {
   navigation: any;
 }
 
 const ChangePassword: React.FC<Props> = ({navigation}) => {
+  const [oldPass, setOldPass] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
   };
+
+  
+
+  const changePass = () => {
+    if (password != confirmPassword) {
+      Alert.alert("Failure", "New password does not match!");
+      return;
+    }
+
+    rewardsChangePassword(oldPass, password, confirmPassword)
+      .then(success => {
+        if (success) {
+          Alert.alert("Success", "Successfully changed your password!", [{text: 'OK', onPress: () => navigation.navigate('Login')}])
+        } else {
+          Alert.alert("Failure", "Unable to change password");
+        }
+      })
+      .catch(e => {
+        Alert.alert("Failure", e.message);
+      })
+  }
 
   return (
     <View style={styles.screen}>
@@ -29,8 +53,15 @@ const ChangePassword: React.FC<Props> = ({navigation}) => {
         <View style={styles.container}>
           <Text style={styles.headerText}>Change your password</Text>
           <Text style={styles.subText}>
-            Enter a new password below to change your password
+            Enter your old password and a new password below to change your password
           </Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={setOldPass}
+            value={oldPass}
+            placeholder="Old password"
+            secureTextEntry
+          />
           <TextInput
             style={styles.input}
             onChangeText={setPassword}
@@ -45,7 +76,7 @@ const ChangePassword: React.FC<Props> = ({navigation}) => {
             placeholder="Confirm password"
             secureTextEntry
           />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={changePass}>
             <Text style={styles.buttonText}>Change password</Text>
           </TouchableOpacity>
         </View>

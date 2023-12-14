@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
-  ListRenderItem
+  ListRenderItem,
+  Alert
 } from 'react-native';
 import Arrow from '@app/assets/icons/rewards/right-arrow.png';
 import Header from '@app/components/reward/RewardHeader';
@@ -14,6 +15,7 @@ import ProfileImage from '@app/assets/images/woosox-rewards-nobg.png';
 import Home from '@app/assets/icons/rewards/blue-home.png';
 import { ProfileInfo, getProfileInfo } from '@app/api/features/getProfileInfo';
 import { logoutUser } from '@app/api/features/rewardsLogin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
   navigation: any;
@@ -69,7 +71,15 @@ const Settings: React.FC<Props> = ({navigation}) => {
   };
 
   const handleSectionClick = (route: string) => {
-    navigation.navigate(route);
+    if (route == 'Login') {
+      logoutUser();
+    }
+
+    if (route == 'UploadProfilePhoto') {
+      Alert.alert("Coming soon!", "The ability to change your profile picture is coming soon!");
+    } else {
+      navigation.navigate(route);
+    }
   };
 
   const renderSettingItem = ({item}: RenderProps) => (

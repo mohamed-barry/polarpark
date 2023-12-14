@@ -2,6 +2,7 @@
 import TextField from '@app/components/reward/TextField';
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,16 +12,19 @@ import {
 
 import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
+import { UserInfo, getProfileInfo, getUserInfo } from '@app/api/features/getProfileInfo';
+import { updateRewardsAccount } from '@app/api/features/rewardsSignup';
 
 interface Props {
   navigation: any;
 }
 
 const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     firstName: '',
     lastName: '',
-    address: '',
+    address1: '',
+    address2: '',
     state: '',
     city: '',
     zipCode: '',
@@ -37,22 +41,9 @@ const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
 
   useEffect(() => {
     // Replace with your actual API endpoint
-    fetch('https://example.com/api/userinfo')
-      .then(response => response.json())
-      .then(data => {
-        setUserInfo({
-          ...userInfo,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          address: data.address,
-          state: data.state,
-          city: data.city,
-          zipCode: data.zipCode,
-          gender: data.gender,
-          race: data.race,
-          maritalStatus: data.maritalStatus,
-          phoneNumber: data.phoneNumber,
-        });
+    getUserInfo({useCache: false})
+      .then(ui => {
+        setUserInfo(ui);
       })
       .catch(error => {
         console.error('Error fetching user info:', error);
@@ -60,7 +51,18 @@ const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
   }, []);
 
   const handleConfirmClick = () => {
-    // Handle confirm click
+    updateRewardsAccount(userInfo)
+      .then(success => {
+        if (success) {
+          getProfileInfo({useCache: false});
+          Alert.alert("Success", "Successfully updated account information. May take some time to update.", [{text: "OK", onPress: () => {navigation.navigate('Settings')}}]);
+        } else {
+          Alert.alert("Failure", "Unable to update account info. Please try again later.");
+        }
+      })
+      .catch(e => {
+        Alert.alert("Failure", "Unable to update account info. " + e.message);
+      })
   };
 
   return (
@@ -75,34 +77,38 @@ const UpdateAccountInfo: React.FC<Props> = ({navigation}) => {
         />
         <TextField
           placeholder="Change your last name"
-          value={userInfo.firstName}
-          onChange={text => setUserInfo({...userInfo, firstName: text})}
+          value={userInfo.lastName}
+          onChange={text => setUserInfo({...userInfo, lastName: text})}
         />
         <TextField
           placeholder="Change your Address Line 1"
-          value={userInfo.firstName}
-          onChange={text => setUserInfo({...userInfo, firstName: text})}
+          value={userInfo.address1}
+          onChange={text => setUserInfo({...userInfo, address1: text})}
         />
         <TextField
           placeholder="Change your Address Line 2"
-          value={userInfo.firstName}
-          onChange={text => setUserInfo({...userInfo, firstName: text})}
+          value={userInfo.address2}
+          onChange={text => setUserInfo({...userInfo, address2: text})}
         />
         <View style={styles.row}>
           <View style={[styles.halfWidthInput, {marginRight: '4%'}]}>
-            <TextField placeholder="Change your state" value={userInfo.state} />
+            <TextField 
+              placeholder="Change your state" 
+              value={userInfo.state} 
+              onChange={text => setUserInfo({...userInfo, state: text})} />
           </View>
           <View style={styles.halfWidthInput}>
             <TextField
               placeholder="Change your zip code"
               value={userInfo.zipCode}
+              onChange={text => setUserInfo({...userInfo, zipCode: text})}
             />
           </View>
         </View>
         <TextField
           placeholder="Change your phone number"
           value={userInfo.firstName}
-          onChange={text => setUserInfo({...userInfo, firstName: text})}
+          onChange={text => setUserInfo({...userInfo, phoneNumber: text})}
         />
         <TouchableOpacity
           style={styles.confirmButton}
