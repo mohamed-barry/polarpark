@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -24,7 +24,7 @@ type RenderProps = {
     key: string;
     text: string;
     iconName: string;
-    onClick: () => void;
+    route: string;
   }
 }
 
@@ -51,6 +51,19 @@ const Settings: React.FC<Props> = ({navigation}) => {
     {key: 'signOut', text: 'Sign Out', iconName: 'sign-out', route: 'Login'},
   ];
 
+  const [profile, setProfile] = useState<ProfileInfo>({
+    name: 'John Doe',
+    avatar: ProfileImage,
+    userID: "0"
+  });
+
+  useEffect(() => {
+    getProfileInfo({useCache: true})
+      .then((pi) => {
+        setProfile(pi);
+      })
+  }, [])
+
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
   };
@@ -59,7 +72,7 @@ const Settings: React.FC<Props> = ({navigation}) => {
     navigation.navigate(route);
   };
 
-  const renderSettingItem = ({item}) => (
+  const renderSettingItem = ({item}: RenderProps) => (
     <TouchableOpacity
       style={styles.settingItem}
       onPress={() => handleSectionClick(item.route)} // Added onPress event handler
@@ -73,8 +86,8 @@ const Settings: React.FC<Props> = ({navigation}) => {
     <View style={styles.container}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
       <View style={styles.profileSection}>
-        <Image source={ProfileImage} style={styles.profileImage} />
-        <Text style={styles.profileName}>User Name</Text>
+        <Image source={profile.avatar} style={styles.profileImage} />
+        <Text style={styles.profileName}>{profile.name}</Text>
       </View>
       <FlatList
         data={settingsOptions}

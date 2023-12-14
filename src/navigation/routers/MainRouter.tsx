@@ -84,10 +84,8 @@ function Main(): JSX.Element {
         options={{
           tabBarIcon: ({focused}) => (
             <Icon name="food" focused={focused} size={24} />
-          ),
-          headerShown: false
-          }
-        }
+          )
+        }}
       />
       <RootTab.Screen
         name="Rewards"
@@ -105,8 +103,7 @@ function Main(): JSX.Element {
         options={{
           tabBarIcon: ({focused}) => (
             <Icon name="service" focused={focused} size={24} />
-          ),
-          headerShown: false
+          )
         }}
       />
     </RootTab.Navigator>
