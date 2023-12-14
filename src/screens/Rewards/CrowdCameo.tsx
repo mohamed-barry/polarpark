@@ -1,31 +1,24 @@
 import React from 'react';
 
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Header from '@app/components/reward//RewardHeader';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Home from '@app/assets/images/home-icon.png';
+import Home from '@app/assets/icons/rewards/blue-home.png';
 
 interface Props {
   navigation: any;
 }
 
 const CrowdCameo: React.FC<Props> = ({navigation}) => {
-  const handleHome = () => {
-    navigation.navigate('Dashboard');
-  };
-
   const handleIconClick = () => {
     navigation.navigate('Dashboard');
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{flex: 1}}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
-      <Text style={styles.textStyle}> Coming Soon! </Text>
-      <TouchableOpacity style={styles.button} onPress={handleHome}>
-        <Text style={styles.buttonText}> Return Home</Text>
-        <Image source={Home} style={styles.icon} />
-      </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.textStyle}> Coming Soon! </Text>
+      </View>
     </View>
   );
 };
@@ -38,6 +31,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 40,
     fontWeight: '700',
+    color: 'red',
   },
   button: {
     flexDirection: 'row',

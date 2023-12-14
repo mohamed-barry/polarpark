@@ -82,7 +82,7 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <SvgIcon SVG={TicketIcon} focused={focused} size={24} />
           ),
-          headerShown: false
+          headerShown: false,
         }}
       />
       <RootTab.Screen
