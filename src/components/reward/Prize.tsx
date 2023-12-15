@@ -8,7 +8,7 @@ import {
   Alert,
   ImageURISource,
 } from 'react-native';
-import {PrizeModal, InvalidPrize} from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
+import {PrizeModal, PrizePrompt} from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
 import {getAvaliblePoints} from '@app/api/features/pointsAction';
 import {redeemPrize} from '@app/api/features/prizeActions';
 
@@ -21,9 +21,10 @@ interface Prize {
 }
 
 type FailProps = {
-  visible: boolean;
-  message: string;
-};
+  visible: boolean,
+  message: string,
+  success: boolean;
+}
 
 const Prize: React.FC<Prize> = ({name, image, points, id}) => {
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
@@ -58,15 +59,17 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
         setFail({
           visible: true,
           message: resp.message,
+          success: true
         });
       })
-      .catch(e => {
-        const message = e instanceof Error ? e.message : 'Unknown Error';
+      .catch((e: any) => {
+        const message = e instanceof Error ? e.message : "Unknown Error";
         setFail({
           visible: true,
           message: message,
-        });
-      });
+          success: false
+        })
+      })
   };
 
   return (
@@ -89,7 +92,7 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
         onClose={closeModal}
         onRedeem={handleRedeem}
       />
-      <InvalidPrize
+      <PrizePrompt
         visible={fail.visible}
         message={fail.message}
         onClose={() => setFail({visible: false, message: ''})}

@@ -10,6 +10,8 @@ import {
 import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SMILEY from '@app/assets/images/smiley-1.png'
+import SvgIcon from '../ui/SvgIcon/SvgIcon';
+import LeftArrow from '@app/assets/icons/ex-circle-icon.svg'
 
 interface CodeModalProps {
   modalVisible: boolean;
@@ -59,7 +61,7 @@ const CodeModal: React.FC<CodeModalProps> = ({
           <TouchableOpacity
             style={styles.closeButton}
             onPress={() => setModalVisible(false)}>
-            <Icon name="close" size={24} color="#000" />
+            <SvgIcon SVG={LeftArrow} focused={true} size={24} />
           </TouchableOpacity>
           {/* <Text style={styles.modalTitle}>Scan QR Code</Text> */}
           {/* Content of the modal */}

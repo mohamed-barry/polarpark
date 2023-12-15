@@ -10,7 +10,7 @@ type LegendProps = SvgProps & {
 export default function MapLegend(props: LegendProps): JSX.Element {
 
     const floorDown = () => {
-        console.log("floor down");
+        // console.log("floor down");
         if (props.floor > 1) {
             props.setFloor(props.floor - 1);
         } else {
@@ -19,7 +19,7 @@ export default function MapLegend(props: LegendProps): JSX.Element {
     }
 
     const floorUp = () => {
-        console.log("floor up");
+        // console.log("floor up");
         if (props.floor < 3) {
             props.setFloor(props.floor + 1);
         } else {

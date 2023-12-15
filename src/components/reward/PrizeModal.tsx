@@ -41,17 +41,20 @@ export function PrizeModal({
   );
 }
 
-type InvalidPrizeProps = {
+type PrizePromptProps = {
   message: string;
   visible: boolean;
+  success: boolean;
   onClose: () => void;
 };
 
-export function InvalidPrize({
+export function PrizePrompt({
   message,
-  visible,
+  visible, success,
   onClose,
-}: InvalidPrizeProps): JSX.Element {
+}: PrizePromptProps): JSX.Element {
+  const text = success ? "Prize Redeem Successful: " : "Prize Redeem Failed:"
+
   return (
     <Modal
       animationType="slide"
@@ -60,7 +63,7 @@ export function InvalidPrize({
       onRequestClose={onClose}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <Text style={styles.modalText}>Prize Redeem Failed: {message}</Text>
+          <Text style={styles.modalText}>{text + message}</Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.button, {backgroundColor: 'red', marginLeft: 76}]}
