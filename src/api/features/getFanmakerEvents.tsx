@@ -39,7 +39,7 @@ export async function getFanmakerEvents({useCache = true}: CachedAPICallProps): 
                 events.push({
                     name: raw_events[i].event_name,
                     id: raw_events[i].id,
-                    descrpition: "At " + raw_events[i].venues[0] + "\nAttend for " + raw_events[i].points + " points!",
+                    descrpition: "Attend for " + raw_events[i].points + " points!",
                     image: {uri: raw_events[i].banner_image},
                     date: new Date(raw_events[i].starts_at)
                 })

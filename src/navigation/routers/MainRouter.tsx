@@ -40,7 +40,7 @@ import RewardRouter from './RewardRouter';
 import BaseballIcon from '@app/assets/icons/baseball-icon.svg'
 import TicketIcon from '@app/assets/icons/ticket-icon.svg'
 import FoodIcon from '@app/assets/icons/food-icon.svg'
-import BasketIcon from '@app/assets/icons/shopping-icon.svg'
+import RewardsIcon from '@app/assets/icons/ribbon-icon.svg'
 import ServerIcon from '@app/assets/icons/server-icon.svg'
 import LeftArrow from '@app/assets/icons/left-arrow-icon.svg'
 
@@ -99,7 +99,7 @@ function Main(): JSX.Element {
         component={RewardRouter}
         options={{
           tabBarIcon: ({focused}) => (
-            <SvgIcon SVG={BasketIcon} focused={focused} size={24} />
+            <SvgIcon SVG={RewardsIcon} focused={focused} size={24} />
           ),
           headerShown: false,
         }}

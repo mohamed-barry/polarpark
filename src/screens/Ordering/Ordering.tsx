@@ -211,7 +211,7 @@ export default function Ordering(): JSX.Element {
 
   return (
     <ImageBackground
-      source={require('@app/assets/images/background-concessions.jpeg')} // Replace with your actual background image path
+      source={require('@app/assets/images/background-concessions.png')} // Replace with your actual background image path
       style={styles.backgroundImage}
       imageStyle={{opacity: 0.8}}
       resizeMode="cover">
