@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   button: {
-    backgroundColor: 'rgba(169, 7, 10, 1)', // Blue background
+    backgroundColor: 'rgb(16,41,89)', // Blue background
     borderRadius: 10, // Rounded edges
     paddingVertical: 10, // Vertical padding
     paddingHorizontal: 20, // Horizontal padding

@@ -55,7 +55,10 @@ const FAQ: React.FC<Props> = ({navigation}) => {
     <View style={{flex: 1}}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.faqText}>FAQ</Text>
+        <View style={styles.faqTitleContainer}>
+          <Text style={styles.faqText}>FAQ</Text>
+          <View style={styles.faqUnderline} />
+        </View>
         {boxes.map((box, index) => (
           <TouchableOpacity
             key={index}
@@ -114,6 +117,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
     alignItems: 'center',
+  },
+  faqTitleContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  faqUnderline: {
+    height: 4,
+    width: '20%', // Adjust the width as needed
+    backgroundColor: 'rgb(16,41,89)', // Dark blue color for the underline
+    borderRadius: 2, // Rounded edges
+    marginTop: 5, // Spacing between text and underline
   },
 });
 

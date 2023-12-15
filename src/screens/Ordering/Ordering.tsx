@@ -115,7 +115,8 @@ export default function Ordering(): JSX.Element {
         <View style={styles.gridContainer}>
           {searchTerm.trim() ? (
             searchResults.length === 0 ? (
-              <Text style={styles.noResults} 
+              <Text
+                style={styles.noResults}
                 color="white"
                 variant="heading2"
                 textAlign="left">
