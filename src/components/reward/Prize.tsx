@@ -20,15 +20,19 @@ interface Prize {
   id: number;
 }
 
-type FailProps = {
-  visible: boolean,
-  message: string,
+type PrizeMessageProps = {
+  visible: boolean;
+  message: string;
   success: boolean;
-}
+};
 
 const Prize: React.FC<Prize> = ({name, image, points, id}) => {
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
-  const [fail, setFail] = useState<FailProps>({visible: false, message: ''});
+  const [fail, setFail] = useState<PrizeMessageProps>({
+    visible: false,
+    message: '',
+    success: false,
+  });
 
   // Function to open the modal
   const openModal = () => {
@@ -59,17 +63,17 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
         setFail({
           visible: true,
           message: resp.message,
-          success: true
+          success: resp.success,
         });
       })
       .catch((e: any) => {
-        const message = e instanceof Error ? e.message : "Unknown Error";
+        const message = e instanceof Error ? e.message : 'Unknown Error';
         setFail({
           visible: true,
           message: message,
-          success: false
-        })
-      })
+          success: true,
+        });
+      });
   };
 
   return (
@@ -95,7 +99,8 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
       <PrizePrompt
         visible={fail.visible}
         message={fail.message}
-        onClose={() => setFail({visible: false, message: ''})}
+        success={fail.success}
+        onClose={() => setFail({visible: false, message: '', success: false})}
       />
     </>
   );

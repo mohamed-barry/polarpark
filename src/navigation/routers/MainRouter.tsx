@@ -37,12 +37,12 @@ import {useNavigation} from '@react-navigation/native';
 import theme from '@app/config/theme';
 import RewardRouter from './RewardRouter';
 
-import BaseballIcon from '@app/assets/icons/baseball-icon.svg'
-import TicketIcon from '@app/assets/icons/ticket-icon.svg'
-import FoodIcon from '@app/assets/icons/food-icon.svg'
-import RewardsIcon from '@app/assets/icons/ribbon-icon.svg'
-import ServerIcon from '@app/assets/icons/server-icon.svg'
-import LeftArrow from '@app/assets/icons/left-arrow-icon.svg'
+import BaseballIcon from '@app/assets/icons/baseball-icon.svg';
+import TicketIcon from '@app/assets/icons/ticket-icon.svg';
+import FoodIcon from '@app/assets/icons/food-icon.svg';
+import RewardsIcon from '@app/assets/icons/ribbon-icon.svg';
+import ServerIcon from '@app/assets/icons/server-icon.svg';
+import LeftArrow from '@app/assets/icons/left-arrow-icon.svg';
 
 const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();

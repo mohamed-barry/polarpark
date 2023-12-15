@@ -41,7 +41,7 @@ export function PrizeModal({
   );
 }
 
-type PrizePromptProps = {
+export type PrizePromptProps = {
   message: string;
   visible: boolean;
   success: boolean;
@@ -50,10 +50,11 @@ type PrizePromptProps = {
 
 export function PrizePrompt({
   message,
-  visible, success,
+  visible,
+  success,
   onClose,
 }: PrizePromptProps): JSX.Element {
-  const text = success ? "Prize Redeem Successful: " : "Prize Redeem Failed:"
+  const text = success ? 'Prize Redeem Successful: ' : 'Prize Redeem Failed: ';
 
   return (
     <Modal
