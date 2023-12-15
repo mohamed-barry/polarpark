@@ -37,7 +37,7 @@ const PrizeList: React.FC<PrizeListProps> = ({prizeCount}) => {
       }
       setPrizes(prizeData);
     });
-  }, []);
+  }, [prizeCount]);
 
   return (
     <ScrollView>

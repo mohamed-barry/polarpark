@@ -6,7 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {
   BottomBarParamList,
   RootStackParamList,
-  TicketStackParamList,
+  // TicketStackParamList,
 } from '@app/navigation/types';
 import {
   Home,
@@ -16,8 +16,8 @@ import {
   Settings,
   ChangeUsername,
   ChangePassword,
-  PurchaseTicket,
-  Wallet,
+  // PurchaseTicket,
+  // Wallet,
   Parking,
   Seating,
   InteractiveMap,
@@ -44,20 +44,20 @@ import RewardsIcon from '@app/assets/icons/ribbon-icon.svg';
 import ServerIcon from '@app/assets/icons/server-icon.svg';
 import LeftArrow from '@app/assets/icons/left-arrow-icon.svg';
 
-const TicketStack = createNativeStackNavigator<TicketStackParamList>();
+// const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const RootTab = createBottomTabNavigator<BottomBarParamList>();
 
-function Tickets(): JSX.Element {
-  return (
-    <TicketStack.Navigator
-      initialRouteName="PurchaseTicket"
-      screenOptions={{headerShown: false}}>
-      <TicketStack.Screen name="PurchaseTicket" component={PurchaseTicket} />
-      <TicketStack.Screen name="Wallet" component={Wallet} />
-    </TicketStack.Navigator>
-  );
-}
+// function Tickets(): JSX.Element {
+//   return (
+//     <TicketStack.Navigator
+//       initialRouteName="PurchaseTicket"
+//       screenOptions={{headerShown: false}}>
+//       <TicketStack.Screen name="PurchaseTicket" component={PurchaseTicket} />
+//       <TicketStack.Screen name="Wallet" component={Wallet} />
+//     </TicketStack.Navigator>
+//   );
+// }
 
 function Main(): JSX.Element {
   return (
