@@ -221,8 +221,11 @@ export default function MainRouter(): JSX.Element {
         component={InteractiveMap}
         options={{
           headerTitle: 'Ballpark Map',
-          headerTintColor: theme.colors.black,
+          headerTintColor: theme.colors.white,
           headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'rgb(16,41,89)',
+          },
           headerLeft: () => {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
