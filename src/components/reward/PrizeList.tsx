@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import Prize from '@app/components/reward/Prize';
-import { getPrizeList } from '@app/api/features/prizeActions';
+import {getPrizeList} from '@app/api/features/prizeActions';
 
 interface PrizeData {
   name: string;
@@ -12,29 +12,31 @@ interface PrizeData {
 
 type PrizeListProps = {
   prizeCount: number;
-}
+};
 
 const PrizeList: React.FC<PrizeListProps> = ({prizeCount}) => {
   const [prizes, setPrizes] = useState<PrizeData[]>([]);
 
   // Fetch prizes from the API
   useEffect(() => {
-    getPrizeList({useCache: true})
-      .then((prizes) => {
-        //if prize count is less than 0 or greater than the total number of prizes then just so all prizes
-        const count = (prizeCount < 0 || prizeCount > prizes.length) ? prizes.length : prizeCount;
-        let prizeData: PrizeData[] = [];
-        for (let i = 0; i < count; i++) {
-          const prizeImage = prizes[i].images?.display;
-          prizeData.push({
-            name: prizes[i].title,
-            image: prizeImage ? prizeImage : "",
-            points: prizes[i].pointsCost,
-            id: prizes[i].id
-          });
-        }
-        setPrizes(prizeData);
-      })
+    getPrizeList({useCache: true}).then(prizes => {
+      //if prize count is less than 0 or greater than the total number of prizes then just so all prizes
+      const count =
+        prizeCount < 0 || prizeCount > prizes.length
+          ? prizes.length
+          : prizeCount;
+      let prizeData: PrizeData[] = [];
+      for (let i = 0; i < count; i++) {
+        const prizeImage = prizes[i].images?.display;
+        prizeData.push({
+          name: prizes[i].title,
+          image: prizeImage ? prizeImage : '',
+          points: prizes[i].pointsCost,
+          id: prizes[i].id,
+        });
+      }
+      setPrizes(prizeData);
+    });
   }, []);
 
   return (
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
   // ... (existing styles remain unchanged)
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+
     alignItems: 'center',
     fontFamily: 'Nunito Sans',
     paddingLeft: 15,

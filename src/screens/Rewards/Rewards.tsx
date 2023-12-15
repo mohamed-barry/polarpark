@@ -18,8 +18,8 @@ const Rewards: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScrollView>
+      <Header rightImage={Home} onRightImageClick={handleIconClick} />
       <View style={styles.container}>
-        <Header rightImage={Home} onRightImageClick={handleIconClick} />
         <View style={styles.titleContainer}>
           <View style={styles.rewardsContainer}>
             <Text style={styles.rewardsText}>Rewards</Text>
@@ -34,7 +34,6 @@ const Rewards: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
     alignItems: 'center',
     fontFamily: 'Nunito Sans',
     paddingLeft: 15,
@@ -45,18 +44,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    marginBottom: 15,
+    // Remove or reduce marginBottom if it's creating the unwanted space
+    marginBottom: 0, // Try setting this to 0 or another smaller value
   },
   rewardsContainer: {
-    marginBottom: 20,
+    // Remove or reduce marginBottom if it's creating the unwanted space
+    marginBottom: 0, // Try setting this to 0 or another smaller value
     alignItems: 'center',
-    borderColor: 'lightgrey',
+    // Remove borderColor if it's not needed, as it might be creating a visible border contributing to the space
   },
   rewardsText: {
     fontSize: 24,
     fontWeight: '700',
     fontFamily: 'Nunito Sans',
+    // If the gray space is a result of a text shadow or other effect, ensure no such styles are applied here
   },
+
   prizesContainer: {
     alignItems: 'center', // Center items horizontally
   },

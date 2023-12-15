@@ -7,7 +7,11 @@ interface PrizeModalProps {
   onRedeem: () => void;
 }
 
-export function PrizeModal({visible, onClose, onRedeem}: PrizeModalProps): JSX.Element {
+export function PrizeModal({
+  visible,
+  onClose,
+  onRedeem,
+}: PrizeModalProps): JSX.Element {
   return (
     <Modal
       animationType="slide"
@@ -35,35 +39,39 @@ export function PrizeModal({visible, onClose, onRedeem}: PrizeModalProps): JSX.E
       </View>
     </Modal>
   );
-};
+}
 
 type InvalidPrizeProps = {
   message: string;
   visible: boolean;
   onClose: () => void;
-}
+};
 
-export function InvalidPrize({message, visible, onClose}: InvalidPrizeProps): JSX.Element {
-  return (<Modal
-    animationType="slide"
-    transparent={true}
-    visible={visible}
-    onRequestClose={onClose}>
-    <View style={styles.modalContainer}>
-      <View style={styles.modalContent}>
-        <Text style={styles.modalText}>
-          Prize Redeem Failed: {message}
-        </Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.button, {backgroundColor: 'red'}]}
-            onPress={onClose}>
-            <Text style={styles.buttonText}>Close</Text>
-          </TouchableOpacity>
+export function InvalidPrize({
+  message,
+  visible,
+  onClose,
+}: InvalidPrizeProps): JSX.Element {
+  return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onClose}>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalText}>Prize Redeem Failed: {message}</Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[styles.button, {backgroundColor: 'red', marginLeft: 76}]}
+              onPress={onClose}>
+              <Text style={styles.buttonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
-  </Modal>)
+    </Modal>
+  );
 }
 
 const styles = StyleSheet.create({

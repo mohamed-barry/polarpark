@@ -32,7 +32,6 @@ export const LeaderBoard: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
     getProfileInfo({useCache: true})
       .then(info => {
-        // console.log(info)
         if (currentUser.name !== info.name) {
           setCurrentUser(info);
         }
@@ -50,11 +49,13 @@ export const LeaderBoard: React.FC<Props> = ({navigation}) => {
       .catch(e => {
         console.error(e);
       });
-  });
+  }, [currentUser, navigation]);
 
   const renderItem: ListRenderItem<LeaderboardEntry> = ({item}) => (
-    <View style={[styles.item]}>
-      <Text style={styles.rank}>{item.id}</Text>
+    <View style={styles.item}>
+      <View style={styles.rankContainer}>
+        <Text style={styles.rank}>{item.id}</Text>
+      </View>
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.points}>{item.points}</Text>
     </View>
@@ -63,7 +64,7 @@ export const LeaderBoard: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.page}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
-      <View style={styles.container}>
+      <View style={styles.contentContainer}>
         <Text style={styles.header}>Leaderboard</Text>
         <FlatList
           data={users}
@@ -78,46 +79,57 @@ export const LeaderBoard: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
+    backgroundColor: '#F8F8F8',
   },
-  container: {
+  contentContainer: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#F8F8F8', // Light grey background
+    padding: 20,
+    paddingTop: 0,
   },
   header: {
     fontSize: 26,
-    fontWeight: '600', // Slightly less bold
-    color: '#333', // Dark grey for better readability
+    fontWeight: '600',
+    color: '#333',
     marginBottom: 25,
   },
   item: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 15, // Increased vertical padding
+    alignItems: 'center',
+    paddingVertical: 15,
     paddingHorizontal: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E1E1E1', // Lighter border color
-    backgroundColor: '#FFF', // White background for each item
+    backgroundColor: '#FFF',
     width: '100%',
-    marginVertical: 5, // Added vertical margin for spacing between items
+    marginVertical: 5,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(169, 7, 10, 1)',
   },
-  currentUserItem: {
-    backgroundColor: '#E6F9FF', // Changed to a light blue for subtlety
+  rankContainer: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'rgb(16,41,89)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
   },
   rank: {
-    width: '10%',
-    textAlign: 'left',
-    color: '#555', // Dark grey text for better readability
+    color: '#F6BE00',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '800',
   },
   name: {
-    width: '60%',
-    textAlign: 'center',
+    flex: 1,
+    textAlign: 'left',
     color: '#555',
+    fontWeight: '600',
   },
   points: {
     width: '30%',
     textAlign: 'right',
     color: '#555',
+    fontWeight: '700',
   },
 });
 

@@ -14,15 +14,35 @@ const TextField: React.FC<TextFieldProps> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
+  const [firstCharHandled, setFirstCharHandled] = useState(false);
+
+  const handleChangeText = (text: string) => {
+    let newValue = text;
+
+    if (!firstCharHandled && text.length === 1) {
+      newValue = text.toLowerCase();
+      setFirstCharHandled(true);
+    }
+
+    if (onChange) {
+      onChange(newValue);
+    }
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setFirstCharHandled(false); // Reset on focus to handle first char again
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
         style={[styles.input, isFocused && styles.inputFocused]}
         placeholder={placeholder}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onFocus={handleFocus}
+        onBlur={handleFocus}
         value={value}
-        onChangeText={onChange}
+        onChangeText={handleChangeText}
       />
     </View>
   );

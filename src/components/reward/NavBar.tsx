@@ -8,6 +8,7 @@ import {
   Dimensions,
   Keyboard,
   TouchableWithoutFeedback,
+  Modal,
 } from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 
@@ -70,14 +71,6 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
     logoutUser();
     navigation.navigate('Login');
   };
-
-  const handleBackgroundPress = () => {
-    if (isOpen) {
-      closeModal();
-      Keyboard.dismiss();
-    }
-  };
-
   const renderSections = () => {
     return sections.map((section, index) => (
       <TouchableOpacity
@@ -93,24 +86,37 @@ const NavBar: React.FC<Props> = ({navigation, closeModal, isOpen}) => {
     ));
   };
 
+  const handleBackgroundPress = () => {
+    if (isOpen) {
+      closeModal();
+      Keyboard.dismiss();
+    }
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={handleBackgroundPress}>
-      <View style={styles.navContainer}>
-        <View style={styles.userInfo}>
-          <Text style={styles.userName}>{userData.name}</Text>
-          <Image source={userData.avatar} style={styles.userImage} />
+    <Modal
+      visible={isOpen}
+      transparent
+      animationType="slide"
+      onRequestClose={closeModal}>
+      <TouchableWithoutFeedback onPress={handleBackgroundPress}>
+        <View style={styles.navContainer}>
+          <View style={styles.userInfo}>
+            <Text style={styles.userName}>{userData.name}</Text>
+            <Image source={userData.avatar} style={styles.userImage} />
+          </View>
+          <View style={styles.sectionContainer}>{renderSections()}</View>
+          <View style={styles.bottomContainer}>
+            <TouchableOpacity
+              style={styles.signOutButton}
+              onPress={handleSignoutButtonClick}>
+              <Text style={styles.signOutText}>Sign Out</Text>
+              <Image source={ExitIcon} style={styles.placeholderIcon} />
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.sectionContainer}>{renderSections()}</View>
-        <View style={styles.bottomContainer}>
-          <TouchableOpacity
-            style={styles.signOutButton}
-            onPress={handleSignoutButtonClick}>
-            <Text style={styles.signOutText}>Sign Out</Text>
-            <Image source={ExitIcon} style={styles.placeholderIcon} />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </Modal>
   );
 };
 

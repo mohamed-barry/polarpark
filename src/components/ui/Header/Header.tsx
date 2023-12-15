@@ -2,38 +2,38 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ParamListBase, RouteProp} from '@react-navigation/native';
 import Box from '@app/components/general/Box/Box';
-import Text from '@app/components/general/Text/Text';
-import HomeOptions from './HomeOptions/HomeOptions';
-import OrderingOptions from './OrderingOptions/OrderingOptions';
-import TicketsOptions from './TicketOptions/TicketsOptions';
+
+import {StyleSheet, Text, View} from 'react-native';
 
 interface HeaderProps {
   route: RouteProp<ParamListBase, string>;
 }
 
 export default function HeaderContainer({route}: HeaderProps): JSX.Element {
-  const options =
-    route.name === 'Home' ? (
-      <HomeOptions />
-    ) : null;
-
   // todo [dev note]: please change how we did this
 
+  const styles = StyleSheet.create({
+    header: {
+      backgroundColor: 'rgb(16,41,89)',
+      paddingLeft: 20,
+    },
+    text: {
+      color: 'white',
+      fontFamily: 'Nunito Sans',
+      fontWeight: '700',
+      fontSize: 30,
+    },
+  });
   return (
-    <Box
-      bg="mainBackground"
-      borderBottomWidth={1}
-      borderColor="headerBorder"
-      px="l"
-      pt="xl">
+    <View style={styles.header}>
       <SafeAreaView edges={['top']}>
         <Box flexDirection="row" justifyContent="space-between">
-          <Text variant="heading1">{route.name}</Text>
+          <Text style={styles.text}>{route.name}</Text>
           <Box alignItems="center" flexDirection="row">
             {/* {options} */}
           </Box>
         </Box>
       </SafeAreaView>
-    </Box>
+    </View>
   );
 }

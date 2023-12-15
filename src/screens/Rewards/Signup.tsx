@@ -14,8 +14,6 @@ import Dropdown from '@app/components/reward/DropDown';
 import Confirmation from './Confirmation';
 import {SignUpParams, signUp} from '@app/api/features/rewardsSignup';
 
-const phoneRegEx = new RegExp('[- +()0-9]+');
-
 interface Props {
   navigation: NavigationProp<any>;
 }

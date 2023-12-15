@@ -37,12 +37,12 @@ import {useNavigation} from '@react-navigation/native';
 import theme from '@app/config/theme';
 import RewardRouter from './RewardRouter';
 
-import BaseballIcon from '@app/assets/icons/baseball-icon.svg'
-import TicketIcon from '@app/assets/icons/ticket-icon.svg'
-import FoodIcon from '@app/assets/icons/food-icon.svg'
-import BasketIcon from '@app/assets/icons/shopping-icon.svg'
-import ServerIcon from '@app/assets/icons/server-icon.svg'
-import LeftArrow from '@app/assets/icons/left-arrow-icon.svg'
+import BaseballIcon from '@app/assets/icons/baseball-icon.svg';
+import TicketIcon from '@app/assets/icons/ticket-icon.svg';
+import FoodIcon from '@app/assets/icons/food-icon.svg';
+import BasketIcon from '@app/assets/icons/shopping-icon.svg';
+import ServerIcon from '@app/assets/icons/server-icon.svg';
+import LeftArrow from '@app/assets/icons/left-arrow-icon.svg';
 
 const TicketStack = createNativeStackNavigator<TicketStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -82,7 +82,6 @@ function Main(): JSX.Element {
           tabBarIcon: ({focused}) => (
             <SvgIcon SVG={TicketIcon} focused={focused} size={24} />
           ),
-          headerShown: false,
         }}
       />
       <RootTab.Screen
@@ -140,7 +139,12 @@ export default function MainRouter(): JSX.Element {
             const goBack = () => navigation.goBack();
 
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}
@@ -188,7 +192,12 @@ export default function MainRouter(): JSX.Element {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}
@@ -218,7 +227,12 @@ export default function MainRouter(): JSX.Element {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}
@@ -228,13 +242,21 @@ export default function MainRouter(): JSX.Element {
         component={ParkingServices}
         options={{
           headerTitle: 'Parking',
-          headerTintColor: theme.colors.black,
+          headerTintColor: theme.colors.white,
           headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'rgb(16,41,89)',
+          },
           headerLeft: () => {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}
@@ -244,13 +266,21 @@ export default function MainRouter(): JSX.Element {
         component={SecurityServices}
         options={{
           headerTitle: 'Security',
-          headerTintColor: theme.colors.black,
+          headerTintColor: theme.colors.white,
           headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'rgb(16,41,89)',
+          },
           headerLeft: () => {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}
@@ -260,13 +290,21 @@ export default function MainRouter(): JSX.Element {
         component={FAQServices}
         options={{
           headerTitle: 'FAQ',
-          headerTintColor: theme.colors.black,
+          headerTintColor: theme.colors.white,
           headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'rgb(16,41,89)',
+          },
           headerLeft: () => {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}
@@ -276,13 +314,21 @@ export default function MainRouter(): JSX.Element {
         component={WeatherServices}
         options={{
           headerTitle: 'Weather Policy',
-          headerTintColor: theme.colors.black,
+          headerTintColor: theme.colors.white,
           headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'rgb(16,41,89)',
+          },
           headerLeft: () => {
             const navigation = useNavigation();
             const goBack = () => navigation.goBack();
             return (
-              <SvgIcon SVG={LeftArrow} focused={true} size={24} onPress={goBack} />
+              <SvgIcon
+                SVG={LeftArrow}
+                focused={true}
+                size={24}
+                onPress={goBack}
+              />
             );
           },
         }}

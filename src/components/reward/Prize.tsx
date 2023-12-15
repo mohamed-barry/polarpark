@@ -8,9 +8,9 @@ import {
   Alert,
   ImageURISource,
 } from 'react-native';
-import { PrizeModal, InvalidPrize } from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
-import { getAvaliblePoints } from '@app/api/features/pointsAction';
-import { redeemPrize } from '@app/api/features/prizeActions';
+import {PrizeModal, InvalidPrize} from './PrizeModal'; // Make sure this import points to the location of your PrizeModal component
+import {getAvaliblePoints} from '@app/api/features/pointsAction';
+import {redeemPrize} from '@app/api/features/prizeActions';
 
 // Add props for name, image, and points
 interface Prize {
@@ -21,28 +21,26 @@ interface Prize {
 }
 
 type FailProps = {
-  visible: boolean,
-  message: string
-}
+  visible: boolean;
+  message: string;
+};
 
 const Prize: React.FC<Prize> = ({name, image, points, id}) => {
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
-  const [fail, setFail] = useState<FailProps>({visible: false, message: ""});
+  const [fail, setFail] = useState<FailProps>({visible: false, message: ''});
 
   // Function to open the modal
   const openModal = () => {
-    getAvaliblePoints({useCache: false})
-      .then((userPoints => {
-        if (userPoints >= points || true) {
-          setModalVisible(true); // User has enough points
-        } else {
-          Alert.alert(
-            'Not enough points',
-            "You don't have enough points to redeem this prize.",
-          ); // User doesn't have enough points
-        }
-      }))
-  
+    getAvaliblePoints({useCache: false}).then(userPoints => {
+      if (userPoints >= points || true) {
+        setModalVisible(true); // User has enough points
+      } else {
+        Alert.alert(
+          'Not enough points',
+          "You don't have enough points to redeem this prize.",
+        ); // User doesn't have enough points
+      }
+    });
   };
 
   // Function to close the modal
@@ -59,16 +57,16 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
       .then(resp => {
         setFail({
           visible: true,
-          message: resp.message
+          message: resp.message,
         });
       })
       .catch(e => {
-        const message = e instanceof Error ? e.message : "Unknown Error";
+        const message = e instanceof Error ? e.message : 'Unknown Error';
         setFail({
           visible: true,
-          message: message
-        })
-      })
+          message: message,
+        });
+      });
   };
 
   return (
@@ -77,7 +75,7 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
         style={styles.container}
         activeOpacity={0.7}
         onPress={openModal}>
-        <Image source={image} style={styles.image} resizeMode="contain" />
+        <Image source={image} style={styles.image} resizeMode="cover" />
         <View style={styles.divider} />
         <View style={styles.rewardTextContainer}>
           <Text style={styles.rewardText}>{name}</Text>
@@ -94,7 +92,7 @@ const Prize: React.FC<Prize> = ({name, image, points, id}) => {
       <InvalidPrize
         visible={fail.visible}
         message={fail.message}
-        onClose={() => setFail({visible: false, message: ""})}
+        onClose={() => setFail({visible: false, message: ''})}
       />
     </>
   );
@@ -130,25 +128,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
-    paddingTop: 15, // Reduced padding top to compensate for image adjustment
-    maxWidth: "80%" //make sure the text doesn't get too wide
+    padding: 15,
+    paddingTop: 15,
+    paddingRight: 5, // Add padding to ensure text doesn't go behind the points container
   },
   rewardText: {
-    fontSize: 20, // Slightly larger font size for better readability
-    fontWeight: 'bold', // Bolder font weight for importance
+    fontSize: 15,
+    fontWeight: 'bold',
     color: '#333',
+    marginRight: 90, // Add marginRight that is the width of the pointsContainer plus some extra space
+    flexShrink: 1, // Allow text to shrink and wrap if necessary
   },
   pointsContainer: {
-    backgroundColor: '#4CAF50', // Changed to a green color for a more positive association
-    borderRadius: 10, // Rounded corners for the points container
+    backgroundColor: '#4CAF50',
+    borderRadius: 10,
     paddingVertical: 8,
     paddingHorizontal: 15,
-    marginLeft: 10,
+    position: 'absolute',
+    right: 5,
+    top: 15,
+    alignSelf: 'flex-start', // Add this to ensure the container aligns to the top
   },
   points: {
     color: 'white',
-    fontSize: 18, // Slightly larger font size for better readability
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });

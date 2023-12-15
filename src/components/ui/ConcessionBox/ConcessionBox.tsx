@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   ImageSourcePropType,
+  ImageBackground,
 } from 'react-native';
 import MenuItemModal from './MenuItemModal';
 
@@ -23,6 +24,7 @@ type ConsessionStand = {
   location?: any;
   featured: Array<FoodItem>;
   other: Array<FoodItem>;
+  image: ImageSourcePropType;
 };
 
 type ConcessionBoxProps = {
@@ -42,7 +44,7 @@ const ConcessionBox: React.FC<ConcessionBoxProps> = ({concessionStand}) => {
       overflow: 'hidden',
       margin: 5, // Reduced margin for a tighter grid
       width: '43%', // Approximate width for 2-column grid accounting for margin
-      aspectRatio: 1, // Optional: if you want each box to be a square
+      aspectRatio: 1.2, // Optional: if you want each box to be a square
       // height: 150, // Remove fixed height if using aspectRatio
       backgroundColor: 'white',
     },
@@ -50,26 +52,18 @@ const ConcessionBox: React.FC<ConcessionBoxProps> = ({concessionStand}) => {
       justifyContent: 'center',
       alignItems: 'center',
       height: 150,
-      backgroundColor: 'white', // Assuming default background is white
+      // backgroundColor: 'white', // Assuming default background is white
     },
-    expanded: {
-      backgroundColor: 'rgba(169, 7, 10, 1)', // Dark red background
-      padding: 10,
-    },
+
     collapsedTitle: {
       fontWeight: 'bold',
-      fontSize: 18,
-      color: 'black',
-    },
-    expandedTitle: {
-      fontWeight: 'bold',
-      fontSize: 22, // Increased font size
+      fontSize: 24,
       color: 'white',
-      marginBottom: 15,
     },
+
     foodItemContainer: {
-      flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'center',
       marginBottom: 10,
     },
     foodItemTextContainer: {
@@ -90,13 +84,34 @@ const ConcessionBox: React.FC<ConcessionBoxProps> = ({concessionStand}) => {
       height: 60,
       borderRadius: 10,
     },
+    imageBackground: {
+      flex: 1,
+      justifyContent: 'center', // Center content for background image
+      width: '100%', // Ensure it covers the entire TouchableOpacity
+      height: '100%', // Ensure it covers the entire TouchableOpacity
+    },
+    titleOverlay: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent overlay
+      padding: 10,
+    },
   });
 
   return (
     <TouchableOpacity onPress={toggleModal} style={styles.box}>
-      <View style={styles.collapsed}>
-        <Text style={styles.collapsedTitle}>{concessionStand.name}</Text>
-      </View>
+      <ImageBackground
+        source={concessionStand.image}
+        resizeMode="cover" // Ensures the image is contained within the box
+        style={styles.imageBackground}>
+        <View style={styles.titleOverlay}>
+          <View style={styles.collapsed}>
+            <Text style={styles.collapsedTitle}>{concessionStand.name}</Text>
+          </View>
+        </View>
+      </ImageBackground>
       <MenuItemModal
         isVisible={isModalVisible}
         onClose={toggleModal}
