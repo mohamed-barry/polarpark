@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   ScrollView,
@@ -6,8 +7,9 @@ import {
   RefreshControl,
   StyleSheet,
   ImageBackground,
+  View,
 } from 'react-native';
-import {Box, Section, Text} from '@app/components';
+import {Box, Text} from '@app/components';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   CONCESSIONS_JSON_CACHE_ID,
@@ -157,7 +159,7 @@ export default function Ordering(): JSX.Element {
     AsyncStorage.removeItem(CONCESSIONS_CSV_CACHE_ID).then(() =>
       readFoodCSV(food, setFood, setRefreshing),
     );
-  }, []);
+  }, [food]);
 
   // getFood().then((val) => {
   //   setFood(val);
@@ -168,6 +170,25 @@ export default function Ordering(): JSX.Element {
     readFoodCSV(food, setFood, setRefreshing);
     FIRST = false;
   }
+
+  const styles = StyleSheet.create({
+    // ... (any other styles you have for this component)
+    noResults: {
+      color: 'red',
+      textAlign: 'center',
+      marginTop: 20,
+    },
+    backgroundImage: {
+      flex: 1, // Make sure it covers the whole screen
+      resizeMode: 'cover', // or 'stretch'
+    },
+    gridContainer: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around', // Distributes space evenly around the items
+      alignItems: 'flex-start', // Aligns items to the start of the cross axis
+    },
+  });
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Array<ConsessionStand>>(
@@ -188,19 +209,6 @@ export default function Ordering(): JSX.Element {
     }
   };
 
-  const styles = StyleSheet.create({
-    // ... (any other styles you have for this component)
-    noResults: {
-      color: 'red',
-      textAlign: 'center',
-      marginTop: 20,
-    },
-    backgroundImage: {
-      flex: 1, // Make sure it covers the whole screen
-      resizeMode: 'cover', // or 'stretch'
-    },
-  });
-
   return (
     <ImageBackground
       source={require('@app/assets/images/background-concessions.png')} // Replace with your actual background image path
@@ -215,14 +223,16 @@ export default function Ordering(): JSX.Element {
         style={{backgroundColor: 'transparent'}} // Ensure ScrollView background is transparent
       >
         <SearchBox onSearch={handleSearch} />
-        {searchTerm && searchResults.length === 0 ? (
-          <Text style={styles.noResults}>
-            No concessions currently sell this item
-          </Text>
-        ) : (
-          searchResults.map(displayConcessionStand)
-        )}
-        {food.map(displayConcessionStand)}
+        <View style={styles.gridContainer}>
+          {searchTerm && searchResults.length === 0 ? (
+            <Text style={styles.noResults}>
+              No concessions currently sell this item
+            </Text>
+          ) : (
+            searchResults.map(displayConcessionStand)
+          )}
+          {food.map(displayConcessionStand)}
+        </View>
       </ScrollView>
     </ImageBackground>
   );

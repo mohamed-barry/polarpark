@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  View,
+} from 'react-native';
 import Header from '@app/components/reward/RewardHeader';
 import Home from '@app/assets/icons/rewards/blue-home.png';
 
@@ -46,31 +52,33 @@ const FAQ: React.FC<Props> = ({navigation}) => {
   ];
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={{flex: 1}}>
       <Header rightImage={Home} onRightImageClick={handleIconClick} />
-      <Text style={styles.faqText}>FAQ</Text>
-      {boxes.map((box, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[
-            styles.box,
-            // eslint-disable-next-line react-native/no-inline-styles
-            {
-              borderRadius: 10,
-              backgroundColor: 'rgb(16,41,89)',
-              marginBottom: 7,
-            },
-            // eslint-disable-next-line react-native/no-inline-styles
-            expandedBox === index && {height: 300, padding: 15}, // Expanded box height and padding
-          ]}
-          onPress={() => toggleBox(index)}>
-          <Text style={styles.boxTitle}>{box.title}</Text>
-          {expandedBox === index && (
-            <Text style={styles.boxContent}>{box.content}</Text>
-          )}
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.faqText}>FAQ</Text>
+        {boxes.map((box, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.box,
+              // eslint-disable-next-line react-native/no-inline-styles
+              {
+                borderRadius: 10,
+                backgroundColor: 'rgb(16,41,89)',
+                marginBottom: 7,
+              },
+              // eslint-disable-next-line react-native/no-inline-styles
+              expandedBox === index && {height: 300, padding: 15}, // Expanded box height and padding
+            ]}
+            onPress={() => toggleBox(index)}>
+            <Text style={styles.boxTitle}>{box.title}</Text>
+            {expandedBox === index && (
+              <Text style={styles.boxContent}>{box.content}</Text>
+            )}
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 

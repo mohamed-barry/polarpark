@@ -4,9 +4,9 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  Image,
   ImageSourcePropType,
 } from 'react-native';
+import MenuItemModal from './MenuItemModal';
 
 type FoodItem = {
   name: string;
@@ -20,7 +20,7 @@ type FoodItem = {
 type ConsessionStand = {
   name: string;
   description: string;
-  location?: any; //TODO make a type for this?
+  location?: any;
   featured: Array<FoodItem>;
   other: Array<FoodItem>;
 };
@@ -30,93 +30,80 @@ type ConcessionBoxProps = {
 };
 
 const ConcessionBox: React.FC<ConcessionBoxProps> = ({concessionStand}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const toggleExpansion = () => {
-    setIsExpanded(!isExpanded);
+  const toggleModal = () => {
+    setIsModalVisible(prevState => !prevState);
   };
 
-  return (
-    <TouchableOpacity onPress={toggleExpansion} style={styles.box}>
-      {/* Only show ImageBackground when not expanded */}
-      {!isExpanded && (
-        <View style={styles.collapsed}>
-          <Text style={styles.collapsedTitle}>{concessionStand.name}</Text>
-        </View>
-      )}
+  const styles = StyleSheet.create({
+    box: {
+      borderRadius: 20,
+      overflow: 'hidden',
+      margin: 5, // Reduced margin for a tighter grid
+      width: '43%', // Approximate width for 2-column grid accounting for margin
+      aspectRatio: 1, // Optional: if you want each box to be a square
+      // height: 150, // Remove fixed height if using aspectRatio
+      backgroundColor: 'white',
+    },
+    collapsed: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 150,
+      backgroundColor: 'white', // Assuming default background is white
+    },
+    expanded: {
+      backgroundColor: 'rgba(169, 7, 10, 1)', // Dark red background
+      padding: 10,
+    },
+    collapsedTitle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      color: 'black',
+    },
+    expandedTitle: {
+      fontWeight: 'bold',
+      fontSize: 22, // Increased font size
+      color: 'white',
+      marginBottom: 15,
+    },
+    foodItemContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+    },
+    foodItemTextContainer: {
+      flex: 1,
+    },
+    foodItemName: {
+      fontWeight: 'bold',
+      fontSize: 16,
+      color: 'white',
+      marginBottom: 10,
+    },
+    foodItemDescription: {
+      color: 'white',
+      marginRight: 5,
+    },
+    foodItemImage: {
+      width: 60,
+      height: 60,
+      borderRadius: 10,
+    },
+  });
 
-      {isExpanded && (
-        <View style={styles.expanded}>
-          <Text style={styles.expandedTitle}>{concessionStand.name}</Text>
-          {concessionStand.featured.map((item, index) => (
-            <View key={index} style={styles.foodItemContainer}>
-              <View style={styles.foodItemTextContainer}>
-                <Text style={styles.foodItemName}>{item.name}</Text>
-                <Text style={styles.foodItemDescription}>
-                  {item.description}
-                </Text>
-              </View>
-              {item.image && (
-                <Image source={item.image} style={styles.foodItemImage} />
-              )}
-            </View>
-          ))}
-        </View>
-      )}
+  return (
+    <TouchableOpacity onPress={toggleModal} style={styles.box}>
+      <View style={styles.collapsed}>
+        <Text style={styles.collapsedTitle}>{concessionStand.name}</Text>
+      </View>
+      <MenuItemModal
+        isVisible={isModalVisible}
+        onClose={toggleModal}
+        menuItems={concessionStand.featured}
+      />
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  box: {
-    borderRadius: 20,
-    overflow: 'hidden',
-    margin: 15,
-  },
-  collapsed: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 150,
-    backgroundColor: 'white', // Assuming default background is white
-  },
-  expanded: {
-    backgroundColor: 'rgba(169, 7, 10, 1)', // Dark red background
-    padding: 10,
-  },
-  collapsedTitle: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    color: 'black',
-  },
-  expandedTitle: {
-    fontWeight: 'bold',
-    fontSize: 22, // Increased font size
-    color: 'white',
-    marginBottom: 15,
-  },
-  foodItemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  foodItemTextContainer: {
-    flex: 1,
-  },
-  foodItemName: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: 'white',
-    marginBottom: 10,
-  },
-  foodItemDescription: {
-    color: 'white',
-    marginRight: 5,
-  },
-  foodItemImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 10,
-  },
-});
 
 export default ConcessionBox;
