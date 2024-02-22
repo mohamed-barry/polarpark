@@ -55,7 +55,7 @@ export default function Home(): JSX.Element {
     // }
     // fetchPatronInfo();
 
-    getFanmakerEvents({useCache: true})
+    getFanmakerEvents({useCache: false})
       .then((ev) => {
         // console.log("got events");
         // console.log(ev);

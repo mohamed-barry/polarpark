@@ -26,7 +26,7 @@ export async function getFanmakerEvents({useCache = true}: CachedAPICallProps): 
         }
 
         const params = new URLSearchParams({
-            "after": new Date().toISOString(),
+            "after": new Date("2023-08-19").toISOString(),
             "per_page": "5"
         }).toString();
 
